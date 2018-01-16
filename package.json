@@ -1,0 +1,31 @@
+{
+  "name": "sky-notes",
+  "version": "0.0.1",
+  "description": "A(nother) self-hosted note taking application.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dooxe/sky-notes.git"
+  },
+  "keywords": [
+    "note",
+    "notebook"
+  ],
+  "author": "dooxe",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dooxe/sky-notes/issues"
+  },
+  "homepage": "https://github.com/dooxe/sky-notes#readme",
+  "dependencies": {
+    "ace-builds": "^1.2.9",
+    "angular": "^1.6.8",
+    "angular-ui-ace": "^0.2.3",
+    "bootstrap": "^3.3.7",
+    "jquery": "^3.2.1",
+    "showdown": "^1.8.6"
+  }
+}
