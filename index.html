@@ -19,11 +19,15 @@
         <script src="node_modules/jquery/dist/jquery.min.js"></script>
         <!---->
         <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+
         <link rel="stylesheet" type="text/css" href="node_modules/bootstrap/dist/css/bootstrap.min.css"/>
         <link rel="stylesheet" type="text/css" href="node_modules/bootstrap/dist/css/bootstrap-theme.min.css"/>
-        <!---->
+
         <script src="js/showdown.angular.js"></script>
         <script src="js/sky-notes.angular.js"></script>
+        <script src="js/sky-notes-notebook.angular.js"></script>
+        <script src="js/sky-notes-service.angular.js"></script>
+        <script src="js/sky-notes-main.angular.js"></script>
     </head>
     <body ng-app="SkyNotes">
         <div id="sn-main" ng-controller="snMainController">
@@ -32,44 +36,92 @@
             </nav>
             <div id="sn-body" class="container-fluid">
                 <div class="row">
-                    <div class="col col-sm-2">
-                        <h2>Notes</h2>
-                        <div>
-                            <div ng-repeat="notebook in notebooks">
-                                <a href="#" ng-click="selectNotebook($index)" class="list-group-item d-flex justify-content-between align-items-center">
-                                    {{notebook.title}}
-                                    <span class="badge badge-primary badge-pill">{{notebook.notes.length}}</span>
-                                </a>
-                                <ul class="list-group" ng-if="notebook.selected">
-                                    <li  ng-repeat="note in notebook.notes" ng-class="{selected: $index == selectedNoteIndex}" class="list-group-item d-flex justify-content-between align-items-center">
-                                        <a href="#" ng-click="selectNote($parent.$index,$index)">{{note.title}}</a>
+                    <div class="col col-md-2">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h2 class="panel-title">
+                                    Notebooks
+                                </h2>
+                            </div>
+                            <div class="panel-body">
+
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <input type="text" ng-model="newNotebookTitle" class="form-control"/>
+                                        <a href="#" class="input-group-addon btn-success" title="Create a new notebook"
+                                            ng-click="createNotebook()"
+                                        >
+                                            <span class="glyphicon glyphicon-plus"></span>
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <ul ng-repeat="notebook in getNotebooks()" class="list-group">
+                                    <li class="list-group-item d-flex justify-content-between align-items-center" style="font-size:1.4em">
+                                        <a href="#" ng-click="selectNotebook($index)">
+                                            <span class="glyphicon glyphicon-th-list"></span>
+                                            {{notebook.title}}
+                                        </a>
+                                        <a href="#" ng-click="removeNotebook($index)" class="badge badge-primary badge-pill btn-danger">
+                                            <span class="glyphicon glyphicon-remove"></span>
+                                        </a>
+                                        <a href="#" class="badge badge-primary badge-pill btn-success" title="Add a new note"
+                                            ng-click="addNote($index)"
+                                        >
+                                            <span class="glyphicon glyphicon-plus"></span>
+                                        </a>
+                                        <span class="badge badge-primary badge-pill" title="Delete the notebook">{{notebook.notes.length}}</span>
+                                    </li>
+                                    <li  ng-repeat="note in notebook.notes" class="list-group-item d-flex justify-content-between align-items-center">
+                                        <a href="#" class="input-group-text" ng-click="setCurrentNote(note)">
+                                            <span class="glyphicon glyphicon-edit"></span>
+                                            {{note.title}}
+                                        </a>
+                                        <a href="#" ng-click="removeNote($parent.$index,$index)" class="badge badge-pill badge-primary btn-danger">
+                                            <span class="glyphicon glyphicon-remove"></span>
+                                        </a>
                                     </li>
                                 </ul>
                             </div>
                         </div>
                     </div>
-                    <div class="col col-sm-10">
+                    <div class="col col-md-10">
                         <div class="row">
                             <div class="col col-md-6">
-                                <div><h2>Editor</h2></div>
-                                <input type="text"  style="width:100%;margin-bottom:10px;height:32px" ng-model="selectedNote.title"/>
-                                <div>
-                                    <div id="sn-ace-editor" ui-ace="{
-                                          useWrapMode : true,
-                                          showGutter: false,
-                                          theme:'twilight',
-                                          mode: 'markdown',
-                                          firstLineNumber: 5,
-                                          onLoad: aceLoaded,
-                                          onChange: aceChanged
-                                        }"
-                                        style="width:100%;height:500px"></div>
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h2 class="panel-title">Editor</h2>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <span class="input-group-addon">Name</span>
+                                                <input class="form-control" ng-disabled="!currentNote" type="text"  ng-model="currentNote.title"/>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div id="sn-ace-editor" ui-ace="{
+                                                  useWrapMode : true,
+                                                  mode: 'markdown',
+                                                  firstLineNumber: 5,
+                                                  onLoad: aceLoaded,
+                                                  onChange: aceChanged
+                                                }"
+                                                style="width:100%;height:500px"></div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col col-md-6">
-                                <div><h2>Preview</h2></div>
-                                <div id="sn-markdown-preview" class="container-fluid">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h2 class="panel-title">Preview</h2>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div id="sn-markdown-preview" class="container-fluid">
 
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
