@@ -22,7 +22,9 @@ var snMainController = SkyNotes.controller('snMainController', [
             },
 
             removeNotebook: function(index){
-                $skyNotes.removeNotebook(index);
+                if(window.confirm('Are you sure to delete this notebook ?')){
+                    $skyNotes.removeNotebook(index);
+                }
             },
 
             getNotebooks: function(){
@@ -34,7 +36,9 @@ var snMainController = SkyNotes.controller('snMainController', [
             },
 
             removeNote: function(nbIndex,nIndex){
-                $skyNotes.removeNote(nbIndex,nIndex);
+                if(window.confirm('Are you sure to delete this note from the notebook ?')){
+                    $skyNotes.removeNote(nbIndex,nIndex);
+                }
             },
 
             setCurrentNote: function(note){

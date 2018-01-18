@@ -3,6 +3,7 @@
     <head>
         <title>Sky notes</title>
         <meta charset="utf-8"/>
+        <link rel="icon" type="image/png" href="logo/logo.png" />
         <!---->
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <!-- Load Angular -->
@@ -31,8 +32,28 @@
     </head>
     <body ng-app="SkyNotes">
         <div id="sn-main" ng-controller="snMainController">
-            <nav id="sn-menubar" class="navbar navbar-expand-lg navbar-light bg-light">
-                <a id="sn-brand" class="navbar-brand" href="#">Sky notes</a>
+            <nav id="sn-menubar" class="navbar navbar-default navbar-fixed-top navbar-inverse">
+                <div class="container-fluid">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                      </button>
+                    </div>
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <a class="navbar-brand" href="#">
+                            <span>
+                                <img src="logo/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+                            </span>
+                            <span>
+                                Sky notes
+                            </span>
+                        </a>
+                    </div>
+                </div>
             </nav>
             <div id="sn-body" class="container-fluid">
                 <div class="row">

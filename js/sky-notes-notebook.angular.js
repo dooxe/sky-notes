@@ -27,7 +27,39 @@ SkyNotes.factory('Notebook', ['$http', function($http){
         };
     };
 
-    var notebooks = [];
+    //
+    //  Containers
+    //
+    var notes           = [];
+    var notebooks       = [];
+    var notebooksById   = {};
+
+    //
+    //  Load all
+    //
+    $http.get('api/notebooks/get/all').then(function(response){
+        var data = response.data;
+        for(var i = 0; i < data.length; ++i){
+            var notebook = data[i];
+            notebook.notes = [];
+            notebooksById[notebook.id] = notebook;
+            notebooks.push(notebook);
+        }
+        $http.get('api/notes/get/all').then(function(response){
+            var notesData = response.data;
+            for(var i = 0; i < notesData.length; ++i){
+                var note = notesData[i];
+                var notebook = notebooksById[note.notebookId];
+                if(notebook){
+                    notebook.notes.push(note);
+                    notes.push(note);
+                }
+                else {
+                    console.warn("Note '"+note.id+"' : notebookId not referencing any existing notebook");
+                }
+            }
+        });
+    });
 
     return {
         create: function(title){
@@ -45,7 +77,7 @@ SkyNotes.factory('Notebook', ['$http', function($http){
         },
 
         removeNote: function(nbIndex,nIndex){
-            notebooks[nbIndex].removeNote(nIndex);
+            notebooks[nbIndex].notes.splice(nIndex,1);
         },
 
         getAll: function(){

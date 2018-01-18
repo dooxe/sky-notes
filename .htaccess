@@ -1,0 +1,5 @@
+# Apache (.htaccess or httpd.conf)
+RewriteBase /sky-notes/
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule api/. /api.php [L]
