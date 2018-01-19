@@ -48,6 +48,12 @@ var snMainController = SkyNotes.controller('snMainController', [
                 aceEditor.setValue(note.content);
             },
 
+            saveCurrentNote: function(){
+                if($self.currentNote){
+                    $skyNotes.saveNote($self.currentNote);
+                }
+            },
+
             selectedNotebookIndex: -1,
             selectedNoteIndex: -1,
             selectedNote: null,

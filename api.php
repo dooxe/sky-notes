@@ -61,14 +61,11 @@ $klein->with('api/notes', function () use ($klein) {
         return json_encode($note);
     });
     //
-    $klein->respond('GET', '/save', function($request, $response){
-        /*
-        $notebookid = $request->param('notebookId');
-        $id = md5(uniqid(rand(), true));
-        $note = array("id"=>$id, "title"=>"", "content"=>"","notebookId"=>$notebookid);
-        $filename = getNotePath($note);
-        file_put_contents($filename, json_encode($note));
-        */
+    $klein->respond('POST', '/save', function($request, $response){
+        $contents = json_decode(file_get_contents('php://input'),true);
+        $n = Note::fromArray($contents);
+        $n->save();
+        return true;
     });
     //
     $klein->respond('GET', '/get/all', function($request, $response){

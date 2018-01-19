@@ -31,8 +31,8 @@
         <script src="js/sky-notes-service.angular.js"></script>
         <script src="js/sky-notes-main.angular.js"></script>
     </head>
-    <body ng-app="SkyNotes">
-        <div id="sn-main" ng-controller="snMainController">
+    <body ng-app="SkyNotes" ng-controller="snMainController">
+        <div id="sn-main">
             <nav id="sn-navbar" class="navbar navbar-default navbar-fixed-top navbar-inverse">
                 <div class="container-fluid">
                     <!-- Brand and toggle get grouped for better mobile display -->
@@ -58,11 +58,12 @@
             </nav>
             <div id="sn-body" class="container-fluid">
                 <div class="row">
-                    <div class="col col-md-3">
+                    <div id="sn-menu-container" class="col col-md-3">
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <h2 class="panel-title">
                                     Notebooks
+                                    <a class="glyphicon glyphicon-remove-circle pull-right"></a>
                                 </h2>
                             </div>
                             <div class="panel-body">
@@ -90,7 +91,10 @@
                                         >
                                             <span class="glyphicon glyphicon-plus"></span>
                                         </a>
-                                        <span class="badge badge-primary badge-pill" title="Delete the notebook">{{notebook.notes.length}}</span>
+                                        <a href="#" ng-click="saveNotebook($index)" class="badge badge-primary badge-pill">
+                                            <span class="glyphicon glyphicon-floppy-disk"></span>
+                                        </a>
+                                        <span class="badge badge-primary badge-pill" title="Numbers of notes in the notebook">{{notebook.notes.length}}</span>
                                     </li>
                                     <li  ng-repeat="note in notebook.notes" class="list-group-item d-flex justify-content-between align-items-center">
                                         <a href="#" class="input-group-text" ng-click="setCurrentNote(note)">
@@ -110,17 +114,20 @@
                             <div class="col col-md-6">
                                 <div id="sn-editor-panel" class="panel panel-default">
                                     <div class="panel-heading">
-                                        <h2 class="panel-title">Editor</h2>
+                                        <h2 class="panel-title">
+                                            Editor
+                                        </h2>
                                     </div>
-                                    <div class="panel-body" style="position:relative">
-                                        <!--
-                                        <div class="form-group" style="position:absolute;left:0;top:0;right:0;">
+                                    <div class="panel-body">
+                                        <div class="form-group">
                                             <div class="input-group">
                                                 <span class="input-group-addon">Name</span>
                                                 <input class="form-control" ng-disabled="!currentNote" type="text"  ng-model="currentNote.title"/>
+                                                <a href="#" ng-click="saveCurrentNote()" class="input-group-addon" ng-disabled="!currentNote">
+                                                    <span class="glyphicon glyphicon-floppy-disk pull-right" title="Save the note"></span>
+                                                </a>
                                             </div>
                                         </div>
-                                        -->
                                         <div id="sn-ace-editor" ui-ace="{
                                               useWrapMode : true,
                                               mode: 'markdown',

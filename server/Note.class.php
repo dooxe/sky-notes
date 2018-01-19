@@ -12,16 +12,27 @@ class Note {
 
     public $content;
 
-    function __construct($notebookId){
+    function __construct($notebookId = null){
         $this->id = md5(uniqid(rand(), true));
         $this->title    = "New note";
-        $this->notebookId = $notebookId;
         $this->content      = "# My note ".date('d-m-Y');
+        if($notebookId){
+            $this->notebookId = $notebookId;
+        }
     }
 
     function save(){
         $path = Note::getPath($this);
         return file_put_contents($path,json_encode($this));
+    }
+
+    static function fromArray($a){
+        $note = new Note();
+        $note->id           = $a['id'];
+        $note->title        = $a['title'];
+        $note->notebookId   = $a['notebookId'];
+        $note->content      = $a['content'];
+        return $note;
     }
 
     static function getPath($note){

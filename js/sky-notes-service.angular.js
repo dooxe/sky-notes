@@ -35,6 +35,10 @@ SkyNotes.factory('$skyNotes', ['$http', 'Notebook', function($http, Notebook){
 
         deleteNote: function(){
 
+        },
+
+        saveNote: function(note){
+            return Notebook.saveNote(note);
         }
     };
 
