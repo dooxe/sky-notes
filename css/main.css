@@ -1,0 +1,57 @@
+html,body,#sn-main {
+    height:100%;
+}
+
+body {
+    background-color        : #999999;
+}
+
+#sn-navbar {
+    height          : 60px;
+}
+
+#sn-body {
+    height: 100%;
+    padding-top: 80px;
+    padding-bottom: 50px;
+}
+
+#sn-body>.row {
+    height: 100%;
+}
+
+#sn-body>.row .panel {
+    margin-bottom       : 0;
+}
+
+#sn-body>.row>.col {
+    height: 100%;
+}
+
+#sn-body>.row>.col>.panel {
+    height: 100%;
+    margin-bottom:0;
+}
+
+#sn-body>.row>.col>.row {
+    height: 100%;
+}
+#sn-body>.row>.col>.row>.col {
+    height: 100%;
+}
+#sn-body>.row>.col>.row>.col>.panel {
+    height: 100%;
+}
+
+#sn-editor-panel .panel-body{
+    height          : 100%;
+    position        : relative;
+}
+
+#sn-ace-editor {
+    min-height      : 700px;
+}
+
+.panel {
+    box-shadow: 0 0 25px #777;
+}
