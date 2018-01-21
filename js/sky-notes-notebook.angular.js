@@ -31,6 +31,7 @@ SkyNotes.factory('Notebook', ['$http', function($http){
     //  Containers
     //
     var notes           = [];
+    var notesById       = {};
     var notebooks       = [];
     var notebooksById   = {};
 
@@ -53,6 +54,7 @@ SkyNotes.factory('Notebook', ['$http', function($http){
                 if(notebook){
                     notebook.notes.push(note);
                     notes.push(note);
+                    notesById[note.id] = note;
                 }
                 else {
                     console.warn("Note '"+note.id+"' : notebookId not referencing any existing notebook");
@@ -63,21 +65,58 @@ SkyNotes.factory('Notebook', ['$http', function($http){
 
     return {
         create: function(title){
-            var nb = new Notebook(title);
-            notebooks.push(nb);
-            return this.save(nb);
+            return $http.post('api/notebooks/new', {title:title}).then((response)=>{
+                var nb = response.data;
+                notebooks.push(nb);
+                notebooksById[nb.id] = nb;
+            });
         },
 
-        remove: function(index){
-            notebooks.splice(index,1);
+        save: function(notebook){
+            return $http.post('api/notebooks/save', notebook).then((response)=>{
+                var data = response.data;
+                console.log(data);
+            });
+        },
+
+        remove: function(notebook){
+            return $http.delete('api/notebooks/'+notebook.id).then((response)=>{
+                var index = notebooks.indexOf(notebook);
+                if(index > -1){
+                    notebooks.splice(index,1);
+                }
+            });
+        },
+
+        createNote: function(nbid,title){
+            return $http.post('api/notes/new', {notebookId:nbid,title:title}).then((response)=>{
+                var note = response.data;
+                notesById[note.id] = note;
+                notebooksById[nbid].notes.push(note);
+                return response;
+            });
+        },
+
+        getNote: function(id){
+            return notesById[id];
+        },
+
+        getAllNotes: function(){
+            return notes;
         },
 
         addNote: function(index){
             return notebooks[index].addNote();
         },
 
-        removeNote: function(nbIndex,nIndex){
-            notebooks[nbIndex].notes.splice(nIndex,1);
+        removeNote: function(note){
+            var notebook = notebooksById[note.notebookId];
+            return $http.delete('api/notes/'+note.id).then((response)=>{
+                var index = notebook.notes.indexOf(note);
+                if(index > -1){
+                    notebook.notes.splice(index,1);
+                }
+            });
         },
 
         getAll: function(){

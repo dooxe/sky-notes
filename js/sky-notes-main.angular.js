@@ -10,20 +10,25 @@ var snMainController = SkyNotes.controller('snMainController', [
 
         return angular.extend($self,{
 
+            // The notebook where the new note should be created
+            newNoteNotebookId: null,
+
+            // The model of the title inside 'new notebook' modal dialog
             newNotebookTitle: '',
 
+            // The model of the title inside 'new note' modal dialog
+            newNoteTitle: '',
+
+            // The selected note
             currentNote: null,
 
-            createNotebook: function(){
-                if($self.newNotebookTitle != ''){
-                    $skyNotes.createNotebook($self.newNotebookTitle);
-                    $self.newNotebookTitle = '';
-                }
+            saveNotebook: function(notebook){
+                $skyNotes.saveNotebook(notebook);
             },
 
-            removeNotebook: function(index){
-                if(window.confirm('Are you sure to delete this notebook ?')){
-                    $skyNotes.removeNotebook(index);
+            removeNotebook: function(notebook){
+                if(window.confirm('Are you sure to delete this notebook "'+notebook.title+'" ?')){
+                    $skyNotes.removeNotebook(notebook);
                 }
             },
 
@@ -31,13 +36,61 @@ var snMainController = SkyNotes.controller('snMainController', [
                 return $skyNotes.getNotebooks();
             },
 
+            //
+            //
+            //
+            getAllNotes: function(){
+                return $skyNotes.getAllNotes();
+            },
+
+            //
+            //
+            //
+            showNewNotebookModal: function(){
+                $self.newNotebookTitle = '';
+                $('#sn-new-notebook-modal').modal('toggle');
+            },
+
+            //
+            // Called when pressing 'OK' in new notebook modal
+            //
+            createNotebook: function(){
+                if($self.newNotebookTitle != ''){
+                    $skyNotes.createNotebook($self.newNotebookTitle).then(function(){
+                        $('#sn-new-notebook-modal').modal('toggle');
+                    });
+                }
+            },
+
+            //
+            //  Called when click '+' on the note book toolbar
+            //
+            showNewNoteModal: function(notebookId){
+                $self.newNoteNotebookId = notebookId;
+                $('#sn-new-note-modal').modal('toggle');
+            },
+
+            //
+            //  Called when click 'OK' on new note modal
+            //
+            createNote: function(){
+                $skyNotes.createNote($self.newNoteNotebookId,$self.newNoteTitle).then(function(response){
+                    var note = response.data;
+                    note = $skyNotes.getNote(note.id);
+                    $self.setCurrentNote(note);
+                    $self.notebook = null;
+                    $self.newNoteTitle = '';
+                    $('#sn-new-note-modal').modal('toggle');
+                });
+            },
+
             addNote: function(index){
                 $self.setCurrentNote($skyNotes.addNote(index));
             },
 
-            removeNote: function(nbIndex,nIndex){
-                if(window.confirm('Are you sure to delete this note from the notebook ?')){
-                    $skyNotes.removeNote(nbIndex,nIndex);
+            removeNote: function(note){
+                if(window.confirm('Are you sure to delete the note "'+note.title+'" from the notebook ?')){
+                    $skyNotes.removeNote(note);
                 }
             },
 

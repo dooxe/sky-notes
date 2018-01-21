@@ -13,20 +13,32 @@ SkyNotes.factory('$skyNotes', ['$http', 'Notebook', function($http, Notebook){
             return Notebook.create(title);
         },
 
-        removeNotebook: function(index){
-            Notebook.remove(index);
+        saveNotebook: function(notebook){
+            Notebook.save(notebook);
+        },
+
+        removeNotebook: function(notebook){
+            Notebook.remove(notebook);
+        },
+
+        createNote: function(notebookId,title){
+            return Notebook.createNote(notebookId,title);
+        },
+
+        getAllNotes: function(){
+            return Notebook.getAllNotes();
+        },
+
+        getNote: function(id){
+            return Notebook.getNote(id);
         },
 
         addNote: function(index){
             return Notebook.addNote(index);
         },
 
-        removeNote: function(nbIndex,nIndex){
-            Notebook.removeNote(nbIndex,nIndex);
-        },
-
-        createNote: function(notebookIndex){
-
+        removeNote: function(note){
+            Notebook.removeNote(note);
         },
 
         updateNote: function(content){

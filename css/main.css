@@ -4,6 +4,7 @@ html,body,#sn-main {
 
 body {
     background-color        : #999999;
+    overflow-y              : scroll;
 }
 
 #sn-navbar {
@@ -43,15 +44,56 @@ body {
     height: 100%;
 }
 
+#sn-editor-panel{
+    position            : relative;
+}
+
 #sn-editor-panel .panel-body{
-    height          : 100%;
-    position        : relative;
+    position            : absolute;
+    left                : 0;
+    top                 : 40px;
+    right               : 0;
+    bottom              : 0;
 }
 
 #sn-ace-editor {
-    min-height      : 700px;
+    position            : absolute;
+    left                : 20px;
+    top                 : 110px;
+    right               : 20px;
+    bottom              : 20px;
 }
 
 .panel {
     box-shadow: 0 0 25px #777;
+}
+
+.modal {
+  text-align: center;
+  padding: 0!important;
+}
+
+.modal:before {
+  content: '';
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+  margin-right: -4px;
+}
+
+.modal-dialog {
+  display: inline-block;
+  text-align: left;
+  vertical-align: middle;
+}
+
+.glyphicon.big {
+  width: 28px;  // 14px * 2
+  height: 28px; // 14px * 2
+  background-size: 938px 318px;  // original dimensions * 2
+  background-position: -624px -48px;  // original position * 2
+}
+
+#sn-ilike-skynotes {
+    color               : #AADDFF;
 }

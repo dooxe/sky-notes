@@ -23,8 +23,10 @@ $request->server()->set('REQUEST_URI', substr($uri, strlen(APP_PATH)));
 //------------------------------------------------------------------------------
 $klein->with('api/notebooks', function () use ($klein) {
     //
-    $klein->respond('GET', '/create', function($request, $response){
-        $notebook = Notebook::create();
+    $klein->respond('POST', '/new', function($request, $response){
+        $data = (array)json_decode(file_get_contents('php://input'));
+        $title = $data['title'];
+        $notebook = Notebook::create($title);
         $notebook->save();
         return json_encode($notebook);
     });
@@ -45,7 +47,15 @@ $klein->with('api/notebooks', function () use ($klein) {
     //
     $klein->respond('GET', '/get/id/[:id]', function($request, $response){
         $id = $request->param('id');
-        return json_encode(Notebook::load($id));
+        return json_encode(Note::load($id));
+    });
+    //
+    $klein->respond('DELETE', '/[:id]', function($request, $response){
+        $id = $request->param('id');
+        if(Notebook::delete($id)){
+            return '';
+        }
+        return '';
     });
 });
 
@@ -54,9 +64,10 @@ $klein->with('api/notebooks', function () use ($klein) {
 //------------------------------------------------------------------------------
 $klein->with('api/notes', function () use ($klein) {
     //
-    $klein->respond('POST', '/create', function($request, $response){
-        $notebookId = $request->param('notebookId');
-        $note = Note::create($notebookId);
+    $klein->respond('POST', '/new', function($request, $response){
+        $info = (array)json_decode(file_get_contents('php://input'),true);
+        $notebookId = $info['notebookId'];
+        $note = Note::create($notebookId,$info['title']);
         $note->save();
         return json_encode($note);
     });
@@ -75,6 +86,14 @@ $klein->with('api/notes', function () use ($klein) {
     $klein->respond('GET', '/get/id/[:id]', function($request, $response){
         $id = $request->param('id');
         return json_encode(Note::load($id));
+    });
+    //
+    $klein->respond('DELETE', '/[:id]', function($request, $response){
+        $id = $request->param('id');
+        if(Note::delete($id)){
+            return '';
+        }
+        return 'not deleted ...';
     });
 });
 // Pass our request to our dispatch method

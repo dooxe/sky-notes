@@ -50,9 +50,21 @@
                                 <img src="logo/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
                             </span>
                             <span>
-                                Sky notes
+                                Sky notes - <i>keep your notes in the sky</i>
                             </span>
                         </a>
+                        <ul class="nav navbar-nav pull-right">
+                            <li>
+                                <a id="sn-ilike-skynotes" href="#" class="glyphicon glyphicon-heart"
+                                    style="font-size:24px" title="I like Skynotes !">
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" data-toggle="modal" data-target="#sn-about-modal" class="glyphicon glyphicon-info-sign"
+                                    style="font-size:24px" title="About skynotes">
+                                </a>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </nav>
@@ -63,45 +75,48 @@
                             <div class="panel-heading">
                                 <h2 class="panel-title">
                                     Notebooks
-                                    <a class="glyphicon glyphicon-remove-circle pull-right"></a>
                                 </h2>
                             </div>
                             <div class="panel-body">
-                                <div class="form-group">
-                                    <div class="input-group">
-                                        <input type="text" ng-model="newNotebookTitle" class="form-control"/>
-                                        <a href="#" class="input-group-addon btn-success" title="Create a new notebook"
-                                            ng-click="createNotebook()"
-                                        >
-                                            <span class="glyphicon glyphicon-plus"></span>
-                                        </a>
-                                    </div>
+                                <div class="navbar">
+                                    <button href="#" class="btn pull-right" title="Create a new note"
+                                        ng-click="showNewNoteModal()">
+                                        <span class="glyphicon glyphicon-plus"></span>
+                                         New note
+                                         <span class="glyphicon glyphicon-file"></span>
+                                    </button>
+                                    <button href="#" class="btn pull-right" style="margin-right:10px" title="Create a new notebook"
+                                        ng-click="showNewNotebookModal()">
+                                        <span class="glyphicon glyphicon-plus"></span>
+                                         New notebook
+                                         <span class="glyphicon glyphicon-list-alt"></span>
+                                    </button>
                                 </div>
+                                <div class="clearfix"></div>
                                 <ul ng-repeat="notebook in getNotebooks()" class="list-group">
                                     <li class="list-group-item d-flex justify-content-between align-items-center" style="font-size:1.4em">
                                         <a href="#" ng-click="selectNotebook($index)">
                                             <span class="glyphicon glyphicon-th-list"></span>
                                             {{notebook.title}}
                                         </a>
-                                        <a href="#" ng-click="removeNotebook($index)" class="badge badge-primary badge-pill btn-danger">
+                                        <!-- REMOVE NOTEBOOK -->
+                                        <a href="#" ng-click="removeNotebook(notebook)" class="badge badge-primary badge-pill btn-danger">
                                             <span class="glyphicon glyphicon-remove"></span>
                                         </a>
-                                        <a href="#" class="badge badge-primary badge-pill btn-success" title="Add a new note"
-                                            ng-click="addNote($index)"
-                                        >
-                                            <span class="glyphicon glyphicon-plus"></span>
-                                        </a>
-                                        <a href="#" ng-click="saveNotebook($index)" class="badge badge-primary badge-pill">
+                                        <!-- SAVE NOTEBOOK -->
+                                        <a href="#" ng-click="saveNotebook(notebook)" class="badge badge-primary badge-pill" title="Save the notebook">
                                             <span class="glyphicon glyphicon-floppy-disk"></span>
                                         </a>
+                                        <!-- NUMBER OF NOTES IN NOTEBOOK -->
                                         <span class="badge badge-primary badge-pill" title="Numbers of notes in the notebook">{{notebook.notes.length}}</span>
                                     </li>
-                                    <li  ng-repeat="note in notebook.notes" class="list-group-item d-flex justify-content-between align-items-center">
+                                    <li  ng-repeat="note in getAllNotes()" class="list-group-item d-flex justify-content-between align-items-center"
+                                        ng-if="(note.notebookId == notebook.id)">
                                         <a href="#" class="input-group-text" ng-click="setCurrentNote(note)">
                                             <span class="glyphicon glyphicon-edit"></span>
                                             {{note.title}}
                                         </a>
-                                        <a href="#" ng-click="removeNote($parent.$index,$index)" class="badge badge-pill badge-primary btn-danger">
+                                        <a href="#" ng-click="removeNote(note)" class="badge badge-pill badge-primary btn-danger">
                                             <span class="glyphicon glyphicon-remove"></span>
                                         </a>
                                     </li>
@@ -120,12 +135,20 @@
                                     </div>
                                     <div class="panel-body">
                                         <div class="form-group">
-                                            <div class="input-group">
+                                            <div class="input-group" style="margin-bottom:10px;">
                                                 <span class="input-group-addon">Name</span>
                                                 <input class="form-control" ng-disabled="!currentNote" type="text"  ng-model="currentNote.title"/>
                                                 <a href="#" ng-click="saveCurrentNote()" class="input-group-addon" ng-disabled="!currentNote">
                                                     <span class="glyphicon glyphicon-floppy-disk pull-right" title="Save the note"></span>
                                                 </a>
+                                            </div>
+                                            <div class="input-group">
+                                                <span class="input-group-addon">Notebook</span>
+                                                <select class="form-control" ng-disabled="!currentNote" id="noteNotebookSelect" ng-model="currentNote.notebookId" ng-change="saveCurrentNote()">
+                                                    <option ng-repeat="notebook in getNotebooks()" value="{{notebook.id}}">
+                                                        {{notebook.title}}
+                                                    </option>
+                                                </select>
                                             </div>
                                         </div>
                                         <div id="sn-ace-editor" ui-ace="{
@@ -156,6 +179,103 @@
             </div>
             <div id="sn-footer">
 
+            </div>
+        </div>
+
+        <!-- Modal for the note -->
+        <div id="sn-new-note-modal" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">
+                            Create a new note
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <!--<label for="sel1">Notebook</label>-->
+                            <div class="input-group">
+                                <span class="input-group-addon">Notebook</span>
+                                <select class="form-control" id="sel1" ng-model="newNoteNotebookId">
+                                    <option ng-repeat="notebook in getNotebooks()" value="{{notebook.id}}">
+                                        {{notebook.title}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon">Note title</span>
+                                <input class="form-control" type="text" ng-model="newNoteTitle"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-success" ng-click="createNote()">OK</button>
+                        <button class="btn btn-warning" data-dismiss="modal">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal for the notebook -->
+        <div id="sn-new-notebook-modal" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">
+                            <span class="glyphicon glyphicon-book"></span>
+                            Create a notebook
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon">Notebook title</span>
+                                <input class="form-control" type="text" ng-model="newNotebookTitle"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-success" ng-click="createNotebook()">OK</button>
+                        <button class="btn btn-warning" data-dismiss="modal">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal for information about -->
+        <div id="sn-about-modal" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header" style="text-align:center">
+                        <h2 class="modal-title">
+                            Sky notes
+                        </h2>
+                    </div>
+                    <div class="modal-body" style="text-align:center">
+                        <img src="logo/logo-large.png" alt="">
+                        <p>
+                            <h3>Author</h3>
+                            <div style="font-size:1.5em">dooxe</div>
+                            <a href="http://dooxe-creative.net/">
+                                http://dooxe-creative.net/
+                            </a>
+                        </p>
+                        <p>
+                            <h3>Project repository</h3>
+                            <a href="https://github.com/dooxe/sky-notes">
+                                https://github.com/dooxe/sky-notes
+                            </a>
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
     </body>
