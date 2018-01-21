@@ -2,8 +2,8 @@
 //
 //
 var snMainController = SkyNotes.controller('snMainController', [
-    '$scope', '$showdown','$skyNotes',
-    function($scope, $showdown, $skyNotes){
+    '$scope', '$http','$showdown','$skyNotes',
+    function($scope, $http, $showdown, $skyNotes){
         var $self = $scope;
 
         var aceEditor = null;
@@ -107,37 +107,18 @@ var snMainController = SkyNotes.controller('snMainController', [
                 }
             },
 
-            selectedNotebookIndex: -1,
-            selectedNoteIndex: -1,
-            selectedNote: null,
-            notebooks: [
-                {
-                    title: "Notebook 01",
-                    notes: [
-                        {
-                            title:      "Note 01",
-                            content:    "# Title1 !"
-                        },
-                        {
-                            title: "Note 02",
-                            content:    "# Title2 !"
-                        }
-                    ]
-                },
-                {
-                    title: "Notebook 02",
-                    notes: [
-                        {
-                            title: "Note 01",
-                            content:    "# Title3 !"
-                        },
-                        {
-                            title: "Note 02",
-                            content:    "# Title4 !"
-                        }
-                    ]
-                }
-            ],
+            //
+            //
+            //
+            logout: function(){
+                $http.post('api/logout', $self.loginData).then((response)=>{
+                    window.location.reload();
+                });
+            },
+
+            //
+            //
+            //
             aceLoaded: function(editor){
                 // Editor part
                 var session = editor.getSession();

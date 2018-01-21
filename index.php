@@ -1,7 +1,22 @@
+<?php
+if(file_exists('.security/users.php')){
+    require_once('.security/users.php');
+}
+session_start();
+
+$login = null;
+if(isset($_SESSION['login'])){
+    $login = $_SESSION['login'];
+}
+
+?>
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Sky notes</title>
+        <title>Sky notes <?php
+
+        echo $login;
+        ?></title>
         <meta charset="utf-8"/>
         <link rel="icon" type="image/png" href="logo/logo.png" />
         <!---->
@@ -30,6 +45,13 @@
         <script src="js/sky-notes-notebook.angular.js"></script>
         <script src="js/sky-notes-service.angular.js"></script>
         <script src="js/sky-notes-main.angular.js"></script>
+        <?php
+        if(!$login){
+        ?>
+        <script src="js/sky-notes-login-controller.js"></script>
+        <?php
+        }
+        ?>
     </head>
     <body ng-app="SkyNotes" ng-controller="snMainController">
         <div id="sn-main">
@@ -54,6 +76,17 @@
                             </span>
                         </a>
                         <ul class="nav navbar-nav pull-right">
+                            <?php
+                            if($login){
+                            ?>
+                            <li>
+                                <a href="#" class="glyphicon glyphicon-off"
+                                    style="font-size:24px" title="Disconnect" ng-click="logout()">
+                                </a>
+                            </li>
+                            <?php
+                            }
+                            ?>
                             <li>
                                 <a id="sn-ilike-skynotes" href="#" class="glyphicon glyphicon-heart"
                                     style="font-size:24px" title="I like Skynotes !">
@@ -69,6 +102,9 @@
                 </div>
             </nav>
             <div id="sn-body" class="container-fluid">
+                <?php
+                if($login){
+                ?>
                 <div class="row">
                     <div id="sn-menu-container" class="col col-md-3">
                         <div class="panel panel-default">
@@ -176,6 +212,44 @@
                         </div>
                     </div>
                 </div>
+                <?php
+                }
+                else {
+                ?>
+                <div ng-controller="SkyNotesLoginController" style="text-align:center">
+                    <div class="panel panel-default" style="display:inline-block;margin:auto;margin-top:150px;">
+                        <div class="panel-heading">
+                            <div class="panel-title">Login</div>
+                        </div>
+                        <div class="panel-body">
+                            <form>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-addon" style="width:100px">Login</div>
+                                        <input class="form-control" style="width:200px" type="text" ng-model="loginData.login" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-addon" style="width:100px">Password</div>
+                                        <input class="form-control" style="width:200px" type="password" ng-model="loginData.password"/>
+                                    </div>
+                                </div>
+                                <div ng-if="error" class="form-group">
+                                    <div class="alert alert-danger">
+                                        <strong>Error:</strong> wrong user and/or password.
+                                    </div>
+                                </div>
+                                <div class="form-group pull-right">
+                                    <button class="btn btn-success" ng-click="tryLogin()">Login</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <?php
+                }
+                ?>
             </div>
             <div id="sn-footer">
 
