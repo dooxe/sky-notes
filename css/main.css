@@ -48,7 +48,8 @@ body {
     position            : relative;
 }
 
-#sn-editor-panel .panel-body{
+#sn-editor-panel .panel-body,
+#sn-preview-panel .panel-body{
     position            : absolute;
     left                : 0;
     top                 : 40px;
@@ -62,6 +63,14 @@ body {
     top                 : 110px;
     right               : 20px;
     bottom              : 20px;
+}
+
+#sn-preview-panel .panel-body{
+    left                : 20px;
+    top                 : 60px;
+    right               : 40px;
+    bottom              : 20px;
+    overflow-y          : auto;
 }
 
 .panel {
