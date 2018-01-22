@@ -3,30 +3,6 @@
 //
 SkyNotes.factory('Notebook', ['$http', function($http){
 
-    var Note = function(){
-        return {
-            title:      'new note',
-            content:    '# My new note <'+(new Date())+'>'
-        };
-    };
-
-    var Notebook = function(title){
-        var notes = [];
-        return {
-            notes: notes,
-            title: title,
-            opened: true,
-            addNote: function(){
-                var n = new Note();
-                notes.push(n);
-                return n;
-            },
-            removeNote: function(index){
-                notes.splice(index,1);
-            }
-        };
-    };
-
     //
     //  Containers
     //
@@ -56,9 +32,6 @@ SkyNotes.factory('Notebook', ['$http', function($http){
                     notes.push(note);
                     notesById[note.id] = note;
                 }
-                else {
-                    console.warn("Note '"+note.id+"' : notebookId not referencing any existing notebook");
-                }
             }
         });
     });
@@ -74,8 +47,7 @@ SkyNotes.factory('Notebook', ['$http', function($http){
 
         save: function(notebook){
             return $http.post('api/notebooks/save', notebook).then((response)=>{
-                var data = response.data;
-                console.log(data);
+
             });
         },
 
@@ -92,7 +64,7 @@ SkyNotes.factory('Notebook', ['$http', function($http){
             return $http.post('api/notes/new', {notebookId:nbid,title:title}).then((response)=>{
                 var note = response.data;
                 notesById[note.id] = note;
-                notebooksById[nbid].notes.push(note);
+                notes.push(note);
                 return response;
             });
         },
@@ -105,17 +77,14 @@ SkyNotes.factory('Notebook', ['$http', function($http){
             return notes;
         },
 
-        addNote: function(index){
-            return notebooks[index].addNote();
-        },
-
         removeNote: function(note){
             var notebook = notebooksById[note.notebookId];
             return $http.delete('api/notes/'+note.id).then((response)=>{
-                var index = notebook.notes.indexOf(note);
+                var index = notes.indexOf(note);
                 if(index > -1){
-                    notebook.notes.splice(index,1);
+                    notes.splice(index,1);
                 }
+                delete notesById[note.id];
             });
         },
 
@@ -124,13 +93,13 @@ SkyNotes.factory('Notebook', ['$http', function($http){
         },
 
         save: function(notebook){
+            return $http.post('api/notebooks/save/', {notebook:notebook}).then(
+            (response)=>{
 
-            return notebook;
+            });
         },
 
         saveNote: function(note){
-            console.log('Saving note "'+note.title+'"');
-            console.log(note);
             $http.post('api/notes/save', note).then(function(data){
                 console.log(data.data);
             });

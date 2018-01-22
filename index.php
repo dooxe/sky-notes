@@ -13,16 +13,15 @@ if(isset($_SESSION['login'])){
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Sky notes <?php
-
-        echo $login;
-        ?></title>
+        <title>Sky notes</title>
         <meta charset="utf-8"/>
         <link rel="icon" type="image/png" href="logo/logo.png" />
         <!---->
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <!-- Load Angular -->
         <script src="node_modules/angular/angular.js"></script>
+        <!-- Load Angular sanitize-->
+        <script src="node_modules/angular-sanitize/angular-sanitize.js"></script>
         <!-- load ace -->
         <script src="node_modules/ace-builds/src-min-noconflict/ace.js"></script>
         <!-- load ace language tools -->
@@ -88,7 +87,7 @@ if(isset($_SESSION['login'])){
                             }
                             ?>
                             <li>
-                                <a id="sn-ilike-skynotes" href="#" class="glyphicon glyphicon-heart"
+                                <a id="sn-ilike-skynotes" href="#" class="glyphicon glyphicon-heart-empty"
                                     style="font-size:24px" title="I like Skynotes !">
                                 </a>
                             </li>
@@ -132,7 +131,7 @@ if(isset($_SESSION['login'])){
                                 <ul ng-repeat="notebook in getNotebooks()" class="list-group">
                                     <li class="list-group-item d-flex justify-content-between align-items-center" style="font-size:1.4em">
                                         <a href="#" ng-click="selectNotebook($index)">
-                                            <span class="glyphicon glyphicon-th-list"></span>
+                                            <span class="glyphicon glyphicon-book"></span>
                                             {{notebook.title}}
                                         </a>
                                         <!-- REMOVE NOTEBOOK -->
@@ -144,15 +143,16 @@ if(isset($_SESSION['login'])){
                                             <span class="glyphicon glyphicon-floppy-disk"></span>
                                         </a>
                                         <!-- NUMBER OF NOTES IN NOTEBOOK -->
-                                        <span class="badge badge-primary badge-pill" title="Numbers of notes in the notebook">{{notebook.notes.length}}</span>
+                                        <span class="badge badge-primary badge-pill" title="Numbers of notes in the notebook">{{getNumNotebooksByNotebookId(notebook.id)}}</span>
                                     </li>
-                                    <li  ng-repeat="note in getAllNotes()" class="list-group-item d-flex justify-content-between align-items-center"
-                                        ng-if="(note.notebookId == notebook.id)">
+                                    <li ng-repeat="note in getNotesByNotebookId(notebook.id)" class="list-group-item d-flex justify-content-between align-items-center"
+                                        ng-class="{active:(currentNote==note)}"
+                                    >
                                         <a href="#" class="input-group-text" ng-click="setCurrentNote(note)">
-                                            <span class="glyphicon glyphicon-edit"></span>
+                                            <span class="glyphicon glyphicon-file"></span>
                                             {{note.title}}
                                         </a>
-                                        <a href="#" ng-click="removeNote(note)" class="badge badge-pill badge-primary btn-danger">
+                                        <a href="#" ng-click="removeNote(note)" class="badge badge-pill badge-primary badge-danger">
                                             <span class="glyphicon glyphicon-remove"></span>
                                         </a>
                                     </li>
@@ -348,6 +348,26 @@ if(isset($_SESSION['login'])){
                                 https://github.com/dooxe/sky-notes
                             </a>
                         </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal for information about -->
+        <div id="sn-confirm-modal" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2 class="modal-title">
+                            Are you sure ?
+                        </h2>
+                    </div>
+                    <div class="modal-body" ng-bind-html="windowConfirmMessage">
+
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-success" ng-click="confirm()">OK</button>
+                        <button class="btn btn-warning" data-dismiss="modal">Cancel</button>
                     </div>
                 </div>
             </div>

@@ -2,6 +2,11 @@
 //
 //
 //
+require_once 'server/get-password.php';
+
+//
+//
+//
 function isLoginValid($login){
     return ($login != '');
 }
@@ -26,7 +31,7 @@ while(!isLoginValid($login)){
 $password = '';
 while(!isPasswordValid($password)){
     echo "Give us a password: ";
-    $stdin = fopen('php://stdin', 'r');
+    $stdin = getPassword(true);
     $password = trim(fgets(STDIN));
 }
 

@@ -22,16 +22,43 @@ var snMainController = SkyNotes.controller('snMainController', [
             // The selected note
             currentNote: null,
 
+            //
+            windowConfirmMessage: '',
+
+            // The function called when the user confirm
+            confirmAction: null,
+
+            //
+            //
+            //
+            confirm: function(){
+                if($self.confirmAction){
+                    $self.confirmAction();
+                }
+            },
+
+            //
+            //
+            //
             saveNotebook: function(notebook){
                 $skyNotes.saveNotebook(notebook);
             },
 
+            //
+            //
+            //
             removeNotebook: function(notebook){
-                if(window.confirm('Are you sure to delete this notebook "'+notebook.title+'" ?')){
+                $self.windowConfirmMessage = 'Are you sure to delete the notebook <strong>'+notebook.title+'</strong> ?';
+                $self.confirmAction = function(){
                     $skyNotes.removeNotebook(notebook);
+                    $('#sn-confirm-modal').modal('hide');
                 }
+                $('#sn-confirm-modal').modal('show');
             },
 
+            //
+            //
+            //
             getNotebooks: function(){
                 return $skyNotes.getNotebooks();
             },
@@ -71,6 +98,29 @@ var snMainController = SkyNotes.controller('snMainController', [
             },
 
             //
+            getNumNotebooksByNotebookId: function(nbid){
+                var n = 0;
+                var notes = $skyNotes.getAllNotes();
+                for(var i = 0; i < notes.length; ++i){
+                    if(notes[i].notebookId == nbid){
+                        ++n;
+                    }
+                }
+                return n;
+            },
+
+            getNotesByNotebookId: function(nbid){
+                var notes = [];
+                var allNotes = $skyNotes.getAllNotes();
+                for(var i = 0; i < allNotes.length; ++i){
+                    if(allNotes[i].notebookId == nbid){
+                        notes.push(allNotes[i]);
+                    }
+                }
+                return notes;
+            },
+
+            //
             //  Called when click 'OK' on new note modal
             //
             createNote: function(){
@@ -84,16 +134,28 @@ var snMainController = SkyNotes.controller('snMainController', [
                 });
             },
 
+            //
+            //
+            //
             addNote: function(index){
                 $self.setCurrentNote($skyNotes.addNote(index));
             },
 
+            //
+            //
+            //
             removeNote: function(note){
-                if(window.confirm('Are you sure to delete the note "'+note.title+'" from the notebook ?')){
+                $self.windowConfirmMessage = 'Are you sure to delete the note <strong>'+note.title+'</strong> from the notebook ?';
+                $self.confirmAction = function(){
                     $skyNotes.removeNote(note);
+                    $('#sn-confirm-modal').modal('hide');
                 }
+                $('#sn-confirm-modal').modal('show');
             },
 
+            //
+            //
+            //
             setCurrentNote: function(note){
                 $self.currentNote = note;
                 $(aceEditor.container).css('opacity','1');
@@ -101,10 +163,24 @@ var snMainController = SkyNotes.controller('snMainController', [
                 aceEditor.setValue(note.content);
             },
 
+            //
+            //
+            //
             saveCurrentNote: function(){
                 if($self.currentNote){
                     $skyNotes.saveNote($self.currentNote);
                 }
+            },
+
+            //
+            //
+            //
+            selectNote: function(notebookIndex,noteIndex){
+                $self.selectedNotebookIndex = notebookIndex;
+                $self.selectedNoteIndex = noteIndex;
+                var note = $self.notebooks[notebookIndex].notes[noteIndex];
+                $self.selectedNote = note;
+                aceEditor.setValue(note.content);
             },
 
             //
@@ -144,16 +220,6 @@ var snMainController = SkyNotes.controller('snMainController', [
             },
             aceChanged: function(e){
 
-            },
-            selectNotebook: function(notebookIndex){
-                $self.notebooks[notebookIndex].selected = !$self.notebooks[notebookIndex].selected;
-            },
-            selectNote: function(notebookIndex,noteIndex){
-                $self.selectedNotebookIndex = notebookIndex;
-                $self.selectedNoteIndex = noteIndex;
-                var note = $self.notebooks[notebookIndex].notes[noteIndex];
-                $self.selectedNote = note;
-                aceEditor.setValue(note.content);
             }
         });
     }
