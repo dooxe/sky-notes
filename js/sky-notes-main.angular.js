@@ -124,14 +124,16 @@ var snMainController = SkyNotes.controller('snMainController', [
             //  Called when click 'OK' on new note modal
             //
             createNote: function(){
-                $skyNotes.createNote($self.newNoteNotebookId,$self.newNoteTitle).then(function(response){
-                    var note = response.data;
-                    note = $skyNotes.getNote(note.id);
-                    $self.setCurrentNote(note);
-                    $self.notebook = null;
-                    $self.newNoteTitle = '';
-                    $('#sn-new-note-modal').modal('toggle');
-                });
+                if($self.newNoteTitle.trim() !== ''){
+                    $skyNotes.createNote($self.newNoteNotebookId,$self.newNoteTitle).then(function(response){
+                        var note = response.data;
+                        note = $skyNotes.getNote(note.id);
+                        $self.setCurrentNote(note);
+                        $self.notebook = null;
+                        $self.newNoteTitle = '';
+                        $('#sn-new-note-modal').modal('toggle');
+                    });
+                }
             },
 
             //

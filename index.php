@@ -51,6 +51,8 @@ if(isset($_SESSION['login'])){
         <?php
         }
         ?>
+        <!--github button-->
+        <script async defer src="https://buttons.github.io/buttons.js"></script>
     </head>
     <body ng-app="SkyNotes" ng-controller="snMainController">
         <div id="sn-main">
@@ -86,11 +88,15 @@ if(isset($_SESSION['login'])){
                             <?php
                             }
                             ?>
+                            <?php
+                            /*
                             <li>
                                 <a id="sn-ilike-skynotes" href="#" class="glyphicon glyphicon-heart-empty"
                                     style="font-size:24px" title="I like Skynotes !">
                                 </a>
                             </li>
+                            */
+                            ?>
                             <li>
                                 <a href="#" data-toggle="modal" data-target="#sn-about-modal" class="glyphicon glyphicon-info-sign"
                                     style="font-size:24px" title="About skynotes">
@@ -128,35 +134,43 @@ if(isset($_SESSION['login'])){
                                     </button>
                                 </div>
                                 <div class="clearfix"></div>
-                                <ul ng-repeat="notebook in getNotebooks()" class="list-group">
-                                    <li class="list-group-item d-flex justify-content-between align-items-center" style="font-size:1.4em">
-                                        <a href="#" ng-click="selectNotebook($index)">
-                                            <span class="glyphicon glyphicon-book"></span>
-                                            {{notebook.title}}
-                                        </a>
-                                        <!-- REMOVE NOTEBOOK -->
-                                        <a href="#" ng-click="removeNotebook(notebook)" class="badge badge-primary badge-pill btn-danger">
-                                            <span class="glyphicon glyphicon-remove"></span>
-                                        </a>
-                                        <!-- SAVE NOTEBOOK -->
-                                        <a href="#" ng-click="saveNotebook(notebook)" class="badge badge-primary badge-pill" title="Save the notebook">
-                                            <span class="glyphicon glyphicon-floppy-disk"></span>
-                                        </a>
-                                        <!-- NUMBER OF NOTES IN NOTEBOOK -->
-                                        <span class="badge badge-primary badge-pill" title="Numbers of notes in the notebook">{{getNumNotebooksByNotebookId(notebook.id)}}</span>
-                                    </li>
-                                    <li ng-repeat="note in getNotesByNotebookId(notebook.id)" class="list-group-item d-flex justify-content-between align-items-center"
-                                        ng-class="{active:(currentNote==note)}"
-                                    >
-                                        <a href="#" class="input-group-text" ng-click="setCurrentNote(note)">
-                                            <span class="glyphicon glyphicon-file"></span>
-                                            {{note.title}}
-                                        </a>
-                                        <a href="#" ng-click="removeNote(note)" class="badge badge-pill badge-primary badge-danger">
-                                            <span class="glyphicon glyphicon-remove"></span>
-                                        </a>
-                                    </li>
-                                </ul>
+                                <div id="sn-notebook-list">
+                                    <div ng-repeat="notebook in getNotebooks()" class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h2 class="panel-title">
+                                                <span class="glyphicon glyphicon-book"></span>
+                                                {{notebook.title}}
+                                                <div class="pull-right">
+                                                <!-- NUMBER OF NOTES IN NOTEBOOK -->
+                                                <span class="badge badge-primary badge-pill" title="{{getNumNotebooksByNotebookId(notebook.id)}} in this notebook">{{getNumNotebooksByNotebookId(notebook.id)}}</span>
+                                                    <!-- SAVE NOTEBOOK -->
+                                                    <a href="#" ng-click="saveNotebook(notebook)" class="badge badge-primary badge-pill" title="Save the notebook">
+                                                        <span class="glyphicon glyphicon-floppy-disk"></span>
+                                                    </a>
+                                                    <!-- REMOVE NOTEBOOK -->
+                                                    <a href="#" ng-click="removeNotebook(notebook)" class="badge badge-primary badge-pill btn-danger">
+                                                        <span class="glyphicon glyphicon-remove"></span>
+                                                    </a>
+                                                </div>
+                                            </h2>
+                                        </div>
+                                        <div class="sn-notebook-notes panel-body">
+                                            <div class="list-group">
+                                                <div ng-repeat="note in getNotesByNotebookId(notebook.id)" class="list-group-item d-flex justify-content-between align-items-center"
+                                                    ng-class="{active:(currentNote==note)}"
+                                                >
+                                                    <span href="#" ng-click="setCurrentNote(note)">
+                                                        <span class="glyphicon glyphicon-file"></span>
+                                                        {{note.title}}
+                                                    </span>
+                                                    <a href="#" ng-click="removeNote(note)" class="badge badge-pill badge-primary badge-danger">
+                                                        <span class="glyphicon glyphicon-remove"></span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -190,7 +204,6 @@ if(isset($_SESSION['login'])){
                                         <div id="sn-ace-editor" ui-ace="{
                                               useWrapMode : true,
                                               mode: 'markdown',
-                                              firstLineNumber: 5,
                                               onLoad: aceLoaded,
                                               onChange: aceChanged
                                             }"></div>
