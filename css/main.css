@@ -101,6 +101,11 @@ body {
     overflow-y              : auto;
 }
 
+.sn-notebook-notes .list-group-item
+{
+    cursor                  : pointer;
+}
+
 .modal {
   text-align: center;
   padding: 0!important;
@@ -168,8 +173,24 @@ body {
     border-color        : #CCCCCC;
 }
 
-.panel-default > .panel-heading
+a.input-group-addon:hover {
+    color               : #FFFFFF;
+}
+
+.panel-default > .panel-heading,
+.modal-header,
+.input-group-addon,
+.btn
 {
-    background : #415265;
+    background          : #415265;
     color               : #DDDDDD;
+}
+.btn:hover
+{
+    color               : #FFFFFF;
+}
+
+.form-control,
+.input-group-addon {
+
 }
