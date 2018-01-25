@@ -18,7 +18,6 @@ SkyNotes.factory('Notebook', ['$http', function($http){
         var data = response.data;
         for(var i = 0; i < data.length; ++i){
             var notebook = data[i];
-            notebook.notes = [];
             notebooksById[notebook.id] = notebook;
             notebooks.push(notebook);
         }
@@ -28,7 +27,6 @@ SkyNotes.factory('Notebook', ['$http', function($http){
                 var note = notesData[i];
                 var notebook = notebooksById[note.notebookId];
                 if(notebook){
-                    notebook.notes.push(note);
                     notes.push(note);
                     notesById[note.id] = note;
                 }
@@ -46,9 +44,7 @@ SkyNotes.factory('Notebook', ['$http', function($http){
         },
 
         save: function(notebook){
-            return $http.post('api/notebooks/save', notebook).then((response)=>{
-
-            });
+            return $http.post('api/notebooks/save', notebook);
         },
 
         remove: function(notebook){
@@ -90,13 +86,6 @@ SkyNotes.factory('Notebook', ['$http', function($http){
 
         getAll: function(){
             return notebooks;
-        },
-
-        save: function(notebook){
-            return $http.post('api/notebooks/save/', {notebook:notebook}).then(
-            (response)=>{
-
-            });
         },
 
         saveNote: function(note){

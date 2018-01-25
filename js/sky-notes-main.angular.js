@@ -28,6 +28,9 @@ var snMainController = SkyNotes.controller('snMainController', [
             // The function called when the user confirm
             confirmAction: null,
 
+            // The note book to be renamed
+            renamedNotebook: null,
+
             //
             //
             //
@@ -61,6 +64,22 @@ var snMainController = SkyNotes.controller('snMainController', [
             //
             getNotebooks: function(){
                 return $skyNotes.getNotebooks();
+            },
+
+            //
+            //
+            //
+            showRenameNotebookModal: function(notebook){
+                $self.renamedNotebook = notebook;
+                $('#sn-rename-notebook-modal').modal('show');
+            },
+
+            // Called when OK is clicked in the modal
+            renameNotebook: function(){
+                $skyNotes.saveNotebook($self.renamedNotebook).then(()=>{
+                    $self.renamedNotebook = null;
+                    $('#sn-rename-notebook-modal').modal('hide');
+                });
             },
 
             //

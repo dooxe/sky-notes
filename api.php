@@ -85,14 +85,11 @@ $klein->with('api/notebooks', function () use ($klein) {
         return json_encode($notebook);
     });
     //
-    $klein->respond('GET', '/save', function($request, $response){
-        /*
-        $notebookid = $request->param('notebookId');
-        $id = md5(uniqid(rand(), true));
-        $note = array("id"=>$id, "title"=>"", "content"=>"","notebookId"=>$notebookid);
-        $filename = getNotePath($note);
-        file_put_contents($filename, json_encode($note));
-        */
+    $klein->respond('POST', '/save', function($request, $response){
+        $json = file_get_contents('php://input');
+        $notebookArray = json_decode($json,true);
+        $notebook = Notebook::fromArray($notebookArray);
+        return $notebook->save();
     });
     //
     $klein->respond('GET', '/get/all', function($request, $response){

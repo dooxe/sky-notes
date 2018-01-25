@@ -15,7 +15,7 @@ body {
     height: 100%;
     padding-top: 80px;
     padding-bottom: 20px;
-    padding-top: 65px;
+    padding-top: 55px;
 }
 
 #sn-body>.row {
@@ -86,14 +86,28 @@ body {
     position:relative;
 }
 
+#sn-notebook-list-panel .panel-body {
+    padding-right           : 20px;
+}
+#sn-notebook-list-panel .panel-body .navbar {
+    margin-bottom           : 10px;
+}
+
 #sn-notebook-list {
-    position                :absolute;
-    left                    : 30px;
-    top                     : 120px;
-    bottom                  : 10px;
-    right                   : 20px;
+    position                : absolute;
+    left                    : 10px;
+    top                     : 90px;
+    bottom                  : 5px;
+    right                   : 15px;
     overflow-y              : auto;
     padding-right           : 10px;
+}
+#sn-notebook-list .panel-body {
+    padding                 : 0;
+    padding-right           : 0;
+}
+#sn-notebook-list .panel-body .list-group {
+    margin-bottom           : 0;
 }
 
 .sn-notebook-notes {
@@ -126,14 +140,10 @@ body {
 }
 
 .glyphicon.big {
-  width: 28px;  // 14px * 2
-  height: 28px; // 14px * 2
-  background-size: 938px 318px;  // original dimensions * 2
-  background-position: -624px -48px;  // original position * 2
-}
-
-#sn-ilike-skynotes {
-    color               : #AADDFF;
+  width: 28px;
+  height: 28px;
+  background-size: 938px 318px;
+  background-position: -624px -48px;
 }
 
 .col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-sm-1,
@@ -166,6 +176,10 @@ body {
     border              : none;
 }
 
+.panel-body {
+    padding: 5px;
+}
+
 #sn-notebook-list .panel
 {
     border-style        : solid;
@@ -177,17 +191,47 @@ a.input-group-addon:hover {
     color               : #FFFFFF;
 }
 
+.btn {
+    background: none;
+    border-style : none;
+}
+
+.list-group-item.active,
+.list-group-item.active:focus,
+.list-group-item.active:hover
+{
+    background          : none;
+}
+
 .panel-default > .panel-heading,
 .modal-header,
 .input-group-addon,
-.btn
+.btn,
+.list-group-item.active,
+.list-group-item.active:focus,
+.list-group-item.active:hover
 {
     background          : #415265;
-    color               : #DDDDDD;
+    color               : #EEEEEE;
+    text-shadow         : none;
 }
 .btn:hover
 {
     color               : #FFFFFF;
+}
+
+.btn-success {
+    background-color    : #44934a;
+}
+.btn-success:hover {
+    background-color    : #52ad59;
+}
+
+.btn-warning {
+    background-color    : #b19954;
+}
+.btn-warning:hover {
+    background-color    : #c6ad67;
 }
 
 .form-control,

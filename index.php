@@ -88,15 +88,6 @@ if(isset($_SESSION['login'])){
                             <?php
                             }
                             ?>
-                            <?php
-                            /*
-                            <li>
-                                <a id="sn-ilike-skynotes" href="#" class="glyphicon glyphicon-heart-empty"
-                                    style="font-size:24px" title="I like Skynotes !">
-                                </a>
-                            </li>
-                            */
-                            ?>
                             <li>
                                 <a href="#" data-toggle="modal" data-target="#sn-about-modal" class="glyphicon glyphicon-info-sign"
                                     style="font-size:24px" title="About skynotes">
@@ -112,7 +103,7 @@ if(isset($_SESSION['login'])){
                 ?>
                 <div class="row">
                     <div id="sn-menu-container" class="col col-md-3">
-                        <div class="panel panel-default">
+                        <div id="sn-notebook-list-panel" class="panel panel-default">
                             <div class="panel-heading">
                                 <h2 class="panel-title">
                                     Notebooks
@@ -144,8 +135,8 @@ if(isset($_SESSION['login'])){
                                                 <!-- NUMBER OF NOTES IN NOTEBOOK -->
                                                 <span class="badge badge-primary badge-pill" title="{{getNumNotebooksByNotebookId(notebook.id)}} in this notebook">{{getNumNotebooksByNotebookId(notebook.id)}}</span>
                                                     <!-- SAVE NOTEBOOK -->
-                                                    <a href="#" ng-click="saveNotebook(notebook)" class="badge badge-primary badge-pill" title="Save the notebook">
-                                                        <span class="glyphicon glyphicon-floppy-disk"></span>
+                                                    <a href="#" ng-click="showRenameNotebookModal(notebook)" class="badge badge-primary badge-pill" title="Save the notebook">
+                                                        <span class="glyphicon glyphicon-pencil"></span>
                                                     </a>
                                                     <!-- REMOVE NOTEBOOK -->
                                                     <a href="#" ng-click="removeNotebook(notebook)" class="badge badge-primary badge-pill btn-danger">
@@ -380,6 +371,31 @@ if(isset($_SESSION['login'])){
                     </div>
                     <div class="modal-footer">
                         <button class="btn btn-success" ng-click="confirm()">OK</button>
+                        <button class="btn btn-warning" data-dismiss="modal">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal for notebook renaming -->
+        <div id="sn-rename-notebook-modal" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2 class="modal-title">
+                            Rename a notebook
+                        </h2>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon">New notebook title</span>
+                                <input class="form-control" type="text" ng-model="renamedNotebook.title"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-success" ng-click="renameNotebook()">OK</button>
                         <button class="btn btn-warning" data-dismiss="modal">Cancel</button>
                     </div>
                 </div>

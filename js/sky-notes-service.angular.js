@@ -14,11 +14,11 @@ SkyNotes.factory('$skyNotes', ['$http', 'Notebook', function($http, Notebook){
         },
 
         saveNotebook: function(notebook){
-            Notebook.save(notebook);
+            return Notebook.save(notebook);
         },
 
         removeNotebook: function(notebook){
-            Notebook.remove(notebook);
+            return Notebook.remove(notebook);
         },
 
         createNote: function(notebookId,title){

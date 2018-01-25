@@ -56,6 +56,15 @@ class Notebook {
     /**
     *
     */
+    static function fromArray($a){
+        $notebook = new Notebook($a['title']);
+        $notebook->id = $a['id'];
+        return $notebook;
+    }
+
+    /**
+    *
+    */
     static function load($id){
         $filename = Notebook::getPathById($id);
         return json_decode(file_get_contents($filename));
