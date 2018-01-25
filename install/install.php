@@ -2,11 +2,6 @@
 //
 //
 //
-require_once 'server/get-password.php';
-
-//
-//
-//
 function isLoginValid($login){
     return ($login != '');
 }
