@@ -41,21 +41,31 @@ if(isset($_SESSION['login'])){
         <link rel="stylesheet" type="text/css" href="css/main.css"/>
         <script src="js/showdown.angular.js"></script>
         <script src="js/sky-notes.angular.js"></script>
-        <script src="js/sky-notes-notebook.angular.js"></script>
-        <script src="js/sky-notes-service.angular.js"></script>
-        <script src="js/sky-notes-main.angular.js"></script>
         <?php
         if(!$login){
         ?>
         <script src="js/sky-notes-login-controller.js"></script>
         <?php
         }
+        else {
         ?>
-        <!--github button-->
-        <script async defer src="https://buttons.github.io/buttons.js"></script>
+        <script src="js/sky-notes-notebook.angular.js"></script>
+        <script src="js/sky-notes-service.angular.js"></script>
+        <script src="js/sky-notes-main.angular.js"></script>
+        <?php
+        }
+        ?>
     </head>
-    <body ng-app="SkyNotes" ng-controller="snMainController">
-        <div id="sn-main">
+    <body>
+        <div id="sn-main"
+            <?php
+            if($login){
+            ?>
+            ng-app="SkyNotes" ng-controller="snMainController"
+            <?php
+            }
+            ?>
+            >
             <nav id="sn-navbar" class="navbar navbar-default navbar-fixed-top navbar-inverse">
                 <div class="container-fluid">
                     <!-- Brand and toggle get grouped for better mobile display -->
@@ -220,7 +230,7 @@ if(isset($_SESSION['login'])){
                 }
                 else {
                 ?>
-                <div ng-controller="SkyNotesLoginController" style="text-align:center">
+                <div ng-app="SkyNotes" ng-controller="SkyNotesLoginController" style="text-align:center">
                     <div class="panel panel-default" style="display:inline-block;margin:auto;margin-top:150px;">
                         <div class="panel-heading">
                             <div class="panel-title">Login</div>
@@ -260,6 +270,9 @@ if(isset($_SESSION['login'])){
             </div>
         </div>
 
+        <?php
+        if($login){
+        ?>
         <!-- Modal for the note -->
         <div id="sn-new-note-modal" class="modal fade">
             <div class="modal-dialog">
@@ -401,5 +414,8 @@ if(isset($_SESSION['login'])){
                 </div>
             </div>
         </div>
+        <?php
+        }
+        ?>
     </body>
 </html>
