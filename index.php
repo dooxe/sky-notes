@@ -56,16 +56,14 @@ if(isset($_SESSION['login'])){
         }
         ?>
     </head>
-    <body>
-        <div id="sn-main"
-            <?php
-            if($login){
-            ?>
-            ng-app="SkyNotes" ng-controller="snMainController"
-            <?php
-            }
-            ?>
-            >
+    <body <?php
+    if($login){
+    ?>
+    ng-app="SkyNotes" ng-controller="snMainController"
+    <?php
+    }
+    ?>>
+        <div id="sn-main">
             <nav id="sn-navbar" class="navbar navbar-default navbar-fixed-top navbar-inverse">
                 <div class="container-fluid">
                     <!-- Brand and toggle get grouped for better mobile display -->

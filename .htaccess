@@ -1,5 +1,8 @@
-# Apache (.htaccess or httpd.conf)
-RewriteBase /sky-notes
-RewriteEngine On
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule api/. /api.php [L]
+<IfModule mod_rewrite.c>
+    Options -MultiViews
+
+    RewriteEngine On
+    RewriteBase /sky-notes/
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule api/. api.php [L]
+</IfModule>

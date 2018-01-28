@@ -4,11 +4,12 @@
 var snMainController = SkyNotes.controller('snMainController', [
     '$scope', '$http','$showdown','$skyNotes',
     function($scope, $http, $showdown, $skyNotes){
+
         var $self = $scope;
 
         var aceEditor = null;
 
-        return angular.extend($self,{
+        $self = angular.extend($self,{
 
             // The notebook where the new note should be created
             newNoteNotebookId: null,
@@ -83,25 +84,19 @@ var snMainController = SkyNotes.controller('snMainController', [
             },
 
             //
-            //
-            //
             getAllNotes: function(){
                 return $skyNotes.getAllNotes();
             },
 
-            //
-            //
-            //
+            //  Show the modal to create a new notebook
             showNewNotebookModal: function(){
                 $self.newNotebookTitle = '';
                 $('#sn-new-notebook-modal').modal('toggle');
             },
 
-            //
             // Called when pressing 'OK' in new notebook modal
-            //
             createNotebook: function(){
-                if($self.newNotebookTitle != ''){
+                if($self.newNotebookTitle !== ''){
                     $skyNotes.createNotebook($self.newNotebookTitle).then(function(){
                         $('#sn-new-notebook-modal').modal('toggle');
                     });
@@ -243,5 +238,6 @@ var snMainController = SkyNotes.controller('snMainController', [
 
             }
         });
+        return $self;
     }
 ]);

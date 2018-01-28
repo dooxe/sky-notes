@@ -4,6 +4,6 @@ node_modules/
 package-lock.json
 composer.lock
 vendor/
-.security
+config/
 .htaccess
 api.php

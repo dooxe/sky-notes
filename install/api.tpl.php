@@ -4,11 +4,11 @@
 //  TODO Save the notebook (api/notebooks/save)
 //
 
-if(!file_exists('.security/users.php')){
+if(!file_exists('config/config.php')){
     echo "Please proceed to SkyNote installation step.";
     exit(0);
 }
-require_once '.security/users.php';
+require_once 'config/config.php';
 //------------------------------------------------------------------
 
 // Composer dependencies
@@ -34,15 +34,15 @@ $request->server()->set('REQUEST_URI', substr($uri, strlen(APP_PATH)));
 //------------------------------------------------------------------------------
 //  NOTEBOOK API
 //------------------------------------------------------------------------------
-$klein->respond('POST', 'api/login', function ($request, $response) use ($klein,$users) {
+$klein->respond('POST', 'api/login', function ($request, $response) use ($klein,$config) {
     $data = json_decode(file_get_contents('php://input'));
     $login = $data->login;
     $password = $data->password;
-    if(!array_key_exists($login,$users)){
+    if($config['user']['login'] !== $login){
         $response->code(403);
         return 'Login '.$login.'not existing ...';
     }
-    $userData = $users[$login];
+    $userData = $config['user'];
     $passToTest = sha1(md5($password.$userData['salt']));
     if($passToTest === $userData['password']){
         session_start();
