@@ -25,4 +25,8 @@ $ php install/install.php
 ```
 3. Remove the `install` directory.
 
-Everything must be fine now ! 
+Everything must be fine now !
+
+## TODO
+
+* [ ] not saving notes on server

@@ -27,6 +27,7 @@
     "angular-ui-ace": "^0.2.3",
     "bootstrap": "^3.3.7",
     "jquery": "^3.2.1",
-    "showdown": "^1.8.6"
+    "showdown": "^1.8.6",
+    "showdown-table": "^1.0.1"
   }
 }

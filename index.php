@@ -31,6 +31,8 @@ if(isset($_SESSION['login'])){
         <!---->
         <script src="node_modules/showdown/dist/showdown.min.js"></script>
         <!---->
+        <script src="node_modules/showdown-table/dist/showdown-table.min.js"></script>
+        <!---->
         <script src="node_modules/jquery/dist/jquery.min.js"></script>
         <!---->
         <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
