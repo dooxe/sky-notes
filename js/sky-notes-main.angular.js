@@ -184,7 +184,7 @@ var snMainController = SkyNotes.controller('snMainController', [
             //
             saveCurrentNote: function(){
                 if($self.currentNote){
-                    $skyNotes.saveNote($self.currentNote);
+                    return $skyNotes.saveNote($self.currentNote);
                 }
             },
 
@@ -197,6 +197,18 @@ var snMainController = SkyNotes.controller('snMainController', [
                 var note = $self.notebooks[notebookIndex].notes[noteIndex];
                 $self.selectedNote = note;
                 aceEditor.setValue(note.content);
+            },
+
+            //
+            //
+            //
+            gotoPDF: function(){
+                var note = $self.currentNote;
+                if(note){
+                    $self.saveCurrentNote().then(()=>{
+                        window.open('api/notes/'+note.id+'/generate/pdf', '_blank');
+                    });
+                }
             },
 
             //
@@ -238,6 +250,18 @@ var snMainController = SkyNotes.controller('snMainController', [
 
             }
         });
+
+        $(window).keypress(function(event) {
+            if (event.which == 112 && event.ctrlKey){
+                $self.gotoPDF();
+                return false;
+            }
+            if (!(event.which == 115 && event.ctrlKey) && !(event.which == 19)) return true;
+            $self.saveCurrentNote();
+            event.preventDefault();
+            return false;
+        });
+
         return $self;
     }
 ]);

@@ -1,5 +1,9 @@
 {
     "require": {
-        "klein/klein": "^2.1"
+        "klein/klein": "^2.1",
+        "michelf/php-markdown": "1.4.*",
+        "dompdf/dompdf" : "0.6.*",
+        "querypath/querypath": "3.*",
+        "masterminds/html5": "1.*"
     }
 }

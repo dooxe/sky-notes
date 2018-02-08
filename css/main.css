@@ -217,6 +217,7 @@ a.input-group-addon:hover {
 }
 .btn:hover
 {
+    background          : #5c6f84;
     color               : #FFFFFF;
 }
 
@@ -237,4 +238,12 @@ a.input-group-addon:hover {
 .form-control,
 .input-group-addon {
 
+}
+
+.panel-title .btn {
+    background          : #5c6f84;
+}
+
+.ace_editor {
+    font-size: 15px;
 }

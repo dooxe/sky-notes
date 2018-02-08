@@ -39,6 +39,8 @@ if(isset($_SESSION['login'])){
 
         <link rel="stylesheet" type="text/css" href="node_modules/bootstrap/dist/css/bootstrap.min.css"/>
         <link rel="stylesheet" type="text/css" href="node_modules/bootstrap/dist/css/bootstrap-theme.min.css"/>
+        <!---->
+        <link rel="stylesheet" type="text/css" href="node_modules/font-awesome/css/font-awesome.min.css"/>
 
         <link rel="stylesheet" type="text/css" href="css/main.css"/>
         <script src="js/showdown.angular.js"></script>
@@ -189,9 +191,6 @@ if(isset($_SESSION['login'])){
                                             <div class="input-group" style="margin-bottom:10px;">
                                                 <span class="input-group-addon">Name</span>
                                                 <input class="form-control" ng-disabled="!currentNote" type="text"  ng-model="currentNote.title"/>
-                                                <a href="#" ng-click="saveCurrentNote()" class="input-group-addon" ng-disabled="!currentNote">
-                                                    <span class="glyphicon glyphicon-floppy-disk pull-right" title="Save the note"></span>
-                                                </a>
                                             </div>
                                             <div class="input-group">
                                                 <span class="input-group-addon">Notebook</span>
@@ -214,7 +213,13 @@ if(isset($_SESSION['login'])){
                             <div class="col col-md-6">
                                 <div id="sn-preview-panel" class="panel panel-default">
                                     <div class="panel-heading">
-                                        <h2 class="panel-title">Preview</h2>
+                                        <h2 class="panel-title">
+                                            Preview
+                                            <button ng-disable="!currentNote" ng-click="gotoPDF()" title="Generate the pdf of the note" class="btn btn-default pull-right">
+                                                PDF <i class="fa fa-file-pdf-o"></i>
+                                            </button>
+                                            <div class="clearfix"></div>
+                                        </h2>
                                     </div>
                                     <div class="panel-body">
                                         <div id="sn-markdown-preview" class="container-fluid">

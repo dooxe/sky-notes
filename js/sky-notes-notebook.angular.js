@@ -89,8 +89,8 @@ SkyNotes.factory('Notebook', ['$http', function($http){
         },
 
         saveNote: function(note){
-            $http.post('api/notes/save', note).then(function(data){
-                console.log(data.data);
+            return $http.post('api/notes/save', note).then(function(response){
+                return response;
             });
         }
     };
