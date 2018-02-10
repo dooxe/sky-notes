@@ -76,6 +76,22 @@ if(!isset($_SESSION['login'])){
 }
 
 //------------------------------------------------------------------------------
+//
+//------------------------------------------------------------------------------
+$klein->respond('GET', 'api/config', function($request,$response){
+    $file = 'config/config.json';
+    if(file_exists($file)){
+        return file_get_contents($file);
+    }
+    return '{}';
+});
+$klein->respond('POST', 'api/config', function($request,$response){
+    $json = json_decode(file_get_contents('php://input'));
+    file_put_contents('config/config.json', json_encode($json->config));
+    return $json;
+});
+
+//------------------------------------------------------------------------------
 //  NOTEBOOK API
 //------------------------------------------------------------------------------
 $klein->with('api/notebooks', function () use ($klein) {
@@ -138,10 +154,7 @@ $klein->with('api/notes', function () use ($klein) {
                 }
             }
             $html = \HTML5::saveHTML($dom);
-
             $html = str_replace('<html>','<html><head><link rel="stylesheet" type="text/css" href="css/pdf.css"/></head>',$html);
-            file_put_contents('toto.html', $html);
-
             // DOM -> PDF
             $dompdf = new DOMPDF();
             $dompdf->load_html($html);

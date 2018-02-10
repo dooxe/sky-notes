@@ -177,7 +177,7 @@ body {
 }
 
 .panel-body {
-    padding: 5px;
+    padding: 15px;
 }
 
 #sn-notebook-list .panel
@@ -211,7 +211,8 @@ a.input-group-addon:hover {
 .list-group-item.active:focus,
 .list-group-item.active:hover
 {
-    background          : #415265;
+    background-image    : none;
+    background-color    : #415265;
     color               : #EEEEEE;
     text-shadow         : none;
 }
@@ -235,6 +236,13 @@ a.input-group-addon:hover {
     background-color    : #c6ad67;
 }
 
+.btn-danger {
+    background-color    : #883333;
+}
+.btn-danger:hover {
+    background-color    : #AA4444;
+}
+
 .form-control,
 .input-group-addon {
 
@@ -246,4 +254,11 @@ a.input-group-addon:hover {
 
 .ace_editor {
     font-size: 15px;
+}
+
+#sn-note-list-table {
+    margin-bottom       : 0;
+}
+#sn-note-list-table td {
+    vertical-align      : middle;
 }

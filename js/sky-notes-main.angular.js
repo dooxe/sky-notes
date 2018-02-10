@@ -11,6 +11,26 @@ var snMainController = SkyNotes.controller('snMainController', [
 
         $self = angular.extend($self,{
 
+            //
+            config: {
+                fontFamily: 'Arial',
+                fontSize: 14
+            },
+
+            availableFonts: [
+                'Monaco',
+                'Menlo',
+                'Ubuntu Mono',
+                'Consolas',
+                'source-code-pro',
+                'monospace',
+                'Dhurjati',
+                'Dosis',
+                'Share Tech Mono',
+                'Space Mono',
+                'Titillium Web'
+            ],
+
             // The notebook where the new note should be created
             newNoteNotebookId: null,
 
@@ -214,6 +234,21 @@ var snMainController = SkyNotes.controller('snMainController', [
             //
             //
             //
+            saveConfig: function(){
+                $http.post('api/config', {config:$self.config}).then((response)=>{
+                    if(aceEditor){
+                        $(aceEditor.container)
+                            .css('font-family',$self.config.fontFamily)
+                            .css('font-size',$self.config.fontSize+'px')
+                        ;
+                    }
+                    $('#sn-config-modal').modal('hide');
+                });
+            },
+
+            //
+            //
+            //
             logout: function(){
                 $http.post('api/logout', $self.loginData).then((response)=>{
                     window.location.reload();
@@ -229,7 +264,8 @@ var snMainController = SkyNotes.controller('snMainController', [
                 var renderer = editor.renderer;
 
                 //
-                $(editor.container).css('opacity','0.4');
+                var $editor = $(editor.container);
+                $editor.css('opacity','0.4');
                 editor.setReadOnly(true);
 
                 // Events
@@ -241,6 +277,16 @@ var snMainController = SkyNotes.controller('snMainController', [
                         var html = $showdown.makeHtml(markdown);
                         preview.innerHTML = html;
                         $self.currentNote.content = markdown;
+                    }
+                });
+
+                $http.get('api/config').then((response)=>{
+                    if(response.data !== {}){
+                        var config = $self.config = response.data;
+                        $editor
+                            .css('font-family',config.fontFamily)
+                            .css('font-size',config.fontSize+'px')
+                        ;
                     }
                 });
 

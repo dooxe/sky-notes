@@ -76,6 +76,22 @@ if(!isset($_SESSION['login'])){
 }
 
 //------------------------------------------------------------------------------
+//
+//------------------------------------------------------------------------------
+$klein->respond('GET', 'api/config', function($request,$response){
+    $file = 'config/config.json';
+    if(file_exists($file)){
+        return file_get_contents($file);
+    }
+    return '{}';
+});
+$klein->respond('POST', 'api/config', function($request,$response){
+    $json = json_decode(file_get_contents('php://input'));
+    file_put_contents('config/config.json', json_encode($json->config));
+    return $json;
+});
+
+//------------------------------------------------------------------------------
 //  NOTEBOOK API
 //------------------------------------------------------------------------------
 $klein->with('api/notebooks', function () use ($klein) {

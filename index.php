@@ -41,7 +41,9 @@ if(isset($_SESSION['login'])){
         <link rel="stylesheet" type="text/css" href="node_modules/bootstrap/dist/css/bootstrap-theme.min.css"/>
         <!---->
         <link rel="stylesheet" type="text/css" href="node_modules/font-awesome/css/font-awesome.min.css"/>
-
+        <!---->
+        <link href="https://fonts.googleapis.com/css?family=Dhurjati|Dosis|Share+Tech+Mono|Space+Mono|Titillium+Web" rel="stylesheet"/>
+        <!---->
         <link rel="stylesheet" type="text/css" href="css/main.css"/>
         <script src="js/showdown.angular.js"></script>
         <script src="js/sky-notes.angular.js"></script>
@@ -92,6 +94,12 @@ if(isset($_SESSION['login'])){
                             <?php
                             if($login){
                             ?>
+                            <li>
+                                <a href="#" data-toggle="modal" data-target="#sn-config-modal"
+                                    style="font-size:24px" title="Configuration">
+                                    <i class="fa fa-gears"></i>
+                                </a>
+                            </li>
                             <li>
                                 <a href="#" class="glyphicon glyphicon-off"
                                     style="font-size:24px" title="Disconnect" ng-click="logout()">
@@ -158,19 +166,23 @@ if(isset($_SESSION['login'])){
                                             </h2>
                                         </div>
                                         <div class="sn-notebook-notes panel-body">
-                                            <div class="list-group">
-                                                <div ng-repeat="note in getNotesByNotebookId(notebook.id)" class="list-group-item d-flex justify-content-between align-items-center"
+                                            <table id="sn-note-list-table" class="table">
+                                                <tr ng-repeat="note in getNotesByNotebookId(notebook.id)"
                                                     ng-class="{active:(currentNote==note)}"
                                                 >
-                                                    <span href="#" ng-click="setCurrentNote(note)">
-                                                        <span class="glyphicon glyphicon-file"></span>
-                                                        {{note.title}}
-                                                    </span>
-                                                    <a href="#" ng-click="removeNote(note)" class="badge badge-pill badge-primary badge-danger">
-                                                        <span class="glyphicon glyphicon-remove"></span>
-                                                    </a>
-                                                </div>
-                                            </div>
+                                                    <td style="width:100%">
+                                                        <a href="#" ng-click="setCurrentNote(note)">
+                                                            <span class="glyphicon glyphicon-file"></span>
+                                                            {{note.title}}
+                                                        </a>
+                                                    </td>
+                                                    <td>
+                                                        <button href="#" ng-click="removeNote(note)" class="btn btn-danger">
+                                                            <span class="glyphicon glyphicon-remove"></span>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            </table>
                                         </div>
                                     </div>
                                 </div>
@@ -292,7 +304,6 @@ if(isset($_SESSION['login'])){
                     </div>
                     <div class="modal-body">
                         <div class="form-group">
-                            <!--<label for="sel1">Notebook</label>-->
                             <div class="input-group">
                                 <span class="input-group-addon">Notebook</span>
                                 <select class="form-control" id="sel1" ng-model="newNoteNotebookId">
@@ -419,6 +430,66 @@ if(isset($_SESSION['login'])){
                 </div>
             </div>
         </div>
+
+        <!-- Modal for notebook renaming -->
+        <div id="sn-config-modal" class="modal fade">
+            <div class="modal-dialog" style="width:800px">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2 class="modal-title">
+                            <i class="fa fa-gears"></i>
+                            Configuration
+                        </h2>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col col-sm-6">
+                                <div class="form-group">
+                                    <div class="input-group input-group-lg">
+                                        <span class="input-group-addon" id="sizing-addon1">Editor font</span>
+                                        <span class="form-control" style="font-family:'{{config.fontFamily}}'">
+                                            {{config.fontFamily}}
+                                        </span>
+                                        <div class="input-group-btn" role="group">
+                                            <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-family:'{{config.fontFamily}}'">
+                                                <span class="caret"></span>
+                                            </button>
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                <li class="dropdown-item" ng-repeat="font in availableFonts">
+                                                    <a href="#" style="font-family:'{{font}}'" ng-click="config.fontFamily=font">{{font}}</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">
+                                            Editor font size
+                                        </span>
+                                        <input type="number" class="form-control" ng-model="config.fontSize"
+                                            min="10" max="20" step="0.5"
+                                        />
+                                        <span class="input-group-addon">
+                                            px
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col col-sm-6">
+                                <div ui-ace="{ readOnly: true,mode:'markdown'}" style="width:100%;height:200px;font-family:'{{config.fontFamily}}';font-size:{{config.fontSize}}px"># This is some
+Example content.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-success" ng-click="saveConfig()">OK</button>
+                        <button class="btn btn-warning" data-dismiss="modal">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>$('#sn-config-modal').modal('show');</script>
         <?php
         }
         ?>
