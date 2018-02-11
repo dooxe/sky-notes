@@ -35,14 +35,15 @@ if(isset($_SESSION['login'])){
         <!---->
         <script src="node_modules/jquery/dist/jquery.min.js"></script>
         <!---->
+        <script src="node_modules/popper.js/dist/umd/popper.min.js"></script>
+        <!---->
         <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-
         <link rel="stylesheet" type="text/css" href="node_modules/bootstrap/dist/css/bootstrap.min.css"/>
         <link rel="stylesheet" type="text/css" href="node_modules/bootstrap/dist/css/bootstrap-theme.min.css"/>
         <!---->
         <link rel="stylesheet" type="text/css" href="node_modules/font-awesome/css/font-awesome.min.css"/>
         <!---->
-        <link href="https://fonts.googleapis.com/css?family=Dhurjati|Dosis|Share+Tech+Mono|Space+Mono|Titillium+Web" rel="stylesheet"/>
+        <link href="https://fonts.googleapis.com/css?family=Inconsolata|Anonymous+Pro|Menlo|Ubuntu+Mono|Source+Code+Pro|Monospace|Dhurjati|Dosis|Share+Tech+Mono|Space+Mono|Titillium+Web" rel="stylesheet"/>
         <!---->
         <link rel="stylesheet" type="text/css" href="css/main.css"/>
         <script src="js/showdown.angular.js"></script>
@@ -70,215 +71,53 @@ if(isset($_SESSION['login'])){
     }
     ?>>
         <div id="sn-main">
-            <nav id="sn-navbar" class="navbar navbar-default navbar-fixed-top navbar-inverse">
-                <div class="container-fluid">
-                    <!-- Brand and toggle get grouped for better mobile display -->
-                    <div class="navbar-header">
-                      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                      </button>
-                    </div>
-                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                        <a class="navbar-brand" href="#">
-                            <span>
-                                <img src="logo/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
-                            </span>
-                            <span>
-                                Sky notes - <i>keep your notes in the sky</i>
-                            </span>
-                        </a>
-                        <ul class="nav navbar-nav pull-right">
-                            <?php
-                            if($login){
-                            ?>
-                            <li>
-                                <a href="#" data-toggle="modal" data-target="#sn-config-modal"
-                                    style="font-size:24px" title="Configuration">
-                                    <i class="fa fa-gears"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="glyphicon glyphicon-off"
-                                    style="font-size:24px" title="Disconnect" ng-click="logout()">
-                                </a>
-                            </li>
-                            <?php
-                            }
-                            ?>
-                            <li>
-                                <a href="#" data-toggle="modal" data-target="#sn-about-modal" class="glyphicon glyphicon-info-sign"
-                                    style="font-size:24px" title="About skynotes">
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
+            <nav class="navbar navbar-expand-md navbar-light bg-light">
+                <a class="navbar-brand" href="#">
+                    <span>
+                        <img src="logo/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+                    </span>
+                    <span>
+                        Sky notes - <i>keep your notes in the sky</i>
+                    </span>
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                    <ul class="nav navbar-nav">
+                        <?php
+                        if($login){
+                        ?>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" data-toggle="modal" data-target="#sn-config-modal"
+                                style="font-size:24px" title="Configuration">
+                                <i class="fa fa-lg fa-gears"></i>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" style="font-size:24px" title="Disconnect" ng-click="logout()">
+                                <i class="fa fa-lg fa-power-off"></i>
+                            </a>
+                        </li>
+                        <?php
+                        }
+                        ?>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" data-toggle="modal" data-target="#sn-about-modal"
+                                style="font-size:24px" title="About skynotes">
+                                <i class="fa fa-lg fa-info-circle"></i>
+                            </a>
+                        </li>
+                    </ul>
                 </div>
             </nav>
             <div id="sn-body" class="container-fluid">
                 <?php
                 if($login){
-                ?>
-                <div class="row">
-                    <div id="sn-menu-container" class="col col-md-3">
-                        <div id="sn-notebook-list-panel" class="panel panel-default">
-                            <div class="panel-heading">
-                                <h2 class="panel-title">
-                                    Notebooks
-                                </h2>
-                            </div>
-                            <div class="panel-body">
-                                <div class="navbar">
-                                    <button href="#" class="btn pull-right" title="Create a new note"
-                                        ng-click="showNewNoteModal()">
-                                        <span class="glyphicon glyphicon-plus"></span>
-                                         New note
-                                         <span class="glyphicon glyphicon-file"></span>
-                                    </button>
-                                    <button href="#" class="btn pull-right" style="margin-right:10px" title="Create a new notebook"
-                                        ng-click="showNewNotebookModal()">
-                                        <span class="glyphicon glyphicon-plus"></span>
-                                         New notebook
-                                         <span class="glyphicon glyphicon-list-alt"></span>
-                                    </button>
-                                </div>
-                                <div class="clearfix"></div>
-                                <div id="sn-notebook-list">
-                                    <div ng-repeat="notebook in getNotebooks()" class="panel panel-default">
-                                        <div class="panel-heading">
-                                            <h2 class="panel-title">
-                                                <span class="glyphicon glyphicon-book"></span>
-                                                {{notebook.title}}
-                                                <div class="pull-right">
-                                                <!-- NUMBER OF NOTES IN NOTEBOOK -->
-                                                <span class="badge badge-primary badge-pill" title="{{getNumNotebooksByNotebookId(notebook.id)}} in this notebook">{{getNumNotebooksByNotebookId(notebook.id)}}</span>
-                                                    <!-- SAVE NOTEBOOK -->
-                                                    <a href="#" ng-click="showRenameNotebookModal(notebook)" class="badge badge-primary badge-pill" title="Save the notebook">
-                                                        <span class="glyphicon glyphicon-pencil"></span>
-                                                    </a>
-                                                    <!-- REMOVE NOTEBOOK -->
-                                                    <a href="#" ng-click="removeNotebook(notebook)" class="badge badge-primary badge-pill btn-danger">
-                                                        <span class="glyphicon glyphicon-remove"></span>
-                                                    </a>
-                                                </div>
-                                            </h2>
-                                        </div>
-                                        <div class="sn-notebook-notes panel-body">
-                                            <table id="sn-note-list-table" class="table">
-                                                <tr ng-repeat="note in getNotesByNotebookId(notebook.id)"
-                                                    ng-class="{active:(currentNote==note)}"
-                                                >
-                                                    <td style="width:100%">
-                                                        <a href="#" ng-click="setCurrentNote(note)">
-                                                            <span class="glyphicon glyphicon-file"></span>
-                                                            {{note.title}}
-                                                        </a>
-                                                    </td>
-                                                    <td>
-                                                        <button href="#" ng-click="removeNote(note)" class="btn btn-danger">
-                                                            <span class="glyphicon glyphicon-remove"></span>
-                                                        </button>
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="sn-editor-container" class="col col-md-9">
-                        <div class="row">
-                            <div class="col col-md-6">
-                                <div id="sn-editor-panel" class="panel panel-default">
-                                    <div class="panel-heading">
-                                        <h2 class="panel-title">
-                                            Editor
-                                        </h2>
-                                    </div>
-                                    <div class="panel-body">
-                                        <div class="form-group">
-                                            <div class="input-group" style="margin-bottom:10px;">
-                                                <span class="input-group-addon">Name</span>
-                                                <input class="form-control" ng-disabled="!currentNote" type="text"  ng-model="currentNote.title"/>
-                                            </div>
-                                            <div class="input-group">
-                                                <span class="input-group-addon">Notebook</span>
-                                                <select class="form-control" ng-disabled="!currentNote" id="noteNotebookSelect" ng-model="currentNote.notebookId" ng-change="saveCurrentNote()">
-                                                    <option ng-repeat="notebook in getNotebooks()" value="{{notebook.id}}">
-                                                        {{notebook.title}}
-                                                    </option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div id="sn-ace-editor" ui-ace="{
-                                              useWrapMode : true,
-                                              mode: 'markdown',
-                                              onLoad: aceLoaded,
-                                              onChange: aceChanged
-                                            }"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col col-md-6">
-                                <div id="sn-preview-panel" class="panel panel-default">
-                                    <div class="panel-heading">
-                                        <h2 class="panel-title">
-                                            Preview
-                                            <button ng-disable="!currentNote" ng-click="gotoPDF()" title="Generate the pdf of the note" class="btn btn-default pull-right">
-                                                PDF <i class="fa fa-file-pdf-o"></i>
-                                            </button>
-                                            <div class="clearfix"></div>
-                                        </h2>
-                                    </div>
-                                    <div class="panel-body">
-                                        <div id="sn-markdown-preview" class="container-fluid">
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <?php
+                    require_once('views/main.php');
                 }
                 else {
-                ?>
-                <div ng-app="SkyNotes" ng-controller="SkyNotesLoginController" style="text-align:center">
-                    <div class="panel panel-default" style="display:inline-block;margin:auto;margin-top:150px;">
-                        <div class="panel-heading">
-                            <div class="panel-title">Login</div>
-                        </div>
-                        <div class="panel-body">
-                            <form>
-                                <div class="form-group">
-                                    <div class="input-group">
-                                        <div class="input-group-addon" style="width:100px">Login</div>
-                                        <input class="form-control" style="width:200px" type="text" ng-model="loginData.login" />
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="input-group">
-                                        <div class="input-group-addon" style="width:100px">Password</div>
-                                        <input class="form-control" style="width:200px" type="password" ng-model="loginData.password"/>
-                                    </div>
-                                </div>
-                                <div ng-if="error" class="form-group">
-                                    <div class="alert alert-danger">
-                                        <strong>Error:</strong> wrong user and/or password.
-                                    </div>
-                                </div>
-                                <div class="form-group pull-right">
-                                    <button class="btn btn-success" ng-click="tryLogin()">Login</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                <?php
+                    require_once('views/login.php');
                 }
                 ?>
             </div>
@@ -433,7 +272,7 @@ if(isset($_SESSION['login'])){
 
         <!-- Modal for notebook renaming -->
         <div id="sn-config-modal" class="modal fade">
-            <div class="modal-dialog" style="width:800px">
+            <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h2 class="modal-title">
@@ -442,43 +281,108 @@ if(isset($_SESSION['login'])){
                         </h2>
                     </div>
                     <div class="modal-body">
-                        <div class="row">
-                            <div class="col col-sm-6">
-                                <div class="form-group">
-                                    <div class="input-group input-group-lg">
-                                        <span class="input-group-addon" id="sizing-addon1">Editor font</span>
-                                        <span class="form-control" style="font-family:'{{config.fontFamily}}'">
-                                            {{config.fontFamily}}
-                                        </span>
-                                        <div class="input-group-btn" role="group">
-                                            <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-family:'{{config.fontFamily}}'">
-                                                <span class="caret"></span>
-                                            </button>
-                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                <li class="dropdown-item" ng-repeat="font in availableFonts">
-                                                    <a href="#" style="font-family:'{{font}}'" ng-click="config.fontFamily=font">{{font}}</a>
-                                                </li>
-                                            </ul>
+                        <div class="card card-default" style="margin-bottom:20px">
+                            <div class="card-header">
+                                <h3 class="card-title">Editor</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="row" style="margin-left:0;margin-right:0">
+                                    <div class="col col-sm-6">
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <div class="input-group-prepend" id="sizing-addon1">
+                                                    <span class="input-group-text" style="width:140px">Theme</span>
+                                                </div>
+                                                <span class="form-control">
+                                                    {{config.theme}}
+                                                </span>
+                                                <div class="input-group-append input-group-btn dropleft" role="group">
+                                                    <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="width:48px;font-family:'{{config.fontFamily}}'">
+                                                        <span class="caret"></span>
+                                                    </button>
+                                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="width:350px;height:250px;overflow-y:auto">
+                                                        <a href="#" ng-click="setConfigTheme(theme)" class="dropdown-item" ng-repeat="theme in availableTheme" style="margin-bottom:10px;">
+                                                            <i class="fa fa-paint-brush"></i>{{theme}}
+                                                            <div ui-ace='{theme:theme,onLoad:aceThemeEditorSampleLoaded}' style="height:48px"></div>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <div class="input-group-prepend" id="sizing-addon2">
+                                                    <span class="input-group-text" style="width:140px">Font family</span>
+                                                </div>
+                                                <span class="form-control" style="font-family:'{{config.fontFamily}}'">
+                                                    {{config.fontFamily}}
+                                                </span>
+                                                <div class="input-group-btn input-group-append dropleft" role="group">
+                                                    <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="width:48px;font-family:'{{config.fontFamily}}'">
+                                                        <span class="caret"></span>
+                                                    </button>
+                                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                        <a href="#" class="dropdown-item" ng-repeat="font in availableFonts" ng-click="config.fontFamily=font">
+                                                            <span  style="font-family:'{{font}}'" >{{font}}</a>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text" style="width:140px">Editor font size</span>
+                                                </div>
+                                                <input type="number" class="form-control" ng-model="config.fontSize"
+                                                    min="10" max="20" step="0.5"
+                                                />
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text" style="width:48px">px</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col col-sm-6">
+                                        <div ui-ace="{ readOnly: true,mode:'markdown', onLoad:sampleEditorLoaded}" style="width:100%;height:200px;font-family:'{{config.fontFamily}}';font-size:{{config.fontSize}}px">
+                                            # This is some
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            Editor font size
-                                        </span>
-                                        <input type="number" class="form-control" ng-model="config.fontSize"
-                                            min="10" max="20" step="0.5"
-                                        />
-                                        <span class="input-group-addon">
-                                            px
-                                        </span>
+                            </div>
+                        </div>
+                        <div class="card card-default">
+                            <div class="card-header">
+                                <h3 class="card-title">PDF Generation</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col col-sm-6">
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <div class="input-group-prepend" id="sizing-addon2">
+                                                    <span class="input-group-text">Style</span>
+                                                </div>
+                                                <span class="form-control" style="font-family:'{{config.fontFamily}}'">
+                                                    Style
+                                                </span>
+                                                <div class="input-group-btn dropleft input-group-append" role="group">
+                                                    <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="width:48px">
+                                                        <span class="caret"></span>
+                                                    </button>
+                                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                        <li class="dropdown-item">
+                                                            <a href="#">Modern</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col col-sm-6">
+
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col col-sm-6">
-                                <div ui-ace="{ readOnly: true,mode:'markdown'}" style="width:100%;height:200px;font-family:'{{config.fontFamily}}';font-size:{{config.fontSize}}px"># This is some
-Example content.</div>
                             </div>
                         </div>
                     </div>
@@ -489,7 +393,6 @@ Example content.</div>
                 </div>
             </div>
         </div>
-        <script>$('#sn-config-modal').modal('show');</script>
         <?php
         }
         ?>

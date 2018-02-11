@@ -14,21 +14,61 @@ var snMainController = SkyNotes.controller('snMainController', [
             //
             config: {
                 fontFamily: 'Arial',
-                fontSize: 14
+                fontSize: 14,
+                theme: 'ambiance'
             },
 
             availableFonts: [
-                'Monaco',
-                'Menlo',
+                'Anonymous Pro',
                 'Ubuntu Mono',
                 'Consolas',
-                'source-code-pro',
-                'monospace',
+                'Source Code Pro',
+                'Inconsolata',
                 'Dhurjati',
                 'Dosis',
                 'Share Tech Mono',
                 'Space Mono',
                 'Titillium Web'
+            ],
+
+            availableTheme: [
+                'ambiance',
+                'chaos',
+                'chrome',
+                'clouds',
+                'clouds_midnight',
+                'cobalt',
+                'crimson_editor',
+                'dawn',
+                'dracula',
+                'dreamweaver',
+                'eclipse',
+                'github',
+                'gob',
+                'gruvbox',
+                'idle_fingers',
+                'iplastic',
+                'katzenmilch',
+                'kr_theme',
+                'kuroir',
+                'merbivore',
+                'merbivore_soft',
+                'mono_industrial',
+                'monokai',
+                'pastel_on_dark',
+                'solarized_dark',
+                'solarized_light',
+                'sqlserver',
+                'terminal',
+                'textmate',
+                'tomorrow',
+                'tomorrow_night_blue',
+                'tomorrow_night_bright',
+                'tomorrow_night_eighties',
+                'tomorrow_night',
+                'twilight',
+                'vibrant_ink',
+                'xcode'
             ],
 
             // The notebook where the new note should be created
@@ -235,12 +275,16 @@ var snMainController = SkyNotes.controller('snMainController', [
             //
             //
             saveConfig: function(){
-                $http.post('api/config', {config:$self.config}).then((response)=>{
+                var config = $self.config;
+                $http.post('api/config', {config:config}).then((response)=>{
                     if(aceEditor){
                         $(aceEditor.container)
-                            .css('font-family',$self.config.fontFamily)
-                            .css('font-size',$self.config.fontSize+'px')
+                            .css('font-family',config.fontFamily)
+                            .css('font-size',config.fontSize+'px')
                         ;
+                        aceEditor.setOptions({
+                            theme: 'ace/theme/'+config.theme
+                        });
                     }
                     $('#sn-config-modal').modal('hide');
                 });
@@ -287,6 +331,13 @@ var snMainController = SkyNotes.controller('snMainController', [
                             .css('font-family',config.fontFamily)
                             .css('font-size',config.fontSize+'px')
                         ;
+                        var theme = '';
+                        if(config.theme){
+                            theme = config.theme;
+                        }
+                        editor.setOptions({
+                            theme: 'ace/theme/'+theme
+                        });
                     }
                 });
 
@@ -294,6 +345,34 @@ var snMainController = SkyNotes.controller('snMainController', [
             },
             aceChanged: function(e){
 
+            },
+
+            //
+            //
+            //
+            sampleEditor: null,
+            sampleEditorLoaded: function(editor){
+                // Editor part
+                var session = editor.getSession();
+                var renderer = editor.renderer;
+                $self.sampleEditor = editor;
+                editor.setValue("#This is\nSome sample content,\nto _preview_ the theme.");
+                editor.getSelection().clearSelection();
+            },
+            setConfigTheme: function(theme){
+                $self.sampleEditor.setOptions({
+                    theme:'ace/theme/'+theme
+                });
+                $self.config.theme = theme;
+            },
+
+            //
+            //
+            //
+            aceThemeEditorSampleLoaded: function(editor){
+                var name = editor.getOption('theme');
+                editor.setValue("# Theme\nThis is theme '"+name+"'");
+                editor.getSelection().clearSelection();
             }
         });
 
