@@ -15,7 +15,7 @@ var snMainController = SkyNotes.controller('snMainController', [
             config: {
                 fontFamily: 'Arial',
                 fontSize: 14,
-                theme: 'ambiance'
+                editorTheme: 'ambiance'
             },
 
             availableFonts: [
@@ -283,7 +283,7 @@ var snMainController = SkyNotes.controller('snMainController', [
                             .css('font-size',config.fontSize+'px')
                         ;
                         aceEditor.setOptions({
-                            theme: 'ace/theme/'+config.theme
+                            theme: 'ace/theme/'+config.editorTheme
                         });
                     }
                     $('#sn-config-modal').modal('hide');
@@ -332,8 +332,8 @@ var snMainController = SkyNotes.controller('snMainController', [
                             .css('font-size',config.fontSize+'px')
                         ;
                         var theme = '';
-                        if(config.theme){
-                            theme = config.theme;
+                        if(config.editorTheme){
+                            theme = config.editorTheme;
                         }
                         editor.setOptions({
                             theme: 'ace/theme/'+theme
@@ -359,11 +359,15 @@ var snMainController = SkyNotes.controller('snMainController', [
                 editor.setValue("#This is\nSome sample content,\nto _preview_ the theme.");
                 editor.getSelection().clearSelection();
             },
+
+            //
+            //
+            //
             setConfigTheme: function(theme){
                 $self.sampleEditor.setOptions({
                     theme:'ace/theme/'+theme
                 });
-                $self.config.theme = theme;
+                $self.config.editorTheme = theme;
             },
 
             //

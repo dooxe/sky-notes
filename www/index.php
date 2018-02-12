@@ -1,14 +1,9 @@
 <?php
-if(file_exists('.security/users.php')){
-    require_once('.security/users.php');
-}
 session_start();
-
 $login = null;
 if(isset($_SESSION['login'])){
     $login = $_SESSION['login'];
 }
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -294,7 +289,7 @@ if(isset($_SESSION['login'])){
                                                     <span class="input-group-text" style="width:140px">Theme</span>
                                                 </div>
                                                 <span class="form-control">
-                                                    {{config.theme}}
+                                                    {{config.editorTheme}}
                                                 </span>
                                                 <div class="input-group-append input-group-btn dropleft" role="group">
                                                     <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="width:48px;font-family:'{{config.fontFamily}}'">

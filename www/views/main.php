@@ -2,9 +2,9 @@
     <div id="sn-menu-container" class="col col-md-4 col-lg-3">
         <div id="sn-notebook-list-panel" class="card card-default">
             <div class="card-header">
-                <h2 class="card-title">
-                    Notebooks
-                </h2>
+                <h5 class="card-title">
+                     Notebooks
+                </h5>
             </div>
             <div class="card-body">
                 <div>
@@ -60,9 +60,9 @@
     <div class="col col-md-8 col-lg-5">
         <div id="sn-editor-panel" class="card card-default">
             <div class="card-header">
-                <h2 class="card-title">
+                <h5 class="card-title">
                     Editor
-                </h2>
+                </h5>
             </div>
             <div class="card-body">
                 <div class="form-group">
@@ -95,13 +95,13 @@
     <div class="col col-md-5 col-lg-4">
         <div id="sn-preview-panel" class="card card-default">
             <div class="card-header">
-                <h2 class="card-title">
+                <h5 class="card-title">
                     Preview
                     <button ng-disable="!currentNote" ng-click="gotoPDF()" title="Generate the pdf of the note" class="btn btn-default pull-right">
                         PDF <i class="fa fa-file-pdf-o"></i>
                     </button>
                     <div class="clearfix"></div>
-                </h2>
+                </h5>
             </div>
             <div class="card-body">
                 <div id="sn-markdown-preview" class="container-fluid">

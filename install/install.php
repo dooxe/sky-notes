@@ -1,7 +1,9 @@
 <?php
 //
-define('CONFIG_DIR',    'config');
-define('CONFIG_FILE',   CONFIG_DIR.'/config.php');
+define('TEMPLATE_DIRECTORY',    'install/templates');
+define('CONFIG_DIR',            'config');
+define('CONFIG_FILE',           CONFIG_DIR.'/config.php');
+define('WWW_DIR',               'www');
 
 //
 //
@@ -138,17 +140,17 @@ else {
 }
 
 //
-$apiPhp = file_get_contents('install/api.tpl.php');
+$apiPhp = file_get_contents(TEMPLATE_DIRECTORY.'/api.tpl.php');
 $apiPhp = str_replace('{{APP_PATH}}',$appPath,$apiPhp);
-file_put_contents('api.php',$apiPhp);
+file_put_contents(WWW_DIR.'/api.php',$apiPhp);
 
 //
-$htaccess = file_get_contents('install/.htaccess.tpl');
+$htaccess = file_get_contents(TEMPLATE_DIRECTORY.'/.htaccess.tpl');
 $htaccess = str_replace('{{APP_PATH}}',$appPath,$htaccess);
-file_put_contents('.htaccess',$htaccess);
+file_put_contents(WWW_DIR.'/.htaccess',$htaccess);
 
 //
-$config = file_get_contents('install/config.tpl.php');
+$config = file_get_contents(TEMPLATE_DIRECTORY.'/config.tpl.php');
 $config = str_replace('{{USER}}',    $login,     $config);
 $config = str_replace('{{SALT}}',    $salt,      $config);
 $config = str_replace('{{PASSWORD}}',$password,  $config);
@@ -157,8 +159,23 @@ if(!file_put_contents(CONFIG_FILE,$config)){
     echo "Impossible to install file '".CONFIG_FILE."'\n";
     exit(0);
 }
-
+//------------------------------------------------------------------------------
 //
+//------------------------------------------------------------------------------
+if(!file_exists('data')){
+    mkdir('data');
+}
+if(!file_exists('data/notebooks')){
+    mkdir('data/notebooks');
+}
+if(!file_exists('data/notes')){
+    mkdir('data/notes');
+}
+if(!file_exists('config')){
+    mkdir('config');
+}
+
+//------------------------------------------------------------------------------
 echo "Ok ! SkyNotes is now configured, please remove 'install' directory.\n";
 echo "\n";
 ?>

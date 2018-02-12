@@ -1,4 +1,5 @@
 <?php
+require_once(dirname(__FILE__).'/App.class.php');
 /**
 *   The class of a note.
 *
@@ -69,7 +70,7 @@ class Note {
     *
     */
     static function getPathById($id){
-        return 'data/notes/'.$id.'.json';
+        return App::dataPath('notes/'.$id.'.json');
     }
 
     /**
@@ -100,7 +101,7 @@ class Note {
     */
     static function getAll(){
         $notes = [];
-        if ($handle = opendir('data/notes')) {
+        if ($handle = opendir(App::dataPath('notes'))) {
             while (false !== ($entry = readdir($handle))) {
                 if ($entry != "." && $entry != "..") {
                     $id = preg_replace('/\\.[^.\\s]{3,4}$/', '', $entry);

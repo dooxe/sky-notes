@@ -1,9 +1,2 @@
-data/notebooks/*.json
-data/notes/*.json
-node_modules/
-package-lock.json
-composer.lock
-vendor/
+data/
 config/
-.htaccess
-api.php

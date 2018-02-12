@@ -1,12 +1,3 @@
-#<IfModule mod_rewrite.c>
-#    Options -MultiViews
-#    RewriteEngine On
-#    RewriteBase /sky-notes/
-#    RewriteCond %{REQUEST_FILENAME} !-f
-#    RewriteRule ^(.*) www/$1 [L,NC]
-#    RewriteRule api/. api.php [L]
-#</IfModule>
-
 <IfModule mod_rewrite.c>
     Options -MultiViews -Indexes
     RewriteEngine on
@@ -14,6 +5,6 @@
     RewriteCond %{HTTP:X-REQUESTED-WITH} !^(XMLHttpRequest)$
     # https://www.siteground.com/kb/how_to_change_my_document_root_folder_using_an_htaccess_file/
     RewriteCond %{REQUEST_URI} !www/
-    RewriteRule (.*) /sky-notes/www/$1 [L]
-    RewriteRule api/(.*) /sky-notes/www/api.php [L]
+    RewriteRule (.*) /{{APP_PATH}}/www/$1 [L]
+    RewriteRule api/(.*) /{{APP_PATH}}/www/api.php [L]
 </IfModule>

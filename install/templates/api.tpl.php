@@ -1,25 +1,28 @@
 <?php
+//------------------------------------------------------------------
 //
-//
-//  TODO Save the notebook (api/notebooks/save)
-//
+//------------------------------------------------------------------
+require_once '../server/lib.php';
 
-if(!file_exists('config/config.php')){
+//------------------------------------------------------------------
+//
+//------------------------------------------------------------------
+if(!file_exists('../config/config.php')){
     echo "Please proceed to SkyNote installation step.";
     exit(0);
 }
-require_once 'config/config.php';
-//------------------------------------------------------------------
+require_once '../config/config.php';
 
+//------------------------------------------------------------------
 //
+//------------------------------------------------------------------
 define('DOMPDF_ENABLE_AUTOLOAD', false);
 require_once __DIR__ . '/vendor/dompdf/dompdf/dompdf_config.inc.php';
-
-// Composer dependencies
 require_once __DIR__ . '/vendor/autoload.php';
-//
-require_once __DIR__ . '/server/Note.class.php';
-require_once __DIR__ . '/server/Notebook.class.php';
+
+
+//------------------------------------------------------------------
+//  Klein routing
 //------------------------------------------------------------------
 
 // Klein application path
@@ -66,10 +69,11 @@ $klein->respond('POST', 'api/logout', function () use ($klein) {
     return '';
 });
 
-session_start();
-//
+
+//------------------------------------------------------------------------------
 //  Route no more request if not logged in
-//
+//------------------------------------------------------------------------------
+session_start();
 if(!isset($_SESSION['login'])){
     $klein->dispatch($request);
     exit(0);
@@ -79,7 +83,7 @@ if(!isset($_SESSION['login'])){
 //
 //------------------------------------------------------------------------------
 $klein->respond('GET', 'api/config', function($request,$response){
-    $file = 'config/config.json';
+    $file = '../data/config.json';
     if(file_exists($file)){
         return file_get_contents($file);
     }
@@ -87,7 +91,7 @@ $klein->respond('GET', 'api/config', function($request,$response){
 });
 $klein->respond('POST', 'api/config', function($request,$response){
     $json = json_decode(file_get_contents('php://input'));
-    file_put_contents('config/config.json', json_encode($json->config));
+    file_put_contents('../data/config.json', json_encode($json->config));
     return $json;
 });
 
