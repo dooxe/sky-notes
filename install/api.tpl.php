@@ -79,7 +79,7 @@ if(!isset($_SESSION['login'])){
 //
 //------------------------------------------------------------------------------
 $klein->respond('GET', 'api/config', function($request,$response){
-    $file = 'config/config.json';
+    $file = 'data/config.json';
     if(file_exists($file)){
         return file_get_contents($file);
     }
@@ -87,7 +87,7 @@ $klein->respond('GET', 'api/config', function($request,$response){
 });
 $klein->respond('POST', 'api/config', function($request,$response){
     $json = json_decode(file_get_contents('php://input'));
-    file_put_contents('config/config.json', json_encode($json->config));
+    file_put_contents('data/config.json', json_encode($json->config));
     return $json;
 });
 
