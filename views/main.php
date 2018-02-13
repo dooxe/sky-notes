@@ -41,7 +41,7 @@
                 		</div>
                 		<div class="card-body" style="padding:0">
                 		<div class="list-group">
-                			<a class="list-group-item" href="#" ng-repeat="note in getNotesByNotebookId(notebook.id)"
+                			<a class="list-group-item note" href="#" ng-repeat="note in getNotesByNotebookId(notebook.id)"
                             ng-class="{'active':(currentNote==note)}" ng-click="setCurrentNote(note)" style="border-radius:0">
                                     <i class="fa fa-file" style="margin-right:10px"></i>
                                     {{note.title}}

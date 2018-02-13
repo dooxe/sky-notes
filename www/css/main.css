@@ -6,6 +6,7 @@
     right           : 0;
     bottom          : 0;
     overflow        : hidden;
+    background-color   : #333333;
 }
 
 #sn-body {
@@ -90,4 +91,37 @@ h5.card-title {
 
 h5.card-title .title-text {
     vertical-align          : middle;
+}
+
+.note.list-group-item {
+    padding: 5px 1.25rem;
+}
+
+.card-body {
+    padding                 : 10px;
+}
+
+.card-title .btn,
+.note.list-group-item .btn {
+    padding         : 0 5px;
+}
+
+.card {
+    border-style : none;
+}
+
+.navbar-light .navbar-brand,
+.navbar-light .navbar-nav .nav-link {
+    color : rgba(255,255,255,0.5);
+}
+
+.navbar-light .navbar-nav .nav-link:hover {
+    color : rgba(255,255,255,0.9);
+}
+
+.navbar,
+.card-header,
+.modal-header {
+    background-color: #335588 !important;
+    color           : #DDDDDD;
 }
