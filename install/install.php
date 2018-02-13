@@ -147,7 +147,7 @@ file_put_contents(WWW_DIR.'/api.php',$apiPhp);
 //
 $htaccess = file_get_contents(TEMPLATE_DIRECTORY.'/.htaccess.tpl');
 $htaccess = str_replace('{{APP_PATH}}',$appPath,$htaccess);
-file_put_contents(WWW_DIR.'/.htaccess',$htaccess);
+file_put_contents('.htaccess',$htaccess);
 
 //
 $config = file_get_contents(TEMPLATE_DIRECTORY.'/config.tpl.php');

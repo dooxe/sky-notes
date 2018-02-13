@@ -7,52 +7,55 @@
                 </h5>
             </div>
             <div class="card-body">
-                <div>
+                <div class="form-group">
                     <button href="#" class="btn pull-right" title="Create a new note"
                         ng-click="showNewNoteModal()">
-                        <span class="glyphicon glyphicon-plus"></span>
+                        <i class="fa fa-plus"></i>
                          New note
-                         <span class="glyphicon glyphicon-file"></span>
+                        <i class="fa fa-file" style="margin-left:10px"></i>
                     </button>
                     <button href="#" class="btn pull-right" style="margin-right:10px" title="Create a new notebook"
                         ng-click="showNewNotebookModal()">
-                        <span class="glyphicon glyphicon-plus"></span>
+                        <i class="fa fa-plus"></i>
                          New notebook
-                         <span class="glyphicon glyphicon-list-alt"></span>
+                        <i class="fa fa-book" style="margin-left:10px"></i>
                     </button>
-                </div>
                 <div class="clearfix"></div>
+                </div>
                 <div id="sn-notebook-list">
-                    <table class="table" ng-repeat="notebook in getNotebooks()" style="margin-bottom:40px;">
-                        <tr>
-                            <th>
-                                <i class="fa fa-book" style="margin-right:10px"></i>
-                                {{notebook.title}}
-                            </th>
-                            <th style="text-align:right;width:128px">
-                                <button ng-click="showRenameNotebookModal(notebook)" class="btn btn-scondary" title="Save the notebook">
+                	<div ng-repeat="notebook in getNotebooks()" style="margin-bottom:20px;" class="card card-default">
+                		<div class="card-header">
+                		<h4 class="card-title">
+                			<i class="fa fa-book" style="margin-right:10px"></i>
+                			{{notebook.title}}
+                			<div class="pull-right">
+                				<button ng-click="showRenameNotebookModal(notebook)" class="btn btn-scondary" title="Save the notebook">
                                     <i class="fa fa-pencil"></i>
                                 </button>
                                 <button href="#" ng-click="removeNotebook(notebook)" class="btn btn-secondary btn-danger">
                                     <i class="fa fa-trash"></i>
                                 </button>
-                            </th>
-                        </tr>
-                        <tr ng-repeat="note in getNotesByNotebookId(notebook.id)"
-                            ng-class="{'table-active':(currentNote==note)}">
-                            <td>
-                                <a href="#" ng-click="setCurrentNote(note)">
+                			</div>
+		                            <div class="clearfix"></div>
+                		</h4>
+                		
+                		</div>
+                		<div class="card-body" style="padding:0">
+                		<div class="list-group">
+                			<a class="list-group-item" href="#" ng-repeat="note in getNotesByNotebookId(notebook.id)"
+                            ng-class="{'active':(currentNote==note)}" ng-click="setCurrentNote(note)" style="border-radius:0">
                                     <i class="fa fa-file" style="margin-right:10px"></i>
                                     {{note.title}}
-                                </a>
-                            </td>
-                            <td style="text-align:right">
-                                <button href="#" ng-click="removeNote(note)" class="btn btn-danger">
-                                    <i class="fa fa-trash"></i>
-                                </button>
-                            </td>
-                        </tr>
-                    </table>
+                                    <span class="pull-right">
+                                    <button href="#" ng-click="removeNote(note)" class="btn btn-danger">
+		                                <i class="fa fa-trash"></i>
+		                            </button>
+		                            </span>
+		                            <div class="clearfix"></div>
+                             </a>
+                		</div>
+                		</div>
+                	</div>
                 </div>
             </div>
         </div>

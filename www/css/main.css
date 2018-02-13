@@ -49,6 +49,17 @@
     border-color        : #999999;
 }
 
-.modal-dialog {
-    max-width           : 90%;
+.sn-modal {
+	align-items: center;
+	justify-content: center;
 }
+
+.sn-modal.show .modal-dialog {
+	
+	display: flex;
+}
+
+.sn-modal .modal-dialog {
+    max-width           : 600px;
+}
+

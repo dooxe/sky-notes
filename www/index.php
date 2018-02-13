@@ -125,21 +125,24 @@ if(isset($_SESSION['login'])){
         if($login){
         ?>
         <!-- Modal for the note -->
-        <div id="sn-new-note-modal" class="modal fade">
+        <div id="sn-new-note-modal" class="sn-modal modal fade">
             <div class="modal-dialog">
-                <div class="modal-content">
+                <div class="modal-content sn-modal-content">
                     <div class="modal-header">
                         <h4 class="modal-title">
-                            Create a new note
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">×</span>
-                            </button>
+                            <i class="fa fa-file"></i>
+                            Create a new note                            
                         </h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        	<span aria-hidden="true">×</span>
+                        </button>
                     </div>
                     <div class="modal-body">
                         <div class="form-group">
                             <div class="input-group">
-                                <span class="input-group-addon">Notebook</span>
+                                <span class="input-group-prepend">
+                                	<span class="input-group-text">Notebook</span>
+                                </span>
                                 <select class="form-control" id="sel1" ng-model="newNoteNotebookId">
                                     <option ng-repeat="notebook in getNotebooks()" value="{{notebook.id}}">
                                         {{notebook.title}}
@@ -149,7 +152,9 @@ if(isset($_SESSION['login'])){
                         </div>
                         <div class="form-group">
                             <div class="input-group">
-                                <span class="input-group-addon">Note title</span>
+                                <span class="input-group-prepend">
+                                	<span class="input-group-text">Note title</span>
+                                </span>
                                 <input class="form-control" type="text" ng-model="newNoteTitle"/>
                             </div>
                         </div>
@@ -163,22 +168,24 @@ if(isset($_SESSION['login'])){
         </div>
 
         <!-- Modal for the notebook -->
-        <div id="sn-new-notebook-modal" class="modal fade">
+        <div id="sn-new-notebook-modal" class="sn-modal modal fade">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h4 class="modal-title">
-                            <span class="glyphicon glyphicon-book"></span>
+                            <i class="fa fa-book"></i>
                             Create a notebook
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">×</span>
-                            </button>
                         </h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        	<span aria-hidden="true">×</span>
+                        </button>
                     </div>
                     <div class="modal-body">
                         <div class="form-group">
                             <div class="input-group">
-                                <span class="input-group-addon">Notebook title</span>
+                                <span class="input-group-prepend">
+                                	<span class="input-group-text">Notebook title</span>
+                                </span>
                                 <input class="form-control" type="text" ng-model="newNotebookTitle"/>
                             </div>
                         </div>
@@ -192,7 +199,7 @@ if(isset($_SESSION['login'])){
         </div>
 
         <!-- Modal for information about -->
-        <div id="sn-about-modal" class="modal fade">
+        <div id="sn-about-modal" class="sn-modal modal fade">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header" style="text-align:center">
@@ -221,7 +228,7 @@ if(isset($_SESSION['login'])){
         </div>
 
         <!-- Modal for information about -->
-        <div id="sn-confirm-modal" class="modal fade">
+        <div id="sn-confirm-modal" class="sn-modal modal fade">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -241,7 +248,7 @@ if(isset($_SESSION['login'])){
         </div>
 
         <!-- Modal for notebook renaming -->
-        <div id="sn-rename-notebook-modal" class="modal fade">
+        <div id="sn-rename-notebook-modal" class="sn-modal modal fade">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -252,7 +259,9 @@ if(isset($_SESSION['login'])){
                     <div class="modal-body">
                         <div class="form-group">
                             <div class="input-group">
-                                <span class="input-group-addon">New notebook title</span>
+                                <span class="input-group-prepend">
+                                	<span class="input-group-test">New notebook title</span>
+                                </span>
                                 <input class="form-control" type="text" ng-model="renamedNotebook.title"/>
                             </div>
                         </div>
@@ -266,7 +275,7 @@ if(isset($_SESSION['login'])){
         </div>
 
         <!-- Modal for notebook renaming -->
-        <div id="sn-config-modal" class="modal fade">
+        <div id="sn-config-modal" class="sn-modal modal fade">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
