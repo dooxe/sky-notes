@@ -8,7 +8,7 @@
             </div>
             <div class="card-body">
                 <div class="form-group">
-                    <button href="#" class="btn pull-right" title="Create a new note"
+                    <button href="#" class="btn btn-default pull-right" title="Create a new note"
                         ng-click="showNewNoteModal()">
                         <i class="fa fa-plus"></i>
                          New note
