@@ -237,6 +237,7 @@ var snMainController = SkyNotes.controller('snMainController', [
                 $(aceEditor.container).css('opacity','1');
                 aceEditor.setReadOnly(false);
                 aceEditor.setValue(note.content);
+                aceEditor.getSelection().clearSelection();
             },
 
             //
@@ -251,6 +252,7 @@ var snMainController = SkyNotes.controller('snMainController', [
             //
             //
             //
+            /*
             selectNote: function(notebookIndex,noteIndex){
                 $self.selectedNotebookIndex = notebookIndex;
                 $self.selectedNoteIndex = noteIndex;
@@ -258,6 +260,7 @@ var snMainController = SkyNotes.controller('snMainController', [
                 $self.selectedNote = note;
                 aceEditor.setValue(note.content);
             },
+            */
 
             //
             //

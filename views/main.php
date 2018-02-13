@@ -8,16 +8,14 @@
             </div>
             <div class="card-body">
                 <div class="form-group">
-                    <button href="#" class="btn btn-default pull-right" title="Create a new note"
+                    <button href="#" class="btn btn-secondary pull-right" title="Create a new note"
                         ng-click="showNewNoteModal()">
                         <i class="fa fa-plus"></i>
-                         New note
                         <i class="fa fa-file" style="margin-left:10px"></i>
                     </button>
-                    <button href="#" class="btn pull-right" style="margin-right:10px" title="Create a new notebook"
+                    <button href="#" class="btn btn-secondary pull-right" style="margin-right:10px" title="Create a new notebook"
                         ng-click="showNewNotebookModal()">
                         <i class="fa fa-plus"></i>
-                         New notebook
                         <i class="fa fa-book" style="margin-left:10px"></i>
                     </button>
                 <div class="clearfix"></div>
@@ -25,20 +23,21 @@
                 <div id="sn-notebook-list">
                 	<div ng-repeat="notebook in getNotebooks()" style="margin-bottom:20px;" class="card card-default">
                 		<div class="card-header">
-                		<h4 class="card-title">
-                			<i class="fa fa-book" style="margin-right:10px"></i>
-                			{{notebook.title}}
-                			<div class="pull-right">
-                				<button ng-click="showRenameNotebookModal(notebook)" class="btn btn-scondary" title="Save the notebook">
-                                    <i class="fa fa-pencil"></i>
-                                </button>
-                                <button href="#" ng-click="removeNotebook(notebook)" class="btn btn-secondary btn-danger">
-                                    <i class="fa fa-trash"></i>
-                                </button>
-                			</div>
-		                            <div class="clearfix"></div>
-                		</h4>
-                		
+                    		<h5 class="card-title">
+                                <span class="title-text">
+                        			<i class="fa fa-book" style="margin-right:10px"></i>
+                        			{{notebook.title}}
+                                </span>
+                                <div class="pull-right">
+                                    <button ng-click="showRenameNotebookModal(notebook)" class="btn btn-secondary" title="Save the notebook">
+                                        <i class="fa fa-pencil"></i>
+                                    </button>
+                                    <button href="#" ng-click="removeNotebook(notebook)" class="btn btn-secondary btn-danger">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
+                                </div>
+                    		</h5>
+                            <div class="clearfix"></div>
                 		</div>
                 		<div class="card-body" style="padding:0">
                 		<div class="list-group">
@@ -95,7 +94,7 @@
             </div>
         </div>
     </div>
-    <div class="col col-md-5 col-lg-4">
+    <div class="col col-md-5 col-lg-4 d-md-none d-lg-block">
         <div id="sn-preview-panel" class="card card-default">
             <div class="card-header">
                 <h5 class="card-title">
