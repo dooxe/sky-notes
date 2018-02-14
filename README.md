@@ -35,7 +35,7 @@ composer install
 cd ..
 php install/install.php
 chmod 777 -R data
-cp install/config.default.json data
+cp install/config.default.json data/config.json
 ```
 
 You're done ! Have fun now !
