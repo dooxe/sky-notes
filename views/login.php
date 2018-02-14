@@ -2,7 +2,7 @@
 
 -->
 <div ng-app="SkyNotes" ng-controller="SkyNotesLoginController" style="text-align:center">
-    <div class="card card-default" style="display:inline-block;margin:auto;margin-top:150px;">
+    <div class="card card-default" style="display:inline-block;margin:auto;margin-top:150px">
         <div class="card-header">
             <h3 class="card-title">Login</h3>
         </div>

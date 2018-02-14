@@ -42,23 +42,25 @@ if(isset($_SESSION['login'])){
         <!---->
         <link rel="stylesheet" type="text/css" href="css/main.css"/>
         <script src="js/showdown.angular.js"></script>
-        <script src="js/sky-notes.angular.js"></script>
         <?php
-        if(!$login){
+        if($login){
         ?>
-        <script src="js/sky-notes-login-controller.js"></script>
+        <script src="js/sky-notes.angular.js"></script>
+        <script src="js/sky-notes-notebook.angular.js"></script>
+        <script src="js/sky-notes-service.angular.js"></script>
+        <script src="js/sky-notes-main.angular.js"></script>
+        <link rel="stylesheet" type="text/css" href="css/document.css" />
         <?php
         }
         else {
         ?>
-        <script src="js/sky-notes-notebook.angular.js"></script>
-        <script src="js/sky-notes-service.angular.js"></script>
-        <script src="js/sky-notes-main.angular.js"></script>
+        <script src="js/sky-notes.angular.js"></script>
+        <script src="js/sky-notes-login-controller.js"></script>
         <?php
         }
         ?>
     </head>
-    <body <?php
+    <body id="skynotes" <?php
     if($login){
     ?>
     ng-app="SkyNotes" ng-controller="snMainController"
@@ -118,9 +120,7 @@ if(isset($_SESSION['login'])){
             </div>
         </div>
         <?php
-        if($login){
             require_once('../views/modals.php');
-        }
         ?>
     </body>
 </html>

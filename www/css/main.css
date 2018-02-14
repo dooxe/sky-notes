@@ -1,4 +1,6 @@
-
+#sn-main>.navbar{
+    height          : 64px;
+}
 #sn-main {
     position        : absolute;
     left            : 0;
@@ -6,16 +8,15 @@
     right           : 0;
     bottom          : 0;
     overflow        : hidden;
-    background-color   : #333333;
+    background-color: #CCCCCC;
 }
 
 #sn-body {
     position        : absolute;
     left            : 0;
-    top             : 80px;
+    top             : 64px;
     right           : 0;
     bottom          : 0;
-    margin-bottom   : 20px;
 }
 
 #sn-body .row {
@@ -41,10 +42,10 @@
 
 #sn-ace-editor {
     position            : absolute;
-    left                : 20px;
-    top                 : 120px;
-    right               : 20px;
-    bottom              : 20px;
+    left                : 10px;
+    top                 : 110px;
+    right               : 10px;
+    bottom              : 10px;
     border-style        : solid;
     border-width        : 1px;
     border-color        : #999999;
@@ -94,7 +95,17 @@ h5.card-title .title-text {
 }
 
 .note.list-group-item {
-    padding: 5px 1.25rem;
+    padding: 5px 8px;
+}
+.card-header,
+.note.list-group-item {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.card-header {
+    padding-top             : 5px;
+    padding-bottom          : 5px;
 }
 
 .card-body {
@@ -106,15 +117,26 @@ h5.card-title .title-text {
     padding         : 0 5px;
 }
 
-.card {
-    border-style : none;
+.sn-main-row>.col>.card {
+    border-radius       : 0;
+}
+
+.sn-main-row .col>.card {
+    border-color        : #444444;
+}
+.sn-main-row .col>.card>.card-header {
+    height              : 64px;
+}
+.sn-main-row .col>.card>.card-header:first-child {
+    border-radius       : 0;
 }
 
 .navbar-light .navbar-brand,
 .navbar-light .navbar-nav .nav-link {
-    color : rgba(255,255,255,0.5);
+    color : rgba(255,255,255,0.7);
 }
 
+.navbar-light .navbar-brand:hover,
 .navbar-light .navbar-nav .nav-link:hover {
     color : rgba(255,255,255,0.9);
 }
@@ -122,6 +144,26 @@ h5.card-title .title-text {
 .navbar,
 .card-header,
 .modal-header {
-    background-color: #335588 !important;
+    background-color: #4c6d80 !important;
     color           : #DDDDDD;
+}
+
+.sn-main-row .col {
+    padding             : 0;
+}
+
+#skynotes .list-group-item {
+    color: #446990;
+}
+
+#skynotes .list-group-item.active {
+    background-color: #839fbd;
+    border-color: #839fbd;
+    color               : #EEEEEE;
+}
+
+#skynotes .input-group-text {
+    background-color: #4c6d80;
+    color: #EEEEEE;
+    border-color: #4c6d80;
 }

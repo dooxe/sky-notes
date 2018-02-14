@@ -1,0 +1,23 @@
+.sn-document {
+    padding                 : 1cm;
+    font-family             : Times;
+    background-color        : #F5F5F5;
+    color                   : #333333;
+}
+
+
+.sn-document ul  {
+    list-style-type: square;
+}
+
+.sn-document table {
+    width       : 100%;
+}
+
+.sn-document td, .sn-document th {
+    padding             : 10px;
+}
+
+.sn-document table th {
+    background-color: #CCCCCC;
+}

@@ -1,9 +1,9 @@
-<div class="row">
-    <div id="sn-menu-container" class="col col-md-4 col-lg-3">
+<div class="sn-main-row row">
+    <div id="sn-menu-container" class="col col-md-4 col-lg-2">
         <div id="sn-notebook-list-panel" class="card card-default">
             <div class="card-header">
                 <h5 class="card-title">
-                     Notebooks
+                     My notebooks
                 </h5>
             </div>
             <div class="card-body">
@@ -94,7 +94,7 @@
             </div>
         </div>
     </div>
-    <div class="col col-md-5 col-lg-4 d-md-none d-lg-block">
+    <div class="col col-md-5 col-lg-5 d-md-none d-lg-block">
         <div id="sn-preview-panel" class="card card-default">
             <div class="card-header">
                 <h5 class="card-title">
@@ -106,7 +106,7 @@
                 </h5>
             </div>
             <div class="card-body">
-                <div id="sn-markdown-preview" class="container-fluid">
+                <div id="sn-markdown-preview" class="sn-document container-fluid">
 
                 </div>
             </div>

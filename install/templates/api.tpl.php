@@ -158,7 +158,8 @@ $klein->with('api/notes', function () use ($klein) {
                 }
             }
             $html = \HTML5::saveHTML($dom);
-            $html = str_replace('<html>','<html><head><link rel="stylesheet" type="text/css" href="css/pdf.css"/></head>',$html);
+            $html = str_replace('<html>','<html><head><link rel="stylesheet" type="text/css" href="css/pdf.css"/><link rel="stylesheet" type="text/css" href="css/document.css"/></head><body class="sn-document">',$html);
+            $html = str_replace('</html>','</body></html>',$html);
             // DOM -> PDF
             $dompdf = new DOMPDF();
             $dompdf->load_html($html);
