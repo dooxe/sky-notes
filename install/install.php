@@ -180,7 +180,7 @@ if(!file_exists('config')){
 // ask for override
 $overrideConfig = false;
 $configFile = ROOT.'/data/config.json';
-if(!$update or file_exists($configFile)){
+if(!$update and file_exists($configFile)){
     echo "Should we keep your config file ? [Y/n]";
     echo "\n";
     echo "> ";

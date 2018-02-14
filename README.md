@@ -26,6 +26,7 @@ through a self-hosted easy-to-install web application.
 
 ### How to do
 
+Type these commands in a terminal:
 ```
 git clone https://github.com/dooxe/sky-notes.git
 cd sky-notes/www/
@@ -33,8 +34,9 @@ npm install
 composer install
 cd ..
 php install/install.php
+chmod 777 -R data
 ```
 
-Follow the install directions and you're finally done !
+You're done ! Have fun now !
 
-Have fun !
+Feedbacks are appreciated :)
