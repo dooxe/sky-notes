@@ -1,5 +1,6 @@
 <?php
 //
+define('ROOT',                  dirname(__FILE__));
 define('TEMPLATE_DIRECTORY',    'install/templates');
 define('CONFIG_DIR',            'config');
 define('CONFIG_FILE',           CONFIG_DIR.'/config.php');
@@ -175,7 +176,27 @@ if(!file_exists('config')){
     mkdir('config');
 }
 
+// If config file exists and not updating,
+// ask for override
+$overrideConfig = false;
+$configFile = ROOT.'/data/config.json';
+if(!$update or file_exists($configFile)){
+    echo "Should we keep your config file ? [Y/n]";
+    echo "\n";
+    echo "> ";
+    $l = trim(fgets(STDIN));
+    if($l === 'n'){
+        $overrideConfig = true;
+    }
+    echo "\n";
+}
+if($overrideConfig){
+    echo "Okay, let's make a new fresh config !\n";
+    echo "\n";
+    file_put_contents('data/config.json', file_get_contents(ROOT.'/config.default.json'));
+}
+
 //------------------------------------------------------------------------------
-echo "Ok ! SkyNotes is now configured, please remove 'install' directory.\n";
+echo "Nice ! SkyNotes is now configured. Have fun ! \n";
 echo "\n";
 ?>
