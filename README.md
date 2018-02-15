@@ -3,21 +3,19 @@
 *Skynotes* allows creating and editing notes online
 through a self-hosted easy-to-install web application.
 
-## Main features
+## Features
 * Notebook creation / deletion
 * Note creation / deletion inside notebooks
-* Note edition with a powerful Markdown editor
+* Note edition with a markdown editor
 * Live HTML preview
 * PDF generation
 * Editor theme configuration
 
-## Installation
-
-### What you need
+## What you need
 
 1. An *apache* server with *command line* access
     * `mod_rewrite` installed and enabled. 
-    The following line might do the job: 
+    The following lines might do the job: 
       ```
       sudo a2enmod rewrite
       sudo systemctl restart apache2
@@ -37,7 +35,7 @@ through a self-hosted easy-to-install web application.
     https://nodejs.org/en/
 
 
-### How to do
+## Installation
 
 Type these commands in a terminal:
 ```
