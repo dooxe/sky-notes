@@ -18,11 +18,11 @@ through a self-hosted easy-to-install web application.
 1. An *apache* server with *command line* access
     * `mod_rewrite` installed and enabled. 
     The following line might do the job: 
-    ```
-    sudo a2enmod rewrite
-    sudo systemctl restart apache2
-    ```
-        Otherwise see: https://stackoverflow.com/questions/869092/how-to-enable-mod-rewrite-for-apache-2-2
+      ```
+      sudo a2enmod rewrite
+      sudo systemctl restart apache2
+      ```
+      Otherwise see: https://stackoverflow.com/questions/869092/how-to-enable-mod-rewrite-for-apache-2-2
     
     * `AllowOverride All` for `.htacces`
     
