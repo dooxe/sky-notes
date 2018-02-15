@@ -16,6 +16,19 @@ through a self-hosted easy-to-install web application.
 ### What you need
 
 1. An *apache* server with *command line* access
+    * `mod_rewrite` installed and enabled. 
+    The following line might do the job: 
+    ```
+    sudo a2enmod rewrite
+    sudo systemctl restart apache2
+    ```
+        Otherwise see: https://stackoverflow.com/questions/869092/how-to-enable-mod-rewrite-for-apache-2-2
+    
+    * `AllowOverride All` for `.htacces`
+    
+        This might help: https://stackoverflow.com/questions/18740419/how-to-set-allowoverride-all
+    
+    
 2. *composer* dependency manager
 
     https://getcomposer.org/doc/00-intro.md#installation-linux-unix-osx
@@ -35,7 +48,6 @@ composer install
 cd ..
 php install/install.php
 chmod 777 -R data
-cp install/config.default.json data/config.json
 ```
 
 You're done ! Have fun now !
