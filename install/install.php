@@ -141,11 +141,6 @@ else {
 }
 
 //
-$apiPhp = file_get_contents(TEMPLATE_DIRECTORY.'/api.tpl.php');
-$apiPhp = str_replace('{{APP_PATH}}',$appPath,$apiPhp);
-file_put_contents(WWW_DIR.'/api.php',$apiPhp);
-
-//
 $htaccess = file_get_contents(TEMPLATE_DIRECTORY.'/.htaccess.tpl');
 $htaccess = str_replace('{{APP_PATH}}',$appPath,$htaccess);
 file_put_contents('.htaccess',$htaccess);
@@ -195,6 +190,9 @@ if($overrideConfig){
     echo "\n";
     file_put_contents('data/config.json', file_get_contents(ROOT.'/config.default.json'));
 }
+
+//
+require_once(dirname(__FILE__).'/fonts/install-fonts.php');
 
 //------------------------------------------------------------------------------
 echo "Nice ! SkyNotes is now configured. Have fun ! \n";

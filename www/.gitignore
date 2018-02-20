@@ -2,5 +2,5 @@ node_modules/
 package-lock.json
 composer.lock
 vendor/
+fonts/
 .htaccess
-api.php

@@ -20,13 +20,12 @@ define('DOMPDF_ENABLE_AUTOLOAD', false);
 require_once __DIR__ . '/vendor/dompdf/dompdf/dompdf_config.inc.php';
 require_once __DIR__ . '/vendor/autoload.php';
 
-
 //------------------------------------------------------------------
 //  Klein routing
 //------------------------------------------------------------------
-
 // Klein application path
-define('APP_PATH', '/{{APP_PATH}}/');
+$appPath = $config['app-path'];
+define('APP_PATH', "/${appPath}/");
 
 //
 $klein = new \Klein\Klein();
@@ -38,7 +37,7 @@ $uri = $request->server()->get('REQUEST_URI');
 // Set the request URI to a modified one (without the "subdirectory") in it
 $request->server()->set('REQUEST_URI', substr($uri, strlen(APP_PATH)));
 
-
+//
 require_once(App::path('src/klein/login.php'));
 
 //------------------------------------------------------------------------------
@@ -50,10 +49,12 @@ if(!isset($_SESSION['login'])){
     exit(0);
 }
 
+//
 require_once(App::path('src/klein/logout.php'));
 require_once(App::path('src/klein/config.php'));
 require_once(App::path('src/klein/notebooks.php'));
 require_once(App::path('src/klein/notes.php'));
+require_once(App::path('src/klein/fonts.php'));
 
 // Pass our request to our dispatch method
 $klein->dispatch($request);

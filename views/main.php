@@ -106,7 +106,7 @@
                 </h5>
             </div>
             <div class="card-body">
-                <div id="sn-markdown-preview" class="sn-document container-fluid">
+                <div id="sn-markdown-preview" class="sn-document container-fluid doctheme-{{config.docTheme}}">
 
                 </div>
             </div>

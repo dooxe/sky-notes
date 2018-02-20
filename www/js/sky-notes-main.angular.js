@@ -15,20 +15,12 @@ var snMainController = SkyNotes.controller('snMainController', [
             config: {
                 fontFamily: 'Arial',
                 fontSize: 14,
-                editorTheme: 'ambiance'
+                editorTheme: 'ambiance',
+                docTheme: null
             },
 
             availableFonts: [
-                'Anonymous Pro',
-                'Ubuntu Mono',
-                'Consolas',
-                'Source Code Pro',
-                'Inconsolata',
-                'Dhurjati',
-                'Dosis',
-                'Share Tech Mono',
-                'Space Mono',
-                'Titillium Web'
+
             ],
 
             availableTheme: [
@@ -69,6 +61,11 @@ var snMainController = SkyNotes.controller('snMainController', [
                 'twilight',
                 'vibrant_ink',
                 'xcode'
+            ],
+
+            availableDocThemes: [
+                'modern',
+                'book'
             ],
 
             // The notebook where the new note should be created
@@ -252,6 +249,19 @@ var snMainController = SkyNotes.controller('snMainController', [
             //
             //
             //
+            setConfigDocTheme: function(doctheme){
+                $self.config.docTheme = doctheme;
+                for(var i = 0; i < $self.availableDocThemes.length; ++i){
+                    var theme = $self.availableDocThemes[i];
+                    var klass = 'doctheme-'+theme;
+                    $('#sn-config-doc-preview').removeClass(klass);
+                }
+                $('#sn-config-doc-preview').addClass('doctheme-'+doctheme);
+            },
+
+            //
+            //
+            //
             /*
             selectNote: function(notebookIndex,noteIndex){
                 $self.selectedNotebookIndex = notebookIndex;
@@ -381,6 +391,13 @@ var snMainController = SkyNotes.controller('snMainController', [
                 editor.setValue("# Theme\nThis is theme '"+name+"'");
                 editor.getSelection().clearSelection();
             }
+        });
+
+        $self.config.docTheme = $self.availableDocThemes[0];
+
+        $http.get('api/editor-fonts').then((response)=>{
+            console.log(response.data);
+            $self.availableFonts = response.data;
         });
 
         $(window).keypress(function(event) {

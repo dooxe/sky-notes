@@ -167,3 +167,26 @@ h5.card-title .title-text {
     color: #EEEEEE;
     border-color: #4c6d80;
 }
+
+#sn-config-modal .modal-dialog {
+    min-width               : 1000px;
+    max-width               : 80%;
+}
+
+#sn-config-modal .modal-content {
+    max-height              : 80%;
+}
+#sn-config-modal>.card-body {
+    overflow                : auto;
+}
+#sn-preview-panel .card-body {
+    padding                 : 0;
+    overflow                : auto;    
+}
+#sn-config-doc-preview{
+    max-height              : 180px;
+    overflow                : auto;
+    border-style            : solid;
+    border-width            : 1px;
+    border-color            : #999999;
+}

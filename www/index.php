@@ -34,12 +34,10 @@ if(isset($_SESSION['login'])){
         <!---->
         <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
         <link rel="stylesheet" type="text/css" href="node_modules/bootstrap/dist/css/bootstrap.min.css"/>
-        <link rel="stylesheet" type="text/css" href="node_modules/bootstrap/dist/css/bootstrap-theme.min.css"/>
         <!---->
         <link rel="stylesheet" type="text/css" href="node_modules/font-awesome/css/font-awesome.min.css"/>
         <!---->
-        <link href="https://fonts.googleapis.com/css?family=Inconsolata|Anonymous+Pro|Menlo|Ubuntu+Mono|Source+Code+Pro|Monospace|Dhurjati|Dosis|Share+Tech+Mono|Space+Mono|Titillium+Web" rel="stylesheet"/>
-        <!---->
+        <link rel="stylesheet" type="text/css" href="fonts/fonts.css"/>
         <link rel="stylesheet" type="text/css" href="css/main.css"/>
         <script src="js/showdown.angular.js"></script>
         <?php
@@ -50,6 +48,8 @@ if(isset($_SESSION['login'])){
         <script src="js/sky-notes-service.angular.js"></script>
         <script src="js/sky-notes-main.angular.js"></script>
         <link rel="stylesheet" type="text/css" href="css/document.css" />
+        <link rel="stylesheet" type="text/css" href="css/docthemes/modern.css" />
+        <link rel="stylesheet" type="text/css" href="css/docthemes/book.css" />
         <?php
         }
         else {

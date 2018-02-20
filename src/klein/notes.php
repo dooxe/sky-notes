@@ -24,8 +24,12 @@ $klein->with('api/notes', function () use ($klein) {
                 }
             }
             $html = \HTML5::saveHTML($dom);
-            $html = str_replace('<html>','<html><head><link rel="stylesheet" type="text/css" href="css/pdf.css"/><link rel="stylesheet" type="text/css" href="css/document.css"/></head><body class="sn-document">',$html);
+            $header = file_get_contents(App::path('assets/pdf-header.html'));
+            $config = json_decode(file_get_contents(App::dataPath('config.json')));
+            $html = str_replace('<html>',$header,$html);
+            $html = str_replace('{{docTheme}}',$config->docTheme,$html);
             $html = str_replace('</html>','</body></html>',$html);
+            file_put_contents(App::path('tmp/doc.html'),$html);
             // DOM -> PDF
             $dompdf = new DOMPDF();
             $dompdf->load_html($html);

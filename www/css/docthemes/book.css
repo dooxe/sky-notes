@@ -1,0 +1,19 @@
+.sn-document.doctheme-book {
+    padding             : 2cm;
+    /*font-family         : Lateef;*/
+    font-family         : 'Indie Flower';
+    background-color    : #F4F4F0;
+    color               : #333022;
+}
+
+.sn-document.doctheme-book,
+.sn-document.doctheme-book h1,
+.sn-document.doctheme-book h2,
+.sn-document.doctheme-book h3,
+.sn-document.doctheme-book h4,
+.sn-document.doctheme-book h5,
+.sn-document.doctheme-book h6,
+.sn-document.doctheme-book p,
+.sn-document.doctheme-book div {
+    font-family         : 'Indie Flower' !important;
+}

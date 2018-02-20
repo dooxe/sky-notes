@@ -1,5 +1,6 @@
 {
     "fontSize"      : 14,
     "fontFamily"    : "Ubuntu Mono",
-    "editorTheme"   : "ambiance"
+    "editorTheme"   : "ambiance",
+    "docTheme"      : "modern"
 }

@@ -49,7 +49,7 @@
                                             <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="width:48px;font-family:'{{config.fontFamily}}'">
                                                 <span class="caret"></span>
                                             </button>
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="max-height:200px;overflow-y:auto">
                                                 <a href="#" class="dropdown-item" ng-repeat="font in availableFonts" ng-click="config.fontFamily=font">
                                                     <span  style="font-family:'{{font}}'" >{{font}}</a>
                                                 </a>
@@ -92,23 +92,28 @@
                                             <span class="input-group-text">Style</span>
                                         </div>
                                         <span class="form-control" style="font-family:'{{config.fontFamily}}'">
-                                            Style
+                                            {{config.docTheme}}
                                         </span>
                                         <div class="input-group-btn dropleft input-group-append" role="group">
                                             <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="width:48px">
                                                 <span class="caret"></span>
                                             </button>
-                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                <li class="dropdown-item">
-                                                    <a href="#">Modern</a>
-                                                </li>
-                                            </ul>
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                <a class="dropdown-item" href="#" ng-repeat="doctheme in availableDocThemes" ng-click="setConfigDocTheme(doctheme)">
+                                                    {{doctheme}}
+                                                </a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="col col-sm-6">
-
+                                <div id="sn-config-doc-preview" class="sn-document container-fluid">
+                                    <h1>The content</h1>
+                                    <div>
+                                        Of the super note !
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
