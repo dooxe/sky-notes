@@ -1,0 +1,10 @@
+.sn-document {
+    background-color        : transparent;
+}
+
+.sn-document .page {
+    height                  : 29.7cm;
+    margin-bottom           : 1cm;
+    background-color    : #F5F5F5;
+    color               : #333333;
+}

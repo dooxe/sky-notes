@@ -16,9 +16,8 @@ require_once '../config/config.php';
 //------------------------------------------------------------------
 //
 //------------------------------------------------------------------
-define('DOMPDF_ENABLE_AUTOLOAD', false);
-require_once __DIR__ . '/vendor/dompdf/dompdf/dompdf_config.inc.php';
 require_once __DIR__ . '/vendor/autoload.php';
+use Dompdf\Dompdf;
 
 //------------------------------------------------------------------
 //  Klein routing
@@ -55,6 +54,7 @@ require_once(App::path('src/klein/config.php'));
 require_once(App::path('src/klein/notebooks.php'));
 require_once(App::path('src/klein/notes.php'));
 require_once(App::path('src/klein/fonts.php'));
+require_once(App::path('src/klein/themes.php'));
 
 // Pass our request to our dispatch method
 $klein->dispatch($request);

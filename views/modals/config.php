@@ -79,6 +79,8 @@
                         </div>
                     </div>
                 </div>
+                <?php
+                /*
                 <div class="card card-default">
                     <div class="card-header">
                         <h3 class="card-title">PDF Generation</h3>
@@ -118,6 +120,8 @@
                         </div>
                     </div>
                 </div>
+                */
+                ?>
             </div>
             <div class="modal-footer">
                 <button class="btn btn-success" ng-click="saveConfig()">OK</button>

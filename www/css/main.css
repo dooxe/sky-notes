@@ -51,11 +51,11 @@
     border-color        : #999999;
 }
 
+/*
 .sn-modal {
 	align-items: center;
 	justify-content: center;
 }
-
 .sn-modal.fade .modal-dialog{
     -moz-transition: none !important;
     -o-transition: none !important;
@@ -76,10 +76,10 @@
 	flex: 1;
     max-width           : 800px;
 }
+*/
 
 .modal-title .fa {
     margin-right        : 10px;
-
 }
 
 .input-group-text .fa {
@@ -125,7 +125,7 @@ h5.card-title .title-text {
     border-color        : #444444;
 }
 .sn-main-row .col>.card>.card-header {
-    height              : 64px;
+    height              : 40px;
 }
 .sn-main-row .col>.card>.card-header:first-child {
     border-radius       : 0;
@@ -181,7 +181,7 @@ h5.card-title .title-text {
 }
 #sn-preview-panel .card-body {
     padding                 : 0;
-    overflow                : auto;    
+    overflow                : auto;
 }
 #sn-config-doc-preview{
     max-height              : 180px;
@@ -189,4 +189,37 @@ h5.card-title .title-text {
     border-style            : solid;
     border-width            : 1px;
     border-color            : #999999;
+}
+
+#sn-markdown-preview {
+    padding                 : 20px;
+}
+
+/**--------------------------------------------------*/
+.card,
+.card-header:first-child {
+    border-radius           : 0;
+}
+
+/**--------------------------------------------------*/
+
+.btn {
+    border-radius           : 0;
+}
+
+.btn-primary {
+    background-color        : #818077;
+    border-style            : none;
+}
+.btn-primary:hover {
+    background-color        : #919087;
+}
+
+.input-group > .input-group-append:last-child > .btn:not(:last-child):not(.dropdown-toggle),
+.input-group > .input-group-append:last-child > .input-group-text:not(:last-child),
+.input-group > .input-group-append:not(:last-child) > .btn,
+.input-group > .input-group-append:not(:last-child) > .input-group-text,
+.input-group > .input-group-prepend > .btn,
+.input-group > .input-group-prepend > .input-group-text {
+    border-radius           : 0;
 }

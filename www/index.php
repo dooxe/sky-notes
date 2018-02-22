@@ -48,8 +48,7 @@ if(isset($_SESSION['login'])){
         <script src="js/sky-notes-service.angular.js"></script>
         <script src="js/sky-notes-main.angular.js"></script>
         <link rel="stylesheet" type="text/css" href="css/document.css" />
-        <link rel="stylesheet" type="text/css" href="css/docthemes/modern.css" />
-        <link rel="stylesheet" type="text/css" href="css/docthemes/book.css" />
+        <link rel="stylesheet" type="text/css" href="css/document-html.css" />
         <?php
         }
         else {

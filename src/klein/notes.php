@@ -11,32 +11,40 @@ $klein->with('api/notes', function () use ($klein) {
         $note = Note::load($id);
         if($format === 'pdf'){
             // MARKDOW -> HTML
-            $markdown = $note->content;
             $markdownParser = new \Michelf\MarkdownExtra();
-            $html = $markdownParser->transform($markdown);
-            // HTML -> DOM
-            $dom = \HTML5::loadHTML($html);
-            $links = htmlqp($dom, 'a');
-            foreach ($links as $link) {
-                $href = $link->attr('href');
-                if (substr($href, 0, 1) == '/' && substr($href, 1, 1) != '/') {
-                    $link->attr('href', $domain_name . $href);
-                }
+            $markdown = $note->content;
+
+            $html = "";
+            $pages = explode('[page]', $markdown);
+            foreach($pages as $page){
+                if(trim($page) === ''){ continue; }
+                $html .= "<div class='page'>".$markdownParser->transform($page)."</div>";
             }
-            $html = \HTML5::saveHTML($dom);
+
             $header = file_get_contents(App::path('assets/pdf-header.html'));
+            $html = $header.$html;
             $config = json_decode(file_get_contents(App::dataPath('config.json')));
-            $html = str_replace('<html>',$header,$html);
             $html = str_replace('{{docTheme}}',$config->docTheme,$html);
-            $html = str_replace('</html>','</body></html>',$html);
+            $html .= "</body></html>";
             file_put_contents(App::path('tmp/doc.html'),$html);
+
             // DOM -> PDF
-            $dompdf = new DOMPDF();
-            $dompdf->load_html($html);
-            $dompdf->render();
-            $response->header('Content-Type','application/pdf');
-            //$response->file('',$note->title.'.pdf');
-            return $dompdf->output();
+            $dompdf = new \Dompdf\Dompdf();
+            try {
+                $dompdf->setPaper('a4', 'portrait');
+                $dompdf->load_html($html);
+                global $_dompdf_warnings;
+                if(count($_dompdf_warnings) > 0){
+                    return '<pre>'.print_r($_dompdf_warnings,true).'</pre>';
+                }
+                $dompdf->render();
+                $response->header('Content-Type','application/pdf');
+                $response->header('Content-Disposition','attachment; filename="'.str_replace(' ', '_', $note->title).'"');
+            }
+            catch(Exception $e) {
+                return print_r($e,true);
+            }
+            return $dompdf->stream();
         }
         return '';
     });

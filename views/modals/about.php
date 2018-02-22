@@ -2,8 +2,8 @@
 <div id="sn-about-modal" class="sn-modal modal fade">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header" style="text-align:center">
-                <h2 class="modal-title">
+            <div class="modal-header">
+                <h2 class="modal-title" style="margin:auto">
                     Sky notes
                 </h2>
             </div>

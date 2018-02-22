@@ -279,7 +279,7 @@ var snMainController = SkyNotes.controller('snMainController', [
                 var note = $self.currentNote;
                 if(note){
                     $self.saveCurrentNote().then(()=>{
-                        window.open('api/notes/'+note.id+'/generate/pdf', '_blank');
+                        location.href = 'api/notes/'+note.id+'/generate/pdf';
                     });
                 }
             },
@@ -330,8 +330,8 @@ var snMainController = SkyNotes.controller('snMainController', [
                 {
                     if($self.currentNote){
                         var markdown = editor.getValue();
-                        var preview = document.querySelector('#sn-markdown-preview');
                         var html = $showdown.makeHtml(markdown);
+                        var preview = document.querySelector('#sn-markdown-preview');
                         preview.innerHTML = html;
                         $self.currentNote.content = markdown;
                     }
@@ -396,7 +396,6 @@ var snMainController = SkyNotes.controller('snMainController', [
         $self.config.docTheme = $self.availableDocThemes[0];
 
         $http.get('api/editor-fonts').then((response)=>{
-            console.log(response.data);
             $self.availableFonts = response.data;
         });
 

@@ -8,12 +8,12 @@
             </div>
             <div class="card-body">
                 <div class="form-group">
-                    <button href="#" class="btn btn-secondary pull-right" title="Create a new note"
+                    <button href="#" class="btn btn-primary pull-right" title="Create a new note"
                         ng-click="showNewNoteModal()">
                         <i class="fa fa-plus"></i>
                         <i class="fa fa-file" style="margin-left:10px"></i>
                     </button>
-                    <button href="#" class="btn btn-secondary pull-right" style="margin-right:10px" title="Create a new notebook"
+                    <button href="#" class="btn btn-primary pull-right" style="margin-right:10px" title="Create a new notebook"
                         ng-click="showNewNotebookModal()">
                         <i class="fa fa-plus"></i>
                         <i class="fa fa-book" style="margin-left:10px"></i>
@@ -29,10 +29,10 @@
                         			{{notebook.title}}
                                 </span>
                                 <div class="pull-right">
-                                    <button ng-click="showRenameNotebookModal(notebook)" class="btn btn-secondary" title="Save the notebook">
+                                    <button ng-click="showRenameNotebookModal(notebook)" class="btn btn-primary" title="Change notebook title">
                                         <i class="fa fa-pencil"></i>
                                     </button>
-                                    <button href="#" ng-click="removeNotebook(notebook)" class="btn btn-secondary btn-danger">
+                                    <button href="#" ng-click="removeNotebook(notebook)" class="btn btn-danger">
                                         <i class="fa fa-trash"></i>
                                     </button>
                                 </div>
@@ -40,19 +40,19 @@
                             <div class="clearfix"></div>
                 		</div>
                 		<div class="card-body" style="padding:0">
-                		<div class="list-group">
-                			<a class="list-group-item note" href="#" ng-repeat="note in getNotesByNotebookId(notebook.id)"
-                            ng-class="{'active':(currentNote==note)}" ng-click="setCurrentNote(note)" style="border-radius:0">
-                                    <i class="fa fa-file" style="margin-right:10px"></i>
-                                    {{note.title}}
-                                    <span class="pull-right">
-                                    <button href="#" ng-click="removeNote(note)" class="btn btn-danger">
-		                                <i class="fa fa-trash"></i>
-		                            </button>
-		                            </span>
-		                            <div class="clearfix"></div>
-                             </a>
-                		</div>
+                    		<div class="list-group">
+                    			<a class="list-group-item note" href="#" ng-repeat="note in getNotesByNotebookId(notebook.id)"
+                                ng-class="{'active':(currentNote==note)}" ng-click="setCurrentNote(note)" style="border-radius:0">
+                                        <i class="fa fa-file" style="margin-right:10px"></i>
+                                        {{note.title}}
+                                        <span class="pull-right">
+                                        <button href="#" ng-click="removeNote(note)" class="btn btn-danger">
+    		                                <i class="fa fa-trash"></i>
+    		                            </button>
+    		                            </span>
+    		                            <div class="clearfix"></div>
+                                 </a>
+                    		</div>
                 		</div>
                 	</div>
                 </div>
@@ -99,14 +99,14 @@
             <div class="card-header">
                 <h5 class="card-title">
                     Preview
-                    <button ng-disable="!currentNote" ng-click="gotoPDF()" title="Generate the pdf of the note" class="btn btn-default pull-right">
-                        PDF <i class="fa fa-file-pdf-o"></i>
-                    </button>
+                    <a href="#" ng-disable="!currentNote" ng-click="gotoPDF()" title="Generate the pdf of the note" class="btn btn-primary pull-right">
+                        Download as PDF <i class="fa fa-download"></i>
+                    </a>
                     <div class="clearfix"></div>
                 </h5>
             </div>
             <div class="card-body">
-                <div id="sn-markdown-preview" class="sn-document container-fluid doctheme-{{config.docTheme}}">
+                <div id="sn-markdown-preview" class="sn-document doctheme-{{config.docTheme}}">
 
                 </div>
             </div>

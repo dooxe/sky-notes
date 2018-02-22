@@ -1,7 +1,11 @@
+@page { margin: 0; }
+
 .sn-document {
-    padding                 : 1cm;
-    background-color        : #F5F5F5;
-    color                   : #333333;
+    font-family         : 'DejaVu Sans';
+    padding             : 0;
+    margin              : 0;
+    background-color    : #F5F5F5;
+    color               : #333333;
 }
 
 
@@ -10,6 +14,7 @@
 }
 
 .sn-document table {
+    max-width       : 100%;
     width       : 100%;
 }
 
@@ -19,4 +24,11 @@
 
 .sn-document table th {
     background-color: #CCCCCC;
+}
+
+.sn-document .page {
+    box-sizing          : border-box;
+    padding             : 2cm;
+    page-break-after    : always;
+    overflow            : hidden;
 }
