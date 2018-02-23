@@ -99,7 +99,7 @@
             <div class="card-header">
                 <h5 class="card-title">
                     Preview
-                    <a href="#" ng-disable="!currentNote" ng-click="gotoPDF()" title="Generate the pdf of the note" class="btn btn-primary pull-right">
+                    <a href="#" ng-class="{'disabled': !currentNote}" ng-click="gotoPDF()" title="Generate the pdf of the note" class="btn btn-primary pull-right">
                         Download as PDF <i class="fa fa-download"></i>
                     </a>
                     <div class="clearfix"></div>

@@ -26,7 +26,7 @@ $klein->with('api/notes', function () use ($klein) {
             $config = json_decode(file_get_contents(App::dataPath('config.json')));
             $html = str_replace('{{docTheme}}',$config->docTheme,$html);
             $html .= "</body></html>";
-            file_put_contents(App::path('tmp/doc.html'),$html);
+            //file_put_contents(App::path('tmp/doc.html'),$html);
 
             // DOM -> PDF
             $dompdf = new \Dompdf\Dompdf();
@@ -35,7 +35,7 @@ $klein->with('api/notes', function () use ($klein) {
                 $dompdf->load_html($html);
                 global $_dompdf_warnings;
                 if(count($_dompdf_warnings) > 0){
-                    return '<pre>'.print_r($_dompdf_warnings,true).'</pre>';
+                    //return '<pre>'.print_r($_dompdf_warnings,true).'</pre>';
                 }
                 $dompdf->render();
                 $response->header('Content-Type','application/pdf');
