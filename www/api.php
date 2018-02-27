@@ -16,7 +16,7 @@ require_once '../config/config.php';
 //------------------------------------------------------------------
 //
 //------------------------------------------------------------------
-require_once __DIR__ . '/vendor/autoload.php';
+require_once __DIR__ . '/../vendor/autoload.php';
 use Dompdf\Dompdf;
 
 //------------------------------------------------------------------
@@ -38,6 +38,7 @@ $request->server()->set('REQUEST_URI', substr($uri, strlen(APP_PATH)));
 
 //
 require_once(App::path('src/klein/login.php'));
+require_once(App::path('src/klein/assets.php'));
 
 //------------------------------------------------------------------------------
 //  Route no more request if not logged in

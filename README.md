@@ -14,19 +14,18 @@ through a self-hosted easy-to-install web application.
 ## What you need
 
 1. An *apache* server with *command line* access
-    * `mod_rewrite` installed and enabled. 
-    The following lines might do the job: 
+    * `mod_rewrite` installed and enabled.
+    The following lines might do the job:
       ```
       sudo a2enmod rewrite
       sudo systemctl restart apache2
       ```
       Otherwise see: https://stackoverflow.com/questions/869092/how-to-enable-mod-rewrite-for-apache-2-2
-    
+
     * `AllowOverride All` for `.htacces`
-    
+
         This might help: https://stackoverflow.com/questions/18740419/how-to-set-allowoverride-all
-    
-    
+
 2. *composer* dependency manager
 
     https://getcomposer.org/doc/00-intro.md#installation-linux-unix-osx
@@ -37,16 +36,14 @@ through a self-hosted easy-to-install web application.
 
 ## Installation
 
-Type these commands in a terminal:
+1. Type these commands in a terminal:
 ```
 git clone https://github.com/dooxe/sky-notes.git
-cd sky-notes/www/
-npm install
+cd sky-notes
 composer install
-cd ..
 php install/install.php
-chmod 777 -R data
 ```
+2. Make the folder `data` writable.
 
 You're done ! Have fun now !
 

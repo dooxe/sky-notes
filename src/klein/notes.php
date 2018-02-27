@@ -21,7 +21,7 @@ $klein->with('api/notes', function () use ($klein) {
                 $html .= "<div class='page'>".$markdownParser->transform($page)."</div>";
             }
 
-            $header = file_get_contents(App::path('assets/pdf-header.html'));
+            $header = file_get_contents(App::path('src/dompdf/pdf-header.html'));
             $html = $header.$html;
             $config = json_decode(file_get_contents(App::dataPath('config.json')));
             $html = str_replace('{{docTheme}}',$config->docTheme,$html);

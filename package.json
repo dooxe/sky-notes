@@ -2,7 +2,7 @@
   "name": "sky-notes",
   "version": "0.0.1",
   "description": "A(nother) self-hosted note taking application.",
-  "main": "index.js",
+  "main": "src/js/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -20,20 +20,24 @@
     "url": "https://github.com/dooxe/sky-notes/issues"
   },
   "homepage": "https://github.com/dooxe/sky-notes#readme",
-  "dependencies": {
+  "dependencies": {},
+  "devDependencies": {
     "ace-builds": "^1.3.1",
     "angular": "^1.6.9",
     "angular-sanitize": "^1.6.9",
     "angular-ui-ace": "^0.2.3",
     "bootstrap": "^4.0.0",
     "font-awesome": "^4.7.0",
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.1",
+    "gulp-replace": "^0.6.1",
+    "gulp-sass": "^3.1.0",
+    "gulp-uglify": "^3.0.0",
     "jquery": "^3.3.1",
+    "node-sass": "^4.7.2",
     "popper.js": "^1.13.0",
+    "pump": "^3.0.0",
     "showdown": "^1.8.6",
     "showdown-table": "^1.0.1"
-  },
-  "devDependencies": {
-    "gulp-sass": "^3.1.0",
-    "node-sass": "^4.7.2"
   }
 }

@@ -8,56 +8,14 @@ if(isset($_SESSION['login'])){
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Sky notes</title>
+        <title>SkyNotes</title>
         <meta charset="utf-8"/>
         <link rel="icon" type="image/png" href="logo/logo.png" />
         <!---->
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <!-- Load Angular -->
-        <script src="node_modules/angular/angular.js"></script>
-        <!-- Load Angular sanitize-->
-        <script src="node_modules/angular-sanitize/angular-sanitize.js"></script>
-        <!-- load ace -->
-        <script src="node_modules/ace-builds/src-min-noconflict/ace.js"></script>
-        <!-- load ace language tools -->
-        <script src="node_modules/ace-builds/src-min-noconflict/ext-language_tools.js"></script>
-        <!-- load ace-angular -->
-        <script src="node_modules/angular-ui-ace/src/ui-ace.js"></script>
         <!---->
-        <script src="node_modules/showdown/dist/showdown.min.js"></script>
-        <!---->
-        <script src="node_modules/showdown-table/dist/showdown-table.min.js"></script>
-        <!---->
-        <script src="node_modules/jquery/dist/jquery.min.js"></script>
-        <!---->
-        <script src="node_modules/popper.js/dist/umd/popper.min.js"></script>
-        <!---->
-        <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-        <link rel="stylesheet" type="text/css" href="node_modules/bootstrap/dist/css/bootstrap.min.css"/>
-        <!---->
-        <link rel="stylesheet" type="text/css" href="node_modules/font-awesome/css/font-awesome.min.css"/>
-        <!---->
-        <link rel="stylesheet" type="text/css" href="fonts/fonts.css"/>
-        <link rel="stylesheet" type="text/css" href="css/main.css"/>
-        <script src="js/showdown.angular.js"></script>
-        <?php
-        if($login){
-        ?>
-        <script src="js/sky-notes.angular.js"></script>
-        <script src="js/sky-notes-notebook.angular.js"></script>
-        <script src="js/sky-notes-service.angular.js"></script>
-        <script src="js/sky-notes-main.angular.js"></script>
-        <link rel="stylesheet" type="text/css" href="css/document.css" />
-        <link rel="stylesheet" type="text/css" href="css/document-html.css" />
-        <?php
-        }
-        else {
-        ?>
-        <script src="js/sky-notes.angular.js"></script>
-        <script src="js/sky-notes-login-controller.js"></script>
-        <?php
-        }
-        ?>
+        <link rel="stylesheet" type="text/css" href="api/assets/css"/>
+        <script src="api/assets/js"></script>
     </head>
     <body id="skynotes" <?php
     if($login){
@@ -68,12 +26,10 @@ if(isset($_SESSION['login'])){
     ?>>
         <div id="sn-main">
             <nav class="navbar navbar-expand-md navbar-light bg-light">
-                <a class="navbar-brand" href="#">
-                    <span>
-                        <img src="logo/logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
-                    </span>
-                    <span>
-                        Sky notes - <i>keep your notes in the sky</i>
+                <a class="navbar-brand" href="#" style="vertical-align:middle">
+                    <img src="logo/logo-large.png" style="margin-left:10px" width="48" height="48" class="d-inline-block align-top" alt="">
+                    <span style="display:inline-block;padding-top:8px;margin-left:10px">
+                        SkyNotes - <i>keep your notes in the sky</i>
                     </span>
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -110,16 +66,16 @@ if(isset($_SESSION['login'])){
             <div id="sn-body" class="container-fluid">
                 <?php
                 if($login){
-                    require_once('../views/main.php');
+                    require_once('../src/views/main.php');
                 }
                 else {
-                    require_once('../views/login.php');
+                    require_once('../src/views/login.php');
                 }
                 ?>
             </div>
         </div>
         <?php
-            require_once('../views/modals.php');
+            require_once('../src/views/modals.php');
         ?>
     </body>
 </html>

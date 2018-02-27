@@ -17,6 +17,16 @@ class App {
     static function dataPath($path){
         return self::path('data/'.$path);
     }
+
+    //
+    //
+    //
+    static function isLoggedIn(){
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+        return isset($_SESSION['login']);
+    }
 }
 
 ?>

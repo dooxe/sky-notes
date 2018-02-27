@@ -27,7 +27,7 @@ $fontUrls = $match[0];
 foreach($fontUrls as $downloadUrl){
     $fontFile = file_get_contents($downloadUrl);
     $tokens = explode("/s/", $downloadUrl);
-    $dirname = "www/fonts/".dirname($tokens[1]);
+    $dirname = "app/fonts/".dirname($tokens[1]);
     $fontFilename = $dirname.'/'.basename($tokens[1]);
     if(!file_exists($dirname)){
         if(!mkdir($dirname, 0777, true)){
@@ -39,7 +39,7 @@ foreach($fontUrls as $downloadUrl){
 }
 
 //
-$fontCss = str_replace('https://fonts.gstatic.com/s/','',$fontCss);
-file_put_contents("www/fonts/fonts.css", $fontCss);
-echo "\rDownlading fonts ... DONE !\n\n";
+$fontCss = str_replace('https://fonts.gstatic.com/s/','font/',$fontCss);
+file_put_contents("app/fonts/fonts.css", $fontCss);
+echo "\rDownloading fonts ... DONE !\n\n";
 ?>

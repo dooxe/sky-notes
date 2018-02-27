@@ -1,0 +1,159 @@
+#sn-main>.navbar{
+    height          : 64px;
+}
+#sn-main {
+    position        : absolute;
+    left            : 0;
+    top             : 0;
+    right           : 0;
+    bottom          : 0;
+    overflow        : hidden;
+}
+
+#sn-body {
+    position        : absolute;
+    left            : 0;
+    top             : 64px;
+    right           : 0;
+    bottom          : 0;
+}
+
+#sn-body .row {
+    height          : 100%;
+}
+
+#sn-body>.row>.col {
+    height          : 100%;
+}
+
+#sn-body>.row>.col>.card {
+    height          : 100%;
+}
+
+#sn-body>.row>.col>.card>.card-body {
+    height          : 100%;
+    overflow        : auto;
+}
+
+#sn-editor-panel>.card-body{
+    position            :relative;
+}
+
+#sn-ace-editor {
+    position            : absolute;
+    left                : 10px;
+    top                 : 110px;
+    right               : 10px;
+    bottom              : 10px;
+    border-style        : solid;
+    border-width        : 1px;
+    border-color        : #999999;
+}
+
+/*
+.sn-modal {
+	align-items: center;
+	justify-content: center;
+}
+.sn-modal.fade .modal-dialog{
+    -moz-transition: none !important;
+    -o-transition: none !important;
+    -webkit-transition: none !important;
+    transition: none !important;
+    -moz-transform: none !important;
+    -ms-transform: none !important;
+    -o-transform: none !important;
+    -webkit-transform: none !important;
+    transform: none !important;
+}
+
+.sn-modal.show {
+	display: flex !important;
+}
+
+.sn-modal .modal-dialog {
+	flex: 1;
+    max-width           : 800px;
+}
+*/
+
+.modal-title .fa {
+    margin-right        : 10px;
+}
+
+.input-group-text .fa {
+    width               : 32px;
+}
+
+h5.card-title {
+    margin-bottom       : 0;
+}
+
+h5.card-title .title-text {
+    vertical-align          : middle;
+}
+
+.note.list-group-item {
+    padding: 5px 8px;
+}
+.card-header,
+.note.list-group-item {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.card-title .btn,
+.note.list-group-item .btn {
+    padding         : 0 5px;
+}
+
+.sn-main-row>.col>.card {
+    border-radius       : 0;
+}
+
+.sn-main-row .col>.card>.card-header {
+    height              : 50px;
+}
+
+.sn-main-row .col>.card>.card-header:first-child {
+    border-radius       : 0;
+}
+
+.sn-main-row .col>.card>.card-header>.card-title {
+    padding-top         : 5px;
+}
+
+.sn-main-row .col>.card>.card-header>.card-title>.btn {
+	padding-left:10px;
+	padding-right:10px;
+}
+
+.sn-main-row .col {
+    padding             : 0;
+}
+
+#sn-config-modal .modal-dialog {
+    min-width               : 800px;
+    max-width               : 75%;
+}
+
+#sn-config-modal .modal-content {
+    max-height              : 80%;
+}
+#sn-config-modal>.card-body {
+    overflow                : auto;
+}
+#sn-preview-panel .card-body {
+    padding                 : 0;
+    overflow                : auto;
+}
+#sn-config-doc-preview{
+    max-height              : 180px;
+    overflow                : auto;
+    border-style            : solid;
+    border-width            : 1px;
+}
+
+#sn-markdown-preview {
+    padding                 : 20px;
+}

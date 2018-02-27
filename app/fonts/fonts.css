@@ -1,0 +1,96 @@
+@font-face {
+  font-family: 'Anonymous Pro';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Anonymous Pro Regular'), local('AnonymousPro-Regular'), url(font/anonymouspro/v11/rP2Bp2a15UIB7Un-bOeISG3pHls28A.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Bellefair';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Bellefair Regular'), local('Bellefair-Regular'), url(font/bellefair/v3/kJExBuYY6AAuhiXUxG1N-Poy.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Dhurjati';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Dhurjati'), url(font/dhurjati/v5/_6_8ED3gSeatXfFiFU31QqA.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Dosis';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Dosis Regular'), local('Dosis-Regular'), url(font/dosis/v7/HhyaU5sn9vOmLzloC_A.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Inconsolata';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Inconsolata Regular'), local('Inconsolata-Regular'), url(font/inconsolata/v16/QldKNThLqRwH-OJ1UHjlKGlZ5q0.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Indie Flower';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Indie Flower'), local('IndieFlower'), url(font/indieflower/v9/m8JVjfNVeKWVnh3QMuKkFcZVaUuC.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Lateef';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Lateef'), url(font/lateef/v12/hESw6XVnNCxEvkb8oR2A.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Mukta Mahee';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Mukta Mahee Regular'), local('MuktaMahee-Regular'), url(font/muktamahee/v2/XRXQ3IOIi0hcP8iVU67hA9vKUTo.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Pacifico';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Pacifico Regular'), local('Pacifico-Regular'), url(font/pacifico/v12/FwZY7-Qmy14u9lezJ-6H6Mw.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Quicksand';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Quicksand Regular'), local('Quicksand-Regular'), url(font/quicksand/v7/6xKtdSZaM9iE8KbpRA_hK1QI.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto'), local('Roboto-Regular'), url(font/roboto/v18/KFOmCnqEu92Fr1Mu4mxP.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Share Tech Mono';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Share Tech Mono'), local('ShareTechMono-Regular'), url(font/sharetechmono/v7/J7aHnp1uDWRBEqV98dVQztYldFcLowEA.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Source Code Pro';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Source Code Pro'), local('SourceCodePro-Regular'), url(font/sourcecodepro/v7/HI_SiYsKILxRpg3hIP6sJ7fM7PqlPevT.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Space Mono';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Space Mono'), local('SpaceMono-Regular'), url(font/spacemono/v2/i7dPIFZifjKcF5UAWdDRYEF8QA.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Titillium Web';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Titillium Web Regular'), local('TitilliumWeb-Regular'), url(font/titilliumweb/v6/NaPecZTIAOhVxoMyOr9n_E7fdMPmCA.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Ubuntu Mono';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Ubuntu Mono'), local('UbuntuMono-Regular'), url(font/ubuntumono/v7/KFOjCneDtsqEr0keqCMhbCc6CsE.ttf) format('truetype');
+}
