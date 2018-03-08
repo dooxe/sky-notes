@@ -1,4 +1,4 @@
 //
 //
 //
-var SkyNotes = angular.module("SkyNotes", ['ui.ace','showdown','ngSanitize']);
+var SkyNotes = angular.module("SkyNotes", ['ui.ace', 'showdown', 'ngSanitize']);

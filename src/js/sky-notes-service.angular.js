@@ -1,55 +1,55 @@
 //
 //
 //
-SkyNotes.factory('$skyNotes', ['$http', 'Notebook', function($http, Notebook){
+SkyNotes.factory('$skyNotes', ['$http', 'Notebook', function($http, Notebook) {
 
     var $service = {
 
-        getNotebooks: function(){
+        getNotebooks: function() {
             return Notebook.getAll();
         },
 
-        createNotebook: function(title){
+        createNotebook: function(title) {
             return Notebook.create(title);
         },
 
-        saveNotebook: function(notebook){
+        saveNotebook: function(notebook) {
             return Notebook.save(notebook);
         },
 
-        removeNotebook: function(notebook){
+        removeNotebook: function(notebook) {
             return Notebook.remove(notebook);
         },
 
-        createNote: function(notebookId,title){
-            return Notebook.createNote(notebookId,title);
+        createNote: function(notebookId, title) {
+            return Notebook.createNote(notebookId, title);
         },
 
-        getAllNotes: function(){
+        getAllNotes: function() {
             return Notebook.getAllNotes();
         },
 
-        getNote: function(id){
+        getNote: function(id) {
             return Notebook.getNote(id);
         },
 
-        addNote: function(index){
+        addNote: function(index) {
             return Notebook.addNote(index);
         },
 
-        removeNote: function(note){
+        removeNote: function(note) {
             Notebook.removeNote(note);
         },
 
-        updateNote: function(content){
+        updateNote: function(content) {
 
         },
 
-        deleteNote: function(){
+        deleteNote: function() {
 
         },
 
-        saveNote: function(note){
+        saveNote: function(note) {
             return Notebook.saveNote(note);
         }
     };

@@ -2,14 +2,14 @@
 //
 //
 var snMainController = SkyNotes.controller('snMainController', [
-    '$scope', '$http','$showdown','$skyNotes',
-    function($scope, $http, $showdown, $skyNotes){
+    '$scope', '$http', '$showdown', '$skyNotes',
+    function($scope, $http, $showdown, $skyNotes) {
 
         var $self = $scope;
 
         var aceEditor = null;
 
-        $self = angular.extend($self,{
+        $self = angular.extend($self, {
 
             //
             config: {
@@ -28,46 +28,46 @@ var snMainController = SkyNotes.controller('snMainController', [
                 'book'
             ],
 
-		// 
-		availableEditorThemes: [                            
-    'ambiance',                           
-    'chaos',                              
-    'chrome',                             
-    'clouds',                             
-    'clouds_midnight',                    
-    'cobalt',                             
-    'crimson_editor',                     
-    'dawn',                               
-    'dracula',                            
-    'dreamweaver',                        
-    'eclipse',                            
-    'github',                             
-    'gob',                                
-    'gruvbox',                            
-    'idle_fingers',                       
-    'iplastic',                           
-    'katzenmilch',                        
-    'kr_theme',                           
-    'kuroir',                             
-    'merbivore',                          
-    'merbivore_soft',                     
-    'mono_industrial',                    
-    'monokai',                            
-    'pastel_on_dark',                     
-    'solarized_dark',                     
-    'solarized_light',                    
-    'sqlserver',                          
-    'terminal',                           
-    'textmate',                           
-    'tomorrow',                           
-    'tomorrow_night_blue',                
-    'tomorrow_night_bright',              
-    'tomorrow_night_eighties',            
-    'tomorrow_night',                     
-    'twilight',                           
-    'vibrant_ink',                        
-    'xcode'                               
-	],                                        
+            //
+            availableEditorThemes: [
+                'ambiance',
+                'chaos',
+                'chrome',
+                'clouds',
+                'clouds_midnight',
+                'cobalt',
+                'crimson_editor',
+                'dawn',
+                'dracula',
+                'dreamweaver',
+                'eclipse',
+                'github',
+                'gob',
+                'gruvbox',
+                'idle_fingers',
+                'iplastic',
+                'katzenmilch',
+                'kr_theme',
+                'kuroir',
+                'merbivore',
+                'merbivore_soft',
+                'mono_industrial',
+                'monokai',
+                'pastel_on_dark',
+                'solarized_dark',
+                'solarized_light',
+                'sqlserver',
+                'terminal',
+                'textmate',
+                'tomorrow',
+                'tomorrow_night_blue',
+                'tomorrow_night_bright',
+                'tomorrow_night_eighties',
+                'tomorrow_night',
+                'twilight',
+                'vibrant_ink',
+                'xcode'
+        	],
 
             // The notebook where the new note should be created
             newNoteNotebookId: null,
@@ -93,8 +93,8 @@ var snMainController = SkyNotes.controller('snMainController', [
             //
             //
             //
-            confirm: function(){
-                if($self.confirmAction){
+            confirm: function() {
+                if ($self.confirmAction) {
                     $self.confirmAction();
                 }
             },
@@ -102,16 +102,16 @@ var snMainController = SkyNotes.controller('snMainController', [
             //
             //
             //
-            saveNotebook: function(notebook){
+            saveNotebook: function(notebook) {
                 $skyNotes.saveNotebook(notebook);
             },
 
             //
             //
             //
-            removeNotebook: function(notebook){
-                $self.windowConfirmMessage = 'Are you sure to delete the notebook <strong>'+notebook.title+'</strong> ?';
-                $self.confirmAction = function(){
+            removeNotebook: function(notebook) {
+                $self.windowConfirmMessage = 'Are you sure to delete the notebook <strong>' + notebook.title + '</strong> ?';
+                $self.confirmAction = function() {
                     $skyNotes.removeNotebook(notebook);
                     $('#sn-confirm-modal').modal('hide');
                 }
@@ -121,41 +121,41 @@ var snMainController = SkyNotes.controller('snMainController', [
             //
             //
             //
-            getNotebooks: function(){
+            getNotebooks: function() {
                 return $skyNotes.getNotebooks();
             },
 
             //
             //
             //
-            showRenameNotebookModal: function(notebook){
+            showRenameNotebookModal: function(notebook) {
                 $self.renamedNotebook = notebook;
                 $('#sn-rename-notebook-modal').modal('show');
             },
 
             // Called when OK is clicked in the modal
-            renameNotebook: function(){
-                $skyNotes.saveNotebook($self.renamedNotebook).then(function(){
+            renameNotebook: function() {
+                $skyNotes.saveNotebook($self.renamedNotebook).then(function() {
                     $self.renamedNotebook = null;
                     $('#sn-rename-notebook-modal').modal('hide');
                 });
             },
 
             //
-            getAllNotes: function(){
+            getAllNotes: function() {
                 return $skyNotes.getAllNotes();
             },
 
             //  Show the modal to create a new notebook
-            showNewNotebookModal: function(){
+            showNewNotebookModal: function() {
                 $self.newNotebookTitle = '';
                 $('#sn-new-notebook-modal').modal('toggle');
             },
 
             // Called when pressing 'OK' in new notebook modal
-            createNotebook: function(){
-                if($self.newNotebookTitle !== ''){
-                    $skyNotes.createNotebook($self.newNotebookTitle).then(function(){
+            createNotebook: function() {
+                if ($self.newNotebookTitle !== '') {
+                    $skyNotes.createNotebook($self.newNotebookTitle).then(function() {
                         $('#sn-new-notebook-modal').modal('toggle');
                     });
                 }
@@ -164,28 +164,28 @@ var snMainController = SkyNotes.controller('snMainController', [
             //
             //  Called when click '+' on the note book toolbar
             //
-            showNewNoteModal: function(notebookId){
+            showNewNoteModal: function(notebookId) {
                 $self.newNoteNotebookId = notebookId;
                 $('#sn-new-note-modal').modal('toggle');
             },
 
             //
-            getNumNotebooksByNotebookId: function(nbid){
+            getNumNotebooksByNotebookId: function(nbid) {
                 var n = 0;
                 var notes = $skyNotes.getAllNotes();
-                for(var i = 0; i < notes.length; ++i){
-                    if(notes[i].notebookId == nbid){
+                for (var i = 0; i < notes.length; ++i) {
+                    if (notes[i].notebookId == nbid) {
                         ++n;
                     }
                 }
                 return n;
             },
 
-            getNotesByNotebookId: function(nbid){
+            getNotesByNotebookId: function(nbid) {
                 var notes = [];
                 var allNotes = $skyNotes.getAllNotes();
-                for(var i = 0; i < allNotes.length; ++i){
-                    if(allNotes[i].notebookId == nbid){
+                for (var i = 0; i < allNotes.length; ++i) {
+                    if (allNotes[i].notebookId == nbid) {
                         notes.push(allNotes[i]);
                     }
                 }
@@ -195,9 +195,9 @@ var snMainController = SkyNotes.controller('snMainController', [
             //
             //  Called when click 'OK' on new note modal
             //
-            createNote: function(){
-                if($self.newNoteTitle.trim() !== ''){
-                    $skyNotes.createNote($self.newNoteNotebookId,$self.newNoteTitle).then(function(response){
+            createNote: function() {
+                if ($self.newNoteTitle.trim() !== '') {
+                    $skyNotes.createNote($self.newNoteNotebookId, $self.newNoteTitle).then(function(response) {
                         var note = response.data;
                         note = $skyNotes.getNote(note.id);
                         $self.setCurrentNote(note);
@@ -211,16 +211,16 @@ var snMainController = SkyNotes.controller('snMainController', [
             //
             //
             //
-            addNote: function(index){
+            addNote: function(index) {
                 $self.setCurrentNote($skyNotes.addNote(index));
             },
 
             //
             //
             //
-            removeNote: function(note){
-                $self.windowConfirmMessage = 'Are you sure to delete the note <strong>'+note.title+'</strong> from the notebook ?';
-                $self.confirmAction = function(){
+            removeNote: function(note) {
+                $self.windowConfirmMessage = 'Are you sure to delete the note <strong>' + note.title + '</strong> from the notebook ?';
+                $self.confirmAction = function() {
                     $skyNotes.removeNote(note);
                     $('#sn-confirm-modal').modal('hide');
                 }
@@ -230,9 +230,9 @@ var snMainController = SkyNotes.controller('snMainController', [
             //
             //
             //
-            setCurrentNote: function(note){
+            setCurrentNote: function(note) {
                 $self.currentNote = note;
-                $(aceEditor.container).css('opacity','1');
+                $(aceEditor.container).css('opacity', '1');
                 aceEditor.setReadOnly(false);
                 aceEditor.setValue(note.content);
                 aceEditor.getSelection().clearSelection();
@@ -241,23 +241,26 @@ var snMainController = SkyNotes.controller('snMainController', [
             //
             //
             //
-            saveCurrentNote: function(){
-                if($self.currentNote){
-                    return $skyNotes.saveNote($self.currentNote);
+            saveCurrentNote: function() {
+                if ($self.currentNote) {
+                    return $skyNotes.saveNote($self.currentNote).then(function(response) {
+                        $self.currentNote.isSaved = true;
+                        return response;
+                    });
                 }
             },
 
             //
             //
             //
-            setConfigDocTheme: function(doctheme){
+            setConfigDocTheme: function(doctheme) {
                 $self.config.docTheme = doctheme;
-                for(var i = 0; i < $self.availableDocThemes.length; ++i){
+                for (var i = 0; i < $self.availableDocThemes.length; ++i) {
                     var theme = $self.availableDocThemes[i];
-                    var klass = 'doctheme-'+theme;
+                    var klass = 'doctheme-' + theme;
                     $('#sn-config-doc-preview').removeClass(klass);
                 }
-                $('#sn-config-doc-preview').addClass('doctheme-'+doctheme);
+                $('#sn-config-doc-preview').addClass('doctheme-' + doctheme);
             },
 
             //
@@ -276,11 +279,11 @@ var snMainController = SkyNotes.controller('snMainController', [
             //
             //
             //
-            gotoPDF: function(){
+            gotoPDF: function() {
                 var note = $self.currentNote;
-                if(note){
-                    $self.saveCurrentNote().then(function(){
-                        location.href = 'api/notes/'+note.id+'/generate/pdf';
+                if (note) {
+                    $self.saveCurrentNote().then(function() {
+                        location.href = 'api/notes/' + note.id + '/generate/pdf';
                     });
                 }
             },
@@ -288,16 +291,17 @@ var snMainController = SkyNotes.controller('snMainController', [
             //
             //
             //
-            saveConfig: function(){
+            saveConfig: function() {
                 var config = $self.config;
-                $http.post('api/config', {config:config}).then(function(response){
-                    if(aceEditor){
+                $http.post('api/config', {
+                    config: config
+                }).then(function(response) {
+                    if (aceEditor) {
                         $(aceEditor.container)
-                            .css('font-family',config.fontFamily)
-                            .css('font-size',config.fontSize+'px')
-                        ;
+                            .css('font-family', config.fontFamily)
+                            .css('font-size', config.fontSize + 'px');
                         aceEditor.setOptions({
-                            theme: 'ace/theme/'+config.editorTheme
+                            theme: 'ace/theme/' + config.editorTheme
                         });
                     }
                     $('#sn-config-modal').modal('hide');
@@ -307,8 +311,8 @@ var snMainController = SkyNotes.controller('snMainController', [
             //
             //
             //
-            logout: function(){
-                $http.post('api/logout', $self.loginData).then(function(response){
+            logout: function() {
+                $http.post('api/logout', $self.loginData).then(function(response) {
                     window.location.reload();
                 });
             },
@@ -316,48 +320,49 @@ var snMainController = SkyNotes.controller('snMainController', [
             //
             //
             //
-            aceLoaded: function(editor){
+            aceLoaded: function(editor) {
                 // Editor part
                 var session = editor.getSession();
                 var renderer = editor.renderer;
 
                 //
                 var $editor = $(editor.container);
-                $editor.css('opacity','0.4');
+                $editor.css('opacity', '0.4');
                 editor.setReadOnly(true);
 
                 // Events
-                session.on("change", function()
-                {
-                    if($self.currentNote){
+                session.on("change", function() {
+                    if ($self.currentNote) {
                         var markdown = editor.getValue();
                         var html = $showdown.makeHtml(markdown);
                         var preview = document.querySelector('#sn-markdown-preview');
                         preview.innerHTML = html;
-                        $self.currentNote.content = markdown;
+                        if ($self.currentNote.content !== markdown) {
+                            $self.currentNote.content = markdown;
+                            $self.currentNote.isSaved = false;
+                        }
                     }
                 });
 
-                $http.get('api/config').then(function(response){
-                    if(response.data !== {}){
+                $http.get('api/config').then(function(response) {
+                    if (response.data !== {}) {
                         var config = $self.config = response.data;
                         $editor
-                            .css('font-family',config.fontFamily)
-                            .css('font-size',config.fontSize+'px')
-                        ;
+                            .css('font-family', config.fontFamily)
+                            .css('font-size', config.fontSize + 'px');
                         var theme = '';
-                        if(config.editorTheme){
+                        if (config.editorTheme) {
                             theme = config.editorTheme;
                         }
                         editor.setOptions({
-                            theme: 'ace/theme/'+theme
+                            theme: 'ace/theme/' + theme
                         });
                     }
                 });
 
                 aceEditor = editor;
             },
-            aceChanged: function(e){
+            aceChanged: function(e) {
 
             },
 
@@ -365,7 +370,7 @@ var snMainController = SkyNotes.controller('snMainController', [
             //
             //
             sampleEditor: null,
-            sampleEditorLoaded: function(editor){
+            sampleEditorLoaded: function(editor) {
                 // Editor part
                 var session = editor.getSession();
                 var renderer = editor.renderer;
@@ -377,9 +382,9 @@ var snMainController = SkyNotes.controller('snMainController', [
             //
             //
             //
-            setConfigTheme: function(theme){
+            setConfigTheme: function(theme) {
                 $self.sampleEditor.setOptions({
-                    theme:'ace/theme/'+theme
+                    theme: 'ace/theme/' + theme
                 });
                 $self.config.editorTheme = theme;
             },
@@ -387,21 +392,21 @@ var snMainController = SkyNotes.controller('snMainController', [
             //
             //
             //
-            aceThemeEditorSampleLoaded: function(editor){
+            aceThemeEditorSampleLoaded: function(editor) {
                 var name = editor.getOption('theme');
-                editor.setValue("# Theme\nThis is theme '"+name+"'");
+                editor.setValue("# Theme\nThis is theme '" + name + "'");
                 editor.getSelection().clearSelection();
             }
         });
 
         $self.config.docTheme = $self.availableDocThemes[0];
 
-        $http.get('api/editor-fonts').then(function(response){
+        $http.get('api/editor-fonts').then(function(response) {
             $self.availableFonts = response.data;
         });
 
         $(window).keypress(function(event) {
-            if (event.which == 112 && event.ctrlKey){
+            if (event.which == 112 && event.ctrlKey) {
                 $self.gotoPDF();
                 return false;
             }

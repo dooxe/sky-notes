@@ -112,7 +112,7 @@ if(!$update){
     //
     echo "Give us the application directory (can be empty) \n";
     echo "Example: if your website is http://my-web-site/skynotes/ type 'skynotes'.\n";
-    $defaultAppPath = '';
+    $defaultAppPath = basename(dirname(__FILE__.'/../'));
     if($haveConfig){
         $defaultAppPath = $config['app-path'];
         echo "default = '$defaultAppPath'\n";
