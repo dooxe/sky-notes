@@ -29,7 +29,7 @@
                                                 <span class="caret"></span>
                                             </button>
                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="width:350px;height:250px;overflow-y:auto">
-                                                <a href="#" ng-click="setConfigTheme(theme)" class="dropdown-item" ng-repeat="theme in availableTheme" style="margin-bottom:10px;">
+                                                <a href="#" ng-click="setConfigTheme(theme)" class="dropdown-item" ng-repeat="theme in availableEditorThemes" style="margin-bottom:10px;">
                                                     <i class="fa fa-paint-brush"></i>{{theme}}
                                                     <div ui-ace='{theme:theme,onLoad:aceThemeEditorSampleLoaded}' style="height:48px"></div>
                                                 </a>

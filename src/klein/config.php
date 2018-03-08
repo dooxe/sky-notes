@@ -9,7 +9,7 @@ $klein->respond('GET', 'api/config', function($request,$response){
         $response->code(404);
     	return '';
     }
-    $file = '../data/config.json';
+    $file = App::path('data/config.json');
     if(file_exists($file)){
         return file_get_contents($file);
     }
@@ -20,8 +20,8 @@ $klein->respond('GET', 'api/config', function($request,$response){
 //  SAVE
 //------------------------------------------------------------------------------
 $klein->respond('POST', 'api/config', function($request,$response){
-    $json = json_decode(file_get_contents('php://input'));
-    file_put_contents('../data/config.json', json_encode($json->config));
-    return $json;
+	$json = json_decode(file_get_contents('php://input'));
+	file_put_contents(App::path('data/config.json'), json_encode($json->config));
+	return json_encode($json);
 });
 ?>
