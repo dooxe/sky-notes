@@ -414,7 +414,26 @@ var snMainController = SkyNotes.controller('snMainController', [
             $self.saveCurrentNote();
             event.preventDefault();
             return false;
-        });
+        })
+	.on('beforeunload', function(e){
+		var saved = true;
+		var notes = $self.getAllNotes();
+		for(var i = 0; i < notes.length; ++i){
+			var note = notes[i];
+			if(!note.isSaved){
+				saved = false;
+				break;
+			}
+		}
+		if(!saved){
+			$self.confirmMessage = 
+				'Some work has not been saved yet ! Are you sure you want to leave ?';
+			$('#sn-confirm-modal').modal('show');
+			e.preventDefault();
+			return (e.returnValue = 'Are you sure ?');
+		}
+		return null;
+	});
 
         return $self;
     }

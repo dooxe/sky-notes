@@ -18,8 +18,8 @@
                         <input class="form-control" style="width:200px" type="text" ng-model="loginData.login" />
                         <div class="input-group-append">
                             <span class="input-group-text">
-                                <i class="fa fa-male"></i>
-                            </span>
+                        	<i class="fa fa-user"></i>
+			</span>
                         </div>
                     </div>
                 </div>

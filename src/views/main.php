@@ -45,8 +45,8 @@
                                     ng-repeat="note in getNotesByNotebookId(notebook.id)"
                                     ng-class="{'active':(currentNote==note)}"
                                     ng-click="setCurrentNote(note)" style="border-radius:0">
-                                        <span ng-if="!note.isSaved" class="text-danger" style="margin-right:10px" title="Your note is not saved !"> <i class="fa fa-pencil"></i></span>
-                                        <i class="fa fa-file" style="margin-right:10px"></i>
+                                        <span ng-if="!note.isSaved" style="margin-right:10px" title="Your note is not saved !"> <i class="fa fa-pencil"></i></span>
+                                        <i ng-if="note.isSaved" class="fa fa-file" style="margin-right:10px"></i>
                                         {{note.title}}
                                         <span class="pull-right">
                                         <button href="#" ng-click="removeNote(note)" class="btn btn-danger">
@@ -70,6 +70,10 @@
             <div class="card-header">
                 <h5 class="card-title">
                     Editor
+			<span class="pull-right">
+				<i class="fa fa-pencil" ng-if="currentNote && (!currentNote.isSaved)"></i>
+			</span>
+			<span class="clearfix"></span>
                 </h5>
             </div>
             <div class="card-body">

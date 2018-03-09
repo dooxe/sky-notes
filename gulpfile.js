@@ -145,8 +145,10 @@ gulp.task('css.private', function(){
 gulp.task('js.public', function(cb){
     pump([
         gulp.src(skynotes.js.public),
+	concat('skynotes.public.js'),
+	gulp.dest('app/js'),
         uglify(),
-        concat('skynotes.public.js'),
+        concat('skynotes.public.min.js'),
         gulp.dest('app/js')
     ],cb);
 });
@@ -157,8 +159,10 @@ gulp.task('js.public', function(cb){
 gulp.task('js.private', function(cb){
     pump([
         gulp.src(skynotes.js.all()),
+	concat('skynotes.private.js'),
+	gulp.dest('app/js'),
         uglify(),
-        concat('skynotes.private.js'),
+        concat('skynotes.private.min.js'),
         gulp.dest('app/js')
     ],cb);
 });
